@@ -1,0 +1,56 @@
+10
+
+dir
+0
+http://192.168.1.100/usvn/svn/aura/trunk/backend/webot/webot
+http://192.168.1.100/usvn/svn/aura
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+f0721315-1dfe-4fa3-ae0c-ece301cdef12
+
+wsgi.py
+file
+
+
+
+add
+
+__init__.py
+file
+
+
+
+add
+
+settings.py
+file
+
+
+
+add
+
+urls.py
+file
+
+
+
+add
+

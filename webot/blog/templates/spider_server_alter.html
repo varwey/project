@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}spider_server{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%;float:left; text-align: center;font-size: 2em;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+{% endblock %}
+</head>
+<body>
+{% block navi4 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>任务管理</li><span class="divider"> / </span><li><a href="/spider_server/">spider_server</a></li>
+<span class="divider"> / </span><li>修改</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<h1 class="form-signin-heading" style="color:green;text-align:center;">spider_server修改</h1>
+<form class="form-signin" method="post" enctype="multipart/form-data">
+<table class="table table-striped">
+<tr><th>字段</th><th>原数据</th><th></th><th>新数据</th></tr>
+<tr><td>type</td><td>{{ssd.1}}</td><td><i class="icon-circle-arrow-right"></i></td><td><input type="text" class="input-block-level" name="type"></td></tr>
+<tr><td>ip</td><td>{{ssd.2}}</td><td><i class="icon-circle-arrow-right"></i></td><td><input type="text" class="input-block-level" name="ip"></td></tr>
+<tr><td>name</td><td>{{ssd.3}}</td><td><i class="icon-circle-arrow-right"></i></td><td><input type="text" class="input-block-level" name="name"></td></tr>
+<tr><td>status</td><td>{{ssd.4}}</td><td><i class="icon-circle-arrow-right"></i></td><td><input type="text" class="input-block-level" name="status"></td></tr>
+<tr><td>last_ping_datetime</td><td>{{ssd.5}}</td><td><i class="icon-circle-arrow-right"></i></td><td><input type="text" class="input-block-level" name="last_ping_datetime"></td></tr>
+</table>
+<p style="float:left;color:red;">提示：未修改字段将保留原数据。</p><button class="btn btn-large btn-primary" type="submit" style="float:right">提交修改</button>    
+</form>
+</div>
+{% endblock %}
+</body>
+</html>

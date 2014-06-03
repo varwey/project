@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+{% extends "base.html" %}
+<title>{% block title %}Login to Cacti{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#login{float: right;margin-right: 20%;}
+</style>
+{% endblock %}
+</head>
+<body bgcolor="#FFFFFF" onload="document.login.login_username.focus()">
+{% block location %}
+<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>服务监控</li>
+<span class="divider">/ </span><li>Cacti</li>
+{% endblock %}
+{% block body %}
+<div id="login">
+<form name="login" method="post" action="index.php">
+<input type="hidden" name="action" value="login">
+<table id="login" align="center">
+		<tr>
+			<td colspan="2"><img src="/static/img/auth_login.gif" border="0" alt=""></td>
+		</tr>		
+		<tr style="height:10px;"><td></td></tr>
+		<tr id="login_row">
+			<td colspan="2">Please enter your Cacti user name and password below:</td>
+		</tr>
+		<tr style="height:10px;"><td></td></tr>
+		<tr id="user_row">
+			<td>User Name:</td>
+			<td><input type="text" name="login_username" size="40" style="width: 295px;" value=""></td>
+		</tr>
+		<tr id="password_row">
+			<td>Password:</td>
+			<td><input type="password" name="login_password" size="40" style="width: 295px;"></td>
+		</tr>
+				<tr style="height:10px;"><td></td></tr>
+		<tr>
+			<td><input type="submit" value="Login"></td>
+		</tr>
+</table>
+</form>
+</div>
+	{% endblock %}
+</body>
+</html>

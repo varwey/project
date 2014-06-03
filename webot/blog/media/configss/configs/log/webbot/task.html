@@ -1,0 +1,84 @@
+
+<html>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <head><title>采集器列表</title></head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $("tr:even:has(td)").css("background-color", "lightblue");
+
+            $("input#filter").click(function(){
+                if($(this).val()=="筛选僵尸") {
+                    $("tr.good").hide();
+                    $(this).val("显示全部");
+                } else {
+                    $("tr.good").show();
+                    $(this).val("筛选僵尸");
+                }
+            });
+
+            $("input.action").click(function(){
+                var pass = prompt("Input Password");
+                if(pass!="123456") {
+                    confirm("Access Denied!");
+                }
+                else {
+                    alert("暂不支持!");
+                }
+            });
+        });
+    </script>
+    <style>
+        th {
+            color: white;
+            background-color: darkblue;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .bad {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+    <body>
+        <h1>采集器列表</h1>
+        <h3>2013-09-10T11:00:01</h3>
+        <input type="button" id="filter" value="筛选僵尸" />
+        <table>
+            <tr><th>主机</th><th>等待</th><th>运行</th><th>僵尸</th><th>操作</th></tr>
+
+<tr class='good'><td><a href='http://192.168.3.154:6800/jobs'>192.168.3.154</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.155:6800/jobs'>192.168.3.155</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.156:6800/jobs'>192.168.3.156</a></td><td>0</td><td>1</td><td>1</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.157:6800/jobs'>192.168.3.157</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.158:6800/jobs'>192.168.3.158</a></td><td>0</td><td>1</td><td>1</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.159:6800/jobs'>192.168.3.159</a></td><td>4</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.160:6800/jobs'>192.168.3.160</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.161:6800/jobs'>192.168.3.161</a></td><td>9</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='bad'><td><a href='http://192.168.3.162:6800/jobs'>192.168.3.162</a></td><td>0</td><td>8</td><td>8</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.163:6800/jobs'>192.168.3.163</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.164:6800/jobs'>192.168.3.164</a></td><td>4</td><td>1</td><td>1</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.165:6800/jobs'>192.168.3.165</a></td><td>0</td><td>3</td><td>3</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.166:6800/jobs'>192.168.3.166</a></td><td>0</td><td>3</td><td>3</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.167:6800/jobs'>192.168.3.167</a></td><td>0</td><td>6</td><td>6</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.168:6800/jobs'>192.168.3.168</a></td><td>3</td><td>2</td><td>2</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.169:6800/jobs'>192.168.3.169</a></td><td>15</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.170:6800/jobs'>192.168.3.170</a></td><td>1</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.171:6800/jobs'>192.168.3.171</a></td><td>2</td><td>1</td><td>1</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.172:6800/jobs'>192.168.3.172</a></td><td>0</td><td>2</td><td>2</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.173:6800/jobs'>192.168.3.173</a></td><td>2</td><td>1</td><td>1</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.174:6800/jobs'>192.168.3.174</a></td><td>2</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.175:6800/jobs'>192.168.3.175</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.176:6800/jobs'>192.168.3.176</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.177:6800/jobs'>192.168.3.177</a></td><td>0</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.178:6800/jobs'>192.168.3.178</a></td><td>3</td><td>0</td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+<tr class='good'><td><a href='http://192.168.3.179:6800/jobs'>192.168.3.179</a></td><td></td><td></td><td>0</td><td><input type='button' class='action' value='重启' /></td></tr>
+
+        </table>
+    </body>
+</html>
+

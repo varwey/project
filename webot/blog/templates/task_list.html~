@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}task_list{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#search{width: 95%;float: left; }
+#tables{width: 95%;float: left; }
+#btn{margin-bottom: 10px;margin-left: 10px;}
+#tbl{table-layout:fixed;word-break:break-all;}
+#domain{width: 200px;overflow: hidden;white-space: nowrap;}
+#add{margin-bottom: 10px; float: right;}
+#export{margin-bottom: 10px; float: right;margin-left: 10px;}
+#sel{width: 10%}
+p{font-size: 20px;float: left;}
+#msg {color: red;font-weight: bold;}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                $("tr:even:has(td)").addClass("even");
+                $("tr:has('span')").addClass('bad');
+
+                $("#btn").click(search);
+
+                $("#txt").keypress(function(e) {
+                    if(e.which==13) {
+                        search();
+                    }
+                });
+
+                function search() {
+                        var key = $('#sel').val();
+                        var val = $("#txt").val().trim().toLowerCase();
+                        var tot = search_by(key, val);
+                        $("#msg").text("共"+tot+"条记录");
+                }
+
+                function search_by(key, val) {
+                    var cls = '.'+key;
+                    $(cls).parent('tr').each(function () {
+                        var $tr = $(this);
+                        var $td = $tr.find(cls);
+                        var sum = $td.map(function(){
+                                var $me = $(this);
+                                var value = $me.text().trim().toLowerCase();
+                                return value.indexOf(val)!=-1;
+                            }).get().reduce(function(x,y){return x+y}, 0);
+
+                        if(sum) {
+                            $tr.show();
+                        } else {
+                            $tr.hide();
+                        }
+                    });
+                    return $("tr:visible:has(td)").length;
+                }
+
+            });
+        </script>
+<script  charset="utf-8"  language="javascript" type="text/javascript" >
+function Pop(tlid){
+  alert(tlid);
+  }
+</script>
+{% endblock %}
+</head>
+<body>
+{% block navi4 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>任务管理</li>
+<span class="divider"> / </span><li>task_list</li>
+{% endblock %}
+{% block body %}
+<div id='search' class="input-append">
+<br />
+<input id="txt" type="text" />
+<span class="add-on">按:</span>
+<select class="span2" name="sitetype" id="sel">
+   <option value="key">所有</option>
+   <option value="type">类型</option>
+   <option value="domain">域名</option>
+   <option value="site">名称</option>
+   <option value="channel">频道</option>
+   <option value="node">节点</option>
+ </select>
+<input id="btn" type="button" value="筛选" class="btn btn-success" />
+<p id="msg"></p>
+<a href="/task_list_manger/0/1/"><button class="btn" id="export">批量导入</button></a>
+<a href="/task_list_manger/0/0/"><button class="btn" id="add">添加任务</button></a>
+</div>
+<div id="tables" class="row_fulid">
+<table  class="table table-striped" id="tbl">
+    <tr>
+        <th style="width:1%;"></th>
+        <th>类型</th>
+        <th>域名</th>
+        <th>名称</th>
+        <th>频道</th>
+        <th>节点</th>
+        <th>开始时间</th>
+        <th>时间差</th>
+        <th>配置文件</th>
+        <th>详情</th>
+        <th style="width:10%;">管理任务</th>
+    </tr>
+{% for tl in task_list %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td class="key type">{{tl.1}}</td>
+        <td class="key domain">{{tl.2}}</td>
+        <td class="key site">{{tl.3}}</td>
+        <td class="key channel">{{tl.4}}</td>
+        <td class="key node">{{tl.19}}</td>
+        <td>{{tl.22}}</td>
+        <td>{{tl.21}}</td>
+        <td class="config"><a href="{{tl.5}}" target="_blank">查看</td>
+        <td class="detail"><a href="/task_list/{{tl.0}}"><button>详情</button></a></td>
+        <td class="action">
+            <a href="/task_list_manger/1/{{tl.0}}/">
+                <button class="btn btn-success">修改</button>
+            </a>
+            <a href="/task_list_manger/2/{{tl.0}}/">
+                <button class="btn btn-danger">删除</button>
+            <a>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}
+</body>
+</html>

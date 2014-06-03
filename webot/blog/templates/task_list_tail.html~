@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}task_list_tail{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#tables{width: 75%;margin-left: 200px;}
+#piechart{width:55%; height: 410px;float: right;}
+#tbl{width: 45%;float: left;}
+p{font-size: 2em;color: blue;text-align: left;}
+#table{float: left;width: 100%;}
+#tb{width: 100%;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var dt={{sd|safe}}
+            scrapy=dt['result']
+        var data = google.visualization.arrayToDataTable([
+          ['类别',            '数量'],
+          ['exception_count',scrapy[0]],
+          ['timeout_count',  scrapy[1]],
+          ['gava_up_request',scrapy[2]],
+          ['request_count',  scrapy[4]],
+          ['response_count', scrapy[6]],
+          ['status_200_count',scrapy[7]],
+          ['dropped_count',  scrapy[9]],
+          ['duplicated_count',scrapy[10]],
+          ['scraped_count',  scrapy[11]]     
+        ]);
+
+        var options = {
+          title: 'request:'+scrapy[3]+';response:'+scrapy[5],
+          titleTextStyle:{color:'blue'},
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+    <script  charset="utf-8"  language="javascript" type="text/javascript" >
+        function Pop(hd){
+          var hd=hd.split(",");
+          alert(hd);
+          }
+</script>
+{% endblock %}
+</head>
+<body>
+{% block navi4 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>任务管理</li>
+<span class="divider"> / </span><li><a href="/task_list/">task_list</a></li>
+<span class="divider"> / </span><li>task_list_tail</li>
+{% endblock %}
+{% block body %}
+<div id="tables" class="row_fulid">
+<p>该次任务详情</p>
+<table class="table table-striped" id="tbl">
+<tr><td>情况</td><td>内容</td></tr>
+<tr><td>名称</td><td>{{start.6}}</td></tr>
+<tr><td>类型</td><td>{{start.4}}</td></tr>
+<tr><td>域名</td><td>{{start.5}}</td></tr>
+<tr><td>配置文件</td><td><a href="{{start.7}}" target="_blank">查看</a></td></tr>
+<tr><td>开始时间</td><td>{{hd.0|date:"Y-m-d H:i:s"}}</td></tr>
+<tr><td>结束时间</td><td>{{hd.1|date:"Y-m-d H:i:s"}}</td></tr>
+<tr><td>时间差（s）</td><td>{{start.12}}</td></tr>
+<tr><td>结束编码</td><td>{{start.11}}</td></tr>
+<tr><td>优先级</td><td>{{start.8}}</td></tr>
+<tr><td>标签</td><td>{{start.10}}</td></tr>
+<tr><td></td><td></td></tr>
+</table>
+<div id="piechart"></div>
+<div id="table" class="row_fulid">
+<p>该任务总详情</p>
+<table class="table table-hover" id="tb">
+<tr><th></th><th>域名</th><th id="domain">名称</th><th>类型</th><th>配置文件</th><th>接收数</th><th>超时数</th><th>请求字节</th><th>请求数</th><th>响应字节</th><th>响应数</th><th>详情及分析</th></tr>
+{% for h in dts %}
+  {% if h.20 == 0 %}
+    <tr class="error"><td>{{forloop.counter}}</td><td>{{h.5}}</td><td>{{h.6}}</td><td>{{h.7}}</td><td><a href="{{h.9}}" target="_blank">查看</a></td><td>{{h.15}}</td><td>{{h.16}}</td><td>{{h.17}}</td>
+    <td>{{h.18}}</td><td style="color:red;">{{h.19}}</td><td style="color:red;">{{h.20}}</td><td><button onclick='Pop("{{h}}")'>详情</button><a href="/task_tail/{{h.5}}"><button>分析</button></a></td></tr>
+  {% else %}
+    <tr><td>{{forloop.counter}}</td><td>{{h.5}}</td><td>{{h.6}}</td><td>{{h.7}}</td><td><a href="{{h.9}}" target="_blank">查看</a></td><td>{{h.15}}</td><td>{{h.16}}</td><td>{{h.17}}</td>
+    <td>{{h.18}}</td><td>{{h.19}}</td><td>{{h.20}}</td><td><button onclick='Pop("{{h}}")'>详情</button><a href="/task_tail/{{h.5}}"><button>分析</button></a></td></tr>
+  {% endif %}
+{% endfor %}
+</table>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

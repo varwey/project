@@ -1,0 +1,70 @@
+10
+
+dir
+31
+http://192.168.1.100/usvn/svn/aura/trunk/backend/webot
+http://192.168.1.100/usvn/svn/aura
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+incomplete
+f0721315-1dfe-4fa3-ae0c-ece301cdef12
+
+manage.py
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+webot
+dir
+
+
+
+add
+
+blog
+dir
+
+
+
+add
+
+static
+dir
+
+
+
+add
+
+webot.sql
+file
+0
+
+
+add
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}config_error{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#search{width: 95%;float: left;}
+#tables{width: 95%;float: left;}
+#domain{width: 200px;overflow: hidden;white-space: nowrap;}
+#add{margin-bottom: 10px; float: right;}
+#export{margin-bottom: 10px; float: right;margin-left: 10px;}
+#msg {
+                margin-left: 50px;
+                color: red;
+                font-weight: bold;
+            }
+#btn{margin-bottom: 10px;margin-left: 10px;}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script>
+	$(function() {
+
+		$('button.err_btn ~ div').dialog({
+				autoOpen: false
+		});
+
+		$('button.err_btn').click(function(){
+			alert($(this).next().text());
+			$(this).next().dialog( "open" );
+		});
+	});
+</script>
+
+        <script>
+            $(function(){
+                $("tr:even:has(td)").addClass("even");
+                $("tr:has('span')").addClass('bad');
+
+                $("#btn").click(search);
+
+                $("#txt").keypress(function(e) {
+                    if(e.which==13) {
+                        search();
+                    }
+                });
+
+                function search() {
+                    var q = $("#txt").val().trim().toLowerCase();
+                    $("#tbl tr:has(td)").each(function() {
+                        var site = $(this).find('td:nth(1)').text().trim().toLowerCase();
+                        var domain = $(this).find('td:nth(2)').text().trim().toLowerCase();
+                        var config = $(this).find('td:nth(3)').text().trim().toLowerCase();
+                        var writer = $(this).find('td:nth(4)').text().trim().toLowerCase();
+                        var timer = $(this).find('td:nth(5)').text().trim().toLowerCase();
+                        if(site.indexOf(q)!=-1 || domain.indexOf(q)!=-1 || config.indexOf(q)!=-1 || writer.indexOf(q)!=-1 || timer.indexOf(q)!=-1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                    var total = $("tr:visible:has(td)").length;
+                    $("#msg").text("共"+total+"条记录");
+                }
+
+            });
+        </script>
+{% endblock %}
+</head>
+<body>
+{% block navi4 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>任务管理</li>
+<span class="divider"> / </span><li>config_error</li>
+{% endblock %}
+{% block body %}
+<div id='search' class="row_fulid">
+<br />
+<input id="txt" type="text" /><input id="btn" type="button" value="筛选" class="btn btn-success" /><span id="msg"></span>
+</div>
+<div id="dialog" title="Basic dialog">
+<p id="conment"></p>
+</div>
+<div id="tables" class="row_fulid">
+<table class="table table-hover" class="table table-striped" style="font-size:1.5em;" id="tbl">
+<tr><th>编号</th><th>配置文件</th><th>错误内容</th><th>时间日期</th><th>错误类型</th></tr>
+{% for c in config_error %}
+    {% if c.2 %}
+    <tr class="error"><td>{{c.0}}</td><td><a href="{{c.1}}" target="_blank">{{c.1}}</a></td><td><button class="err_btn">错误内容</button><span style="display:none;">{{c.2}}</span></td><td>{{c.3|date:"Y-m-d H:i:s"}}</td><td>{{c.4}}</td></tr>
+    {% else %}
+    <tr><td>{{c.0}}</td><td><a href="{{c.1}}" target="_blank">{{c.1}}</a></td><td>无数据</td><td>{{c.3|date:"Y-m-d H:i:s"}}</td><td>{{c.4}}</td></tr>
+    {% endif %}
+{% endfor %}
+</table> 
+</div>
+
+{% endblock %}
+</body>
+</html>

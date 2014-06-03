@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+{% extends "base.html" %}
+<title>{% block title %}入库统计{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{float: left;}
+</style>
+{% endblock %}
+</head>
+<body>
+{% block navi2 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>服务监控</li>
+<span class="divider">/ </span><li>入库统计</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<h1>入库统计</h1>
+<iframe src="http://192.168.3.196/heatmap.html" width="95%" height="450"></iframe>
+<iframe src="http://192.168.3.180:9999/chart.html" width="95%" height="450"></iframe>
+<img src="http://192.168.3.175/log/webbot/dbmonitor.png" />
+</div>
+{% endblock %}
+</body>
+</html>

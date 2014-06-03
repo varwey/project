@@ -1,0 +1,26 @@
+{
+    "site"    : "中国新闻网",
+
+    "domains" : ["chinanews.com"],
+
+    "urls"    : [   
+                    "http://www.chinanews.com/common/footer/sitemap.shtml"
+                ],
+
+    "rules"   : {
+        "#1":{
+                "follow": false,
+                "xpath" : "//div[@class='txt_2_4']/p"
+        }
+
+    },
+
+    "fields": {
+                "url"     : {"name": "url",         "value": "${URL}"},
+                "title"   : {"name": "title",       "xpath": "(//div[@class='con2']//table[@class='12v']//tr[1]/td[@class='12v'])[1]","parse": {"type": "text"}}
+            
+    }
+
+ 
+}
+

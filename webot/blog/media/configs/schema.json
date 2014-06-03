@@ -1,0 +1,253 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "WebBot™ Config File Schema",
+    "type": "object",
+    "additionalProperties": true,
+    "required": ["site", "domains", "urls", "fields"],
+    "properties": {
+        "site": {
+            "type": "string",
+            "minLength": 1
+        },
+        "domains": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^[^/]+$"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        },
+        "urls": {
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                },
+                {
+                    "$ref": "#/definitions/urls"
+                }
+            ]
+        },
+        "rules": {"$ref": "#/definitions/rules"},
+        "loop": {"type": "string"},
+        "fields": {"$ref": "#/definitions/fields"},
+        "settings": {
+            "$ref": "#/definitions/settings"
+        },
+        "debug": {"type": "boolean"}
+    },
+
+    "definitions": {
+        "urls": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["base"],
+            "properties": {
+                "base": {
+                    "type": "string",
+                    "pattern": "^http://.+$"
+                },
+                "qstr": {"type": "object"},
+                "keywords": {
+                    "$ref": "#/definitions/keywords"
+                },
+                "pages": {
+                    "$ref": "#/definitions/pages"
+                },
+                "method": {"enum": ["GET", "POST"]},
+                "query": {"type": "boolean"}
+            }
+        },
+        "keywords": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name"],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "pattern": "^.+$"
+                },
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {"type": "string"},
+                            {"type": "number"}
+                        ]
+                    },
+                    "uniqueItems": true
+                },
+                "file": {"type": "string"},
+                "enc": {"type": "string"},
+                "query": {"type": "boolean"},
+                "sub": {
+                    "type": "object",
+                    "properties": {
+                        "from": {"type": "string"},
+                        "to": {"type": "string"}
+                    }
+                },
+                "pages": {
+                    "$ref": "#/definitions/pages"
+                }
+            }
+        },
+        "pages": {
+            "type": "object",
+            "properties": {
+                "xpath": {"type": "string"},
+                "regex": {"type": "string"},
+                "group": {"type": "number"},
+                "start": {
+                    "oneOf": [
+                        {"type": "number"},
+                        {
+                            "type": "string",
+                            "pattern": "^[0-9]+$"
+                        }
+                    ]
+                },
+                "stop": {
+                    "oneOf": [
+                        {"type": "number"},
+                        {
+                            "type": "string",
+                            "pattern": "^[0-9]+$"
+                        }
+                    ]
+                }
+            }
+        },
+        "rules": {
+            "type": "object",
+            "patternProperties": {
+                "#[0-9]+": {"$ref": "#/definitions/rule"}
+            }
+        },
+        "rule": {
+            "type": "object",
+            "properties": {
+                "follow": {"type": "boolean"},
+                "xpath": {"type": "string"},
+                "regex": {"type": "string"},
+                "pages": {"$ref": "#/definitions/pages"},
+                "sub": {
+                    "type": "object",
+                    "properties": {
+                        "from": {"type": "string"},
+                        "to": {"type": "string"}
+                    }
+                }
+            }
+        },
+        "fields": {
+            "type": "object",
+            "patternProperties": {
+                ".*": {
+                    "$ref": "#/definitions/field"
+                }
+            }
+        },
+        "field": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "xpath": {"type": "string"},
+                "value": {
+                    "oneOf": [
+                        {"type": "string"},
+                        {"type": "number"}
+                    ]
+                },
+                "regex": {"type": "string"},
+                "parse": {"$ref": "#/definitions/parses"}
+            }
+        },
+        "parses": {
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/parse"}
+                },
+                {
+                    "$ref": "#/definitions/parse"
+                }
+            ]
+        },
+        "parse": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+                "type": {"type": "string"}
+            },
+            "oneOf": [
+                {
+                    "properties": {
+                        "type": {"enum": ["str", "text", "unesc", "clean", "int", "float", "continue", "base64"]}
+                    }
+                },
+                {
+                    "required": ["from", "to"],
+                    "properties": {
+                        "type": {"enum": ["sub"]},
+                        "from": {"type": "string"},
+                        "to": {"type": "string"}
+                    }
+                },
+                {
+                    "required": ["query"],
+                    "properties": {
+                        "type": {"enum": ["jpath"]},
+                        "query": {"type": "string"}
+                    }
+                },
+                {
+                    "properties": {
+                        "type": {"enum": ["join", "list"]},
+                        "sep": {"type": "string"}
+                    }
+                },
+                {
+                    "properties": {
+                        "type": {"enum": ["date"]},
+                        "fmt": {"type": "string"},
+                        "tz": {
+                            "type": "string",
+                            "pattern": "[-+]([0-9]{2}):([0-9]{2})"
+                        }
+                    }
+                },
+                {
+                    "properties": {
+                        "type": {"enum": ["cst"]},
+                        "fmt": {"type": "string"}
+                    }
+                }
+            ]
+        },
+        "settings": {
+            "type": "object",
+            "properties": {
+                "zmq": {
+                    "type": "string",
+                    "pattern": "tcp://.+$"
+                },
+                "mysql": {
+                    "type": "string",
+                    "pattern": "mysql://.+$"
+                },
+                "mongo": {
+                    "type": "string",
+                    "pattern": "mongodb://.+$"
+                }
+            }
+        }
+    }
+}
+

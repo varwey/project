@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}每日ip{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%;float: left; text-align: center;font-size: 1.5em;}
+p{ font-size: 1.5em;color: blueviolet;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+{% endblock %}
+</head>
+<body>
+{% block navi3 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>扫描统计</li>
+<span class="divider">/ </span><li>每日ip</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<p>最近一个月ip情况表</p>
+<table cellspacing cellpadding>
+<tr><td>x/(日期)</td><td></td><td></td><td>ip数/个</td></tr>
+{% for scan in scan_data %}
+<tr><td>{{scan.date|date:"m/d"}}</td><td bgcolor=blue width=1></td>
+<td width=800><div class="progress progress-success">
+<div class="bar" style='width: {{scan.rate}}%;'></div></div></td><td>{{scan.count}}</td></tr>
+{% endfor %}
+<tr><td></td><td bgcolor=blue height=1></td><td bgcolor=blue height=1></td></tr>
+<tr><td>0</td><td></td><td><table width=800 valign=top style="text-align:right"><tr><td width=160>600</td>
+<td width=160>1200</td><td width=160>1800</td><td width=160>2400</td><td width=160>3000</tr></table></td><td>y/(ip)</td></tr>
+</table>
+<tr><td>
+</table>
+{% for q in a %}
+<tr class="{% cycle 'q.0' %}">
+<td>{{q.0}}</td><td>{{q.1}}</td>
+</tr>
+{% endfor %}
+</div>
+<br />
+{% endblock %}
+</body>
+</html>

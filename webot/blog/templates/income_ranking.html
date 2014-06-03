@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}入库排名{% endblock %}</title>
+{% block stylelink %}   
+<style type="text/css">
+#total{width: 95%;float:left;font-size: 1.5em;}
+#mychart{height: 300px;display: none;float: right;width: 100%;}
+#mytot{height: 300px;float: left;width: 100%;}
+#mypart{height: 300px;float: left;display: none;width: 100%;}
+#tabs{float: left;width: 100%;}
+a{cursor: pointer;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+Number.prototype.fmt = function() {
+    return this.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").replace(/\../,'');
+};
+
+google.load("visualization", "1", {packages:["corechart"]});
+
+function drawchart() {
+  var ic = {{ic|safe}}
+      tot = 0
+  for (var i in ic) {
+    tot += ic[i][0]
+    ic[i][0] = tot 
+  }  
+  dat = {'result':ic,'dm':'今日总量:'}
+  chartline(dat,'mytot') 
+}
+
+google.setOnLoadCallback(drawchart);
+
+$(function(){
+  $('#btn,.tail_chart').click(function () {
+    if ($(this).text()) {
+            domain = $(this).text();
+    }else {
+            domain = $('#kw').val();
+    }
+  	$.getJSON("/income_ranking?dm="+domain,function (data) {
+      if (data.result.length>0) {
+        $('#mychart').fadeOut();
+        $('#mychart').fadeIn();
+        chartline(data,'mychart');
+        var tot = 0
+            dat = data.result
+        for (var i in dat) {
+          tot += parseInt(dat[i][0])
+          dat[i][0] = tot
+        }
+        $('#mypart').fadeOut();
+        $('#mypart').fadeIn();
+        chartline({'result':dat,'dm':data.dm},'mypart')
+            
+      }else {
+        $('#mychart').html('<p><h1>对不起，查询无此数据！</h1></p>');
+      }
+    })
+  })
+});
+
+function chartline(dat,div) {
+  var dt = [['时间',dat.dm]],
+      res = dat.result,
+      tot = 0;
+  for (var i in res) {
+      tot+=parseInt(res[i][0]);
+      dt.push([getLocalTime(res[i][1]),parseInt(res[i][0])]);
+  }
+  var data = google.visualization.arrayToDataTable(dt);
+  if (div != 'mychart') {
+    tot = res.slice(-1)[0][0]
+  }
+  title = dat.dm+'凌晨至今共'+tot+'个数据'
+  var options = {
+      title: title,
+      pointSize: 2,
+      chartArea: {left:50,width:"100%"},
+      lineWidth: 0.5
+  };
+  var chart = new google.visualization.LineChart(document.getElementById(div));
+  chart.draw(data, options);
+}
+
+function getLocalTime(nS) {
+  now = new Date(parseInt(nS)*1000)
+  return now    
+}
+
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="/static/js/jquery-1.9.1.js"></script>
+<script src="/static/js/jquery-ui.js"></script>
+<style>
+.ui-autocomplete {
+max-height: 150px;
+overflow-y: auto;
+/* prevent horizontal scrollbar */
+overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+height: 150px;
+}
+</style>
+<script>
+$(function() {
+    var availableTags = {{domain|safe}}
+    $("#kw").autocomplete({
+        source: availableTags
+    });
+});
+</script>
+{% endblock %}
+</head>
+<body>
+{% block navi2 %}
+<div class="unit current">
+{% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：
+    <li><a href="/">首页</a></li>
+    <span class="divider"> / </span>
+    <li>服务监控</li>
+    <span class="divider">/ </span><li>入库排名</li>
+{% endblock %}
+{% block body %}
+<div id="domain_search" class="input-prepend">
+  <input id="kw" type="text" placeholder="输入域名..." />
+  <input type="submit" id="btn" class="btn btn-primary" style="border-top-width: 3px;" value="查阅" />
+</div>
+<div id="total">
+  <div id="mytot"></div>
+  <div id="mypart"></div>
+  <div id="mychart"></div>
+  <div class="row_fulid" id="tbl">
+    <table class="table table-hover" class="table table-striped" id="tabs">
+      <tr><th>排名</th><th>域名</th><th>数量</th></tr>
+      {% for domain,total in dat %}
+        {% if forloop.counter = 1 %}
+        <tr><td><span class="badge badge-important">{{forloop.counter}}</span></td><td><a class="tail_chart">{{domain}}</a></td><td>{{total}}</td></tr>
+        {%elif forloop.counter = 2 %}
+        <tr><td><span class="badge badge-warning">{{forloop.counter}}</span></td><td><a class="tail_chart">{{domain}}</a></td><td>{{total}}</td></tr>
+        {% elif forloop.counter = 3 %}
+        <tr><td><span class="badge badge-success">{{forloop.counter}}</span></td><td><a class="tail_chart">{{domain}}</a></td><td>{{total}}</td></tr>
+        {% else %}
+        <tr><td><span class="badge">{{forloop.counter}}</span></td><td><a class="tail_chart">{{domain}}</a></td><td>{{total}}</td></tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
+</body>
+</html>         

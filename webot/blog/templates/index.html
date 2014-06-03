@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}首页{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%; text-align: center;font-size: 1.5em;}
+#header{font-size: 2em;color: green; height: 150px;}
+#btn{margin-bottom: 10px;margin-left: 10px;}
+#http{width: 50%; float: left;}
+#time{width: 50%; float: right;}
+#stats{line-height: 50px;}
+#divs{width: 100%; float: left;}
+#tbls{display: none;}
+</style>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+      $('a').attr('target', '_blank');
+      stats();
+  });
+
+  function stats() {
+      $.getJSON('http://192.168.3.180:9999/stats?callback=?', function(data){
+          if(data.code===0) {
+              var time = data.time;
+
+              var count = data.result.count,
+                      a = format_number(count.a),
+                      w = format_number(count.w),
+                      d = format_number(count.d),
+                      h = format_number(count.h),
+                      m = format_number(count.m);
+
+              var interval = data.result.interval,
+                      from = new Date(interval[0]).toLocaleDateString(),
+                        to = new Date(interval[1]).toLocaleDateString();
+
+              $('#stats').html(from + ' ~ ' + to +'<br />Total:<b>'+a+'</b> (<b>'+w+'</b>/week <b>'+d+'</b>/day <b>'+h+'</b>/hour <b>'+m+'</b>/minute)');
+          }
+      }).always(function(){
+          setTimeout(stats, 60*1000);
+      });
+  }
+
+  function format_number(num) {
+      var units = ['', 'K', 'M', 'G'];
+      var exp = num===0 ? 0 : parseInt(Math.min(Math.log(num)/Math.log(1000), units.length-1));
+      var result = num/(Math.pow(1000, exp));
+      return result.toFixed(2)+units[exp];
+  }
+  
+  $(function(){
+      $('#btn0').click(function(){
+          var num = encodeURIComponent($('#sel0').val());
+              ddd = document.getElementById("tbls");
+              tbls1 = document.getElementById("tbls1");
+          $.getJSON("/?num="+num, function(data){
+              if(data.site) {
+                ddd.style.display="block";
+                tbls1.style.display="none";
+                $('#trs').html('<td>'+data.date+'</td><td>'+data.name+'</td><td>'+data.site+'</td><td>'+data.count+'</td><td>'
+                      +data.rx_count+'</td><td>'+data.rx_bytes+'</td><td>'+data.tx_count+'</td><td>'+data.tx_bytes+'</td><td>'
+                      +data.err_count+'</td><td>'+data.scraped+'</td><td>'+data.dropped+'</td><td>'+data.duplicated+'</td><td>'
+                      +data.elapsed_min+'s</td><td>'+data.elapsed_max+'s</td><td>'+data.elapsed_avg+'s</td>'	                         
+                ); 
+              }else { 
+                      $('#divs').html('<p><h1>查找无结果</h1></p>');
+                    }
+          })
+      });
+  });
+        
+  $(function(){
+      $('#btn1').click(function(){
+          var time = encodeURIComponent($('#sel1').val());
+              ddd = document.getElementById("tbls");
+              tbls1 = document.getElementById("tbls1");
+          $.getJSON("/?time="+time, function(data){
+              if(data.result) {
+                ddd.style.display="none";
+                tbls1.style.display="block";
+                var s="<tr><td>日期</td><td>名称</td><td>网站</td><td>运行次数</td><td>请求次数</td><td>请求字节</td><td>回复次数</td><td>回复字节</td><td>错误次数</td><td>采集</td><td>丢失</td><td>重复</td><td>最小时间</td><td>最长时间</td><td>平均时间</td></tr>";
+                    dt = data.result                
+                for (var i=0;i<dt.length;i++) {
+	                   s +='<tr><td>'+dt[i].date+'</td><td>'+dt[i].name+'</td><td>'+dt[i].site+'</td><td>'+dt[i].count+'</td><td>'+dt[i].rx_count+'</td><td>'+dt[i].rx_bytes+'</td><td>'+dt[i].tx_count+'</td><td>'+dt[i].tx_bytes+'</td><td>'+dt[i].err_count+'</td><td>'+dt[i].scraped+'</td><td>'+dt[i].dropped+'</td><td>'+dt[i].duplicated+'</td><td>'+dt[i].elapsed_min+'s</td><td>'+dt[i].elapsed_max+'s</td><td>'+dt[i].elapsed_avg+'s</td></tr>'
+                    }
+                $('#tbls1').html(s); 
+              }else { 
+                      $('#divs').html('<p><h1>查找无结果</h1></p>');
+                    }
+          })
+      });
+  });        
+</script>
+{% endblock %}
+</head>
+<body>
+{% block body %}
+<div id="total">
+<div id="header">21个重点网站</div>
+<div id="http" class="input-prepend">
+<span class="add-on">按网站:</span>
+ <select class="span2" name="sitetype" id="sel0">
+   <option value="0">铁血网</option>
+   <option value="1">新浪网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+   <option value="2">搜狐网</option>
+ </select>
+<input type="submit" id="btn0" class="btn btn-primary" value="查阅" />
+</div>
+<div id="time" class="input-prepend">
+<span class="add-on">按时间:</span>
+ <select class="span2" name="sitetype" id="sel1">
+   <option value="5">五分钟以内</option>
+   <option value="15">超过五分钟</option>
+ </select>
+<input type="submit" id="btn1" class="btn btn-primary" value="查阅" />
+</div>
+<div id="divs">
+<table class="table table-striped" id="tbls">
+<tr><td>日期</td><td>名称</td><td>网站</td><td>运行次数</td><td>请求次数</td><td>请求字节</td><td>回复次数</td><td>回复字节</td>
+<td>错误次数</td><td>采集</td><td>丢失</td><td>重复</td><td>最小时间</td><td>最长时间</td><td>平均时间</td></tr>
+<tr id="trs"></tr>
+</table>
+<table class="table table-striped" id="tbls1">
+</table>
+</div>
+<p id="stats"></p>
+</div>
+{% endblock %}
+</body>
+</html>

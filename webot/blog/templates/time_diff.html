@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}采发时间差{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#search{width: 100%;float: left;}
+#tables{width: 95%;float: left;}
+#btn{margin-bottom: 10px;margin-left: 10px;}
+#tbn{table-layout:fixed;word-break:break-all width: 100%;}
+#add{margin-bottom: 10px;float: right;}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                $("tr:even:has(td)").addClass("even");
+                $("tr:has('span')").addClass('bad');
+
+                
+                $("#search").on("click","#btn",search);
+
+                $("#txt").keypress(function(e) {
+                    if(e.which==13) {
+                        search();
+                    }
+                });
+
+                function search() {
+                    var q = $("#txt").val().trim().toLowerCase();
+                    $(".active #tbl tr:has(td)").each(function() {
+                        var domain = $(this).find('td:nth(1)').text().trim().toLowerCase();
+                        if(domain.indexOf(q)!=-1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                    var total = $("tr:visible:has(td)").length;
+                    $("#msg").text("共"+total+"条记录");
+                }
+
+            });
+        </script>
+        <style>
+            th {
+                width: 200px;
+                color: black;
+                background-color: #f3dfdf;
+            }
+
+            td {
+                width: 200px;
+                text-align: left;
+                vertical-align: middle;
+            }
+
+            .even {
+                background-color: lightblue;
+            }
+
+            .bad {
+                background-color: red;
+                color: white;
+                font-weight: bold;
+            }
+
+            #msg {
+                margin-left: 50px;
+                color: red;
+                font-weight: bold;
+            }
+</style>
+{% endblock %}
+</head>
+<body>
+    {% block navi2 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>服务监控</li>
+<span class="divider">/ </span><li>采发时间差</li>
+{% endblock %}
+{% block body %}
+<div id='search'>
+<br />
+<input id="txt" type="text" /><input id="btn" type="button" value="查阅" class="btn btn-success" /><span id="msg"></span>
+</div>
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">昨天</a></li>
+    <li><a href="#tab2" data-toggle="tab">前天</a></li>
+    <li><a href="#tab3" data-toggle="tab">三天前</a></li>
+    <li><a href="#tab4" data-toggle="tab">四天前</a></li>
+    <li><a href="#tab5" data-toggle="tab">五天前</a></li>
+    <li><a href="#tab6" data-toggle="tab">六天前</a></li>
+    <li><a href="#tab7" data-toggle="tab">七天前</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <div id="tables" class="row_fulid">
+        <table class="table table-striped" id="tbl">
+          <tr><th></th><th>域名</th><th>5分钟内</th><th>10分钟内</th><th>15分钟内</th><th>半小时内</th><th>1小时内</th><th>1小时外</th></tr>
+          {% for td in t_d_1 %}
+          <tr><td>{{forloop.counter}}</td><td>{{td.domain}}</td><td>{{td.time_5}}</td><td>{{td.time_10}}</td><td>{{td.time_15}}</td><td>{{td.time_30}}</td><td>{{td.time_60}}</td><td>{{td.time_out}}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <div id="tables" class="row_fulid">
+        <table class="table table-striped" id="tbl">
+          <tr><th></th><th>域名</th><th>5分钟内</th><th>10分钟内</th><th>15分钟内</th><th>半小时内</th><th>1小时内</th><th>1小时外</th></tr>
+          {% for td in t_d_2 %}
+          <tr><td>{{forloop.counter}}</td><td>{{td.domain}}</td><td>{{td.time_5}}</td><td>{{td.time_10}}</td><td>{{td.time_15}}</td><td>{{td.time_30}}</td><td>{{td.time_60}}</td><td>{{td.time_out}}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab3">
+      <div id="tables" class="row_fulid">
+        <table class="table table-striped" id="tbl">
+          <tr><th></th><th>域名</th><th>5分钟内</th><th>10分钟内</th><th>15分钟内</th><th>半小时内</th><th>1小时内</th><th>1小时外</th></tr>
+          {% for td in t_d_3 %}
+          <tr><td>{{forloop.counter}}</td><td>{{td.domain}}</td><td>{{td.time_5}}</td><td>{{td.time_10}}</td><td>{{td.time_15}}</td><td>{{td.time_30}}</td><td>{{td.time_60}}</td><td>{{td.time_out}}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab4">
+      <div id="tables" class="row_fulid">
+        <table class="table table-striped" id="tbl">
+          <tr><th></th><th>域名</th><th>5分钟内</th><th>10分钟内</th><th>15分钟内</th><th>半小时内</th><th>1小时内</th><th>1小时外</th></tr>
+          {% for td in t_d_4 %}
+          <tr><td>{{forloop.counter}}</td><td>{{td.domain}}</td><td>{{td.time_5}}</td><td>{{td.time_10}}</td><td>{{td.time_15}}</td><td>{{td.time_30}}</td><td>{{td.time_60}}</td><td>{{td.time_out}}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab5">
+      <div id="tables" class="row_fulid">
+        <table class="table table-striped" id="tbl">
+          <tr><th></th><th>域名</th><th>5分钟内</th><th>10分钟内</th><th>15分钟内</th><th>半小时内</th><th>1小时内</th><th>1小时外</th></tr>
+          {% for td in t_d_5 %}
+          <tr><td>{{forloop.counter}}</td><td>{{td.domain}}</td><td>{{td.time_5}}</td><td>{{td.time_10}}</td><td>{{td.time_15}}</td><td>{{td.time_30}}</td><td>{{td.time_60}}</td><td>{{td.time_out}}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab6">
+      <div id="tables" class="row_fulid">
+        <table class="table table-striped" id="tbl">
+          <tr><th></th><th>域名</th><th>5分钟内</th><th>10分钟内</th><th>15分钟内</th><th>半小时内</th><th>1小时内</th><th>1小时外</th></tr>
+          {% for td in t_d_6 %}
+          <tr><td>{{forloop.counter}}</td><td>{{td.domain}}</td><td>{{td.time_5}}</td><td>{{td.time_10}}</td><td>{{td.time_15}}</td><td>{{td.time_30}}</td><td>{{td.time_60}}</td><td>{{td.time_out}}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab7">
+      <div id="tables" class="row_fulid">
+        <table class="table table-striped" id="tbl">
+          <tr><th></th><th>域名</th><th>5分钟内</th><th>10分钟内</th><th>15分钟内</th><th>半小时内</th><th>1小时内</th><th>1小时外</th></tr>
+          {% for td in t_d_7 %}
+          <tr><td>{{forloop.counter}}</td><td>{{td.domain}}</td><td>{{td.time_5}}</td><td>{{td.time_10}}</td><td>{{td.time_15}}</td><td>{{td.time_30}}</td><td>{{td.time_60}}</td><td>{{td.time_out}}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+</body>
+</html>

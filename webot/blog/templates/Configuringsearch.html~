@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}配置检索{% endblock %}</title>
+<style type="text/css">
+#search{width: 950px;}
+#tables{width: 950px;}
+#tables>tr>td{text-align: center;}
+</style>
+</head>
+<body>
+{% block location %}
+<li><a href="/index/">首页</a><span class="divider">/</span></li>
+<li>数据检索</li>
+<span class="divider">/</span><li>配置检索</li>
+{% endblock %}
+{% block body %}
+<div id='search'>
+<h4>2013-08-26T00:00:02</h4><br />
+<form class="form-search">
+<input type="text" class="input-medium search-query"><button type="submit" class="btn btn-success">筛选</button>
+</form>
+</div>
+<div id="tables">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;">
+<th>名称</th><th>域名</th><th>配置</th>
+</tr>
+</table>
+</div>
+{% endblock %}
+</body>
+</html>

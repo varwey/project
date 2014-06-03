@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title%}清单查询{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%;float: left;text-align: center;}
+#searchbar{margin-bottom: 30px;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+        google.load("visualization", "1", {packages:["timeline"]});
+
+        function draw(rows) {
+            var tbl = new google.visualization.DataTable();
+
+            tbl.addColumn({ type: 'string', id: 'config' });
+            tbl.addColumn({ type: 'string', id: 'count' });
+            tbl.addColumn({ type: 'date', id: 'start' });
+            tbl.addColumn({ type: 'date', id: 'end' });
+
+            tbl.addRows(rows);
+
+            var opt = {
+                timeline: {
+                    singleColor: '#8d8',
+                    rowLabelStyle: {fontSize:13},
+                    barLabelStyle: {fontSize:12}
+                },
+            };
+
+            var chart = new google.visualization.Timeline($('#chart').get(0));
+            chart.draw(tbl, opt);
+        }
+
+        function parse(result) {
+            var rows = [];
+            for(var i in result) {
+                var item = result[i];
+                rows.push([
+                    item.config.split('/').pop().split('.conf')[0],
+                    item.scraped+'·'+item.dropped+'·'+item.duplicated+(item.reason=='finished'?'✓':'✗'),
+                    new Date(item.start),
+                    new Date(item.finish)
+                ]);
+            }
+            return rows;
+        }
+
+
+        $(function(){
+            $('#btn').click(function(){
+                var conf = encodeURIComponent($('#kw').val());
+                $.getJSON("/listquery?config="+conf, function(data){
+                    if(data.code===0) {
+                        $('#time').text(new Date(data.time));
+                        var rows = parse(data.result);
+                        if(rows.length>0) {
+                            draw(rows);
+                        } else {
+                            $('#chart').html('<p><h1>查找“'+conf+'”<br />无结果</h1></p>');
+                        }
+                    } else {
+                        $('#chart').html('<p>数据读取失败!</p>');
+                    }
+                })
+            });
+        });
+
+    </script>
+{% endblock %}
+</head>
+<body>
+{% block navi1 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li id="navi" value="1">数据检索</li>
+<span class="divider">/ </span><li>清单查询</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<h3>清单查询</h3><br />
+<div class="input-append" id="searchbar">
+<input class="span6" id="kw" type="text" placeholder="等待输入..." />
+<input type="button" class="btn btn-primary" id="btn" name="data" value="查询"  />
+</div>
+<div id="chart"></div>
+</div>
+{%endblock%}
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+    "site"    : "天涯论坛",
+
+    "domains" : ["www.tianya.cn", "bbs.tianya.cn"],
+
+    "urls"    : {
+                    "base": "http://www.tianya.cn/search/bbs?s=4",
+                    "keywords": {
+                        "name": "q",
+                        "file": "#FILENAME#"
+                    }
+                },
+
+    "rules"   : {
+        "#1": {
+            "follow": false,
+            "xpath" : "//div[@class='searchListOne' ]//li[datetime-delta(.//p[@class='source']/span, '+08:00', 6*3600)]//h3"
+        }
+    },
+
+    "fields": {
+        "url"     : {"name": "url",         "value": "${URL}"},
+        "title"   : {"name": "title",       "xpath": "//span[@class='s_title']", "parse": {"type": "text"}},
+        "author"  : {"name": "source",      "value": "${SITE}"},
+        "forum"   : {"name": "siteName",    "value": "${SITE}"},
+        "date"    : {"name": "ctime",       "xpath": "//div[@id='post_head']//span[starts-with(., '时间')]", "regex": "时间：([0-9].+[0-9])", "parse": {"type":"cst"}},
+        "updated" : {"name": "gtime",       "value": "${NOW}", "parse": {"type": "cst"}},
+        "content" : {"name": "content",     "xpath": "(//div[contains(@class, 'bbs-content')])[1]", "parse": {"type": "text"}},
+        "clicks"  : {"name": "visitCount",  "xpath": "//div[@id='post_head']//span[starts-with(., '点击')]", "regex": "点击：([0-9]+)", "parse": {"type":"int"}, "default": 0},
+        "replies" : {"name": "replyCount",  "xpath": "//div[@id='post_head']//span[starts-with(., '回复')]", "regex": "回复：([0-9]+)", "parse": {"type":"int"}, "default": 0},
+        "category": {"name": "info_flag",   "value": "02"}
+    },
+
+    "settings": {
+        "zmq":   "tcp://192.168.3.196:10086",
+        "dedup": "redis://192.168.3.180:6379/0"
+    }
+}

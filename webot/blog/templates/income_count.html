@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}入库总情况{% endblock %}</title>
+{% block stylelink %}   
+<style type="text/css">
+#total{width: 95%;float:left;}
+#mychart{width: 100%;float: left;height: 700px;}
+#chart{width: 50%;float: left;height: 700px;}
+#piechart{width: 50%;float: right;height: 700px;}
+#tbl{width: 100%;float: left;}
+#dt{width: 80px;}
+#dte{width: 80px;}
+#sld{width: 100%; float: left;}
+a{cursor: pointer;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="/static/js/calendar.js"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    $(function(){
+        $('#dates,#mychart').on("click",'#btn,.tab_chart',function(){
+            if ($(this).val()) {
+      	        var dm = $('#kw').val();
+            }else {
+            	  var dm = $(this).text();
+            	  $('#kw').val(dm);
+            }
+            var mdt = new Date().toLocaleDateString().replace(/年0?|月0?/g,'-').replace(/日/g,'');
+                dt = $('#dt').val();
+                cg = $('#sel2').val();
+                tm = $('#sel1').val();
+                dte = $('#dte').val();
+                ty = $('#sel3').val();
+            if (dm&&dt&&dt==dte||dm&&dt&&dte=='') {
+                if (mdt==dt) {
+                    $.getJSON("/income_today?dm="+dm+"&dt="+dt+"&tm="+tm+"&cg="+cg+"&tp=0",function (data) {
+                        handel(data,chartline(data));
+                        })
+                }else {
+                    $.getJSON("/income_count?dm="+dm+"&dt="+dt+"&tm="+tm+"&cg="+cg+"&tp=0",function (data) {
+                        handel(data,chartline(data));
+                    })
+                }
+            }else if (dm&&dt&&dte&&eval(dte)<=eval(dt)) {
+                $.getJSON("/income_count?dm="+dm+"&cg="+cg+"&dt="+dt+"&dte="+dte+"&tp=2",function (data) {
+                    handel(data,chartline(data));
+                })
+            }else if (dm==''&&dt&&dte&&eval(dte)<=eval(dt)) {
+               if (mdt==dt) {
+                   if (ty==0) {
+                       $.getJSON("/income_today?dt="+dt+"&cg="+cg+"&tp=1", function(data){
+                           handel(data,make_tables(data));
+                       })
+                   }else {
+                       $('#mychart').fadeIn();
+                       $('#chart').fadeOut();
+                       $('#piechart').fadeOut();
+                       $('#sld').fadeOut();
+                       $('#mychart').html('<p><h1>筛选条件不可查！</h1></p>');
+                   }
+                }else {
+                    if (ty==0) {
+                        $.getJSON("/income_count?dt="+dt+"&cg="+cg+"&dte="+dte+"&tp=1", function(data){
+                            window.siteordomain=data;
+                            handel(data,make_tables(data));
+                        });
+                    }else {
+                        $.getJSON("/income_count?dt="+dt+"&cg="+cg+"&dte="+dte+"&tp=4", function(data){
+                            handel(data,chartline(data));
+                        });
+                    }
+                }
+            }else {
+                $('#mychart').fadeIn();
+                $('#chart').fadeOut();
+                $('#piechart').fadeOut();
+                $('#sld').fadeOut();
+                $('#mychart').html('<p><h1>查阅规则有误，请重试！</h1></p>');
+            }
+        });
+        $('#mychart').on('click','.site_domain',function () {
+        	  if ($(this).hasClass('icon-chevron-right')==false) {
+        	      var site = siteordomain.result;
+            	  siteordomain.site=siteordomain.result;
+            	  siteordomain.result=site;
+            	  make_tables(siteordomain);
+            	  if ($(this).attr('id')=='sitename') {
+                	  $('#sitename').removeClass('icon-chevron-down').addClass('icon-chevron-right');
+                	  $('#domain').removeClass('icon-chevron-right').addClass('icon-chevron-down');
+                }else {
+                	  $('#domain').removeClass('icon-chevron-down').addClass('icon-chevron-right');
+                	  $('#sitename').removeClass('icon-chevron-right').addClass('icon-chevron-down');
+                }
+            }
+        })
+        $('#kw').focus(function(){  
+            this.select();  
+        });
+    });
+    function handel(data,fun) {
+        if (data.result) {
+            var res = data.result
+            if (res.length>0) {
+                fun;
+            }else {
+                $('#mychart').fadeIn();
+                $('#chart').fadeOut();
+                $('#piechart').fadeOut();
+                $('#sld').fadeOut();
+                $('#mychart').html('<p><h1>查找未发现该相关数据！</h1></p>');
+            }
+        }else {
+            $('#mychart').fadeIn();
+            $('#chart').fadeOut();
+            $('#piechart').fadeOut();
+            $('#sld').fadeOut();
+            $('#mychart').html('<p><h1>查找有误,请重试！</h1></p>');
+        }
+    }
+    function make_tables(dt) {
+        $('#mychart').fadeIn();
+        $('#chart').fadeOut();
+        $('#piechart').fadeOut();
+        $('#sld').fadeOut();
+        var res = dt.result;
+            op  = dt.option;
+            tot = 0;
+            st  = [];
+            dm  = [];
+        if (op=='old') {
+            var hr = '<tr><th>名称 <i id="sitename" class="icon-chevron-down site_domain"></i></th>\
+                      <th>域名 <i id="domain" class="icon-chevron-right site_domain"></i></th><th>入库数量</th></tr>'
+            for (var i in res) {
+                site = res[i][0].replace(/-.*/g,'')
+                hr += '<tr><td>'+site+'</td><td class="tab_chart"><a>'+res[i][1]+'</a></td><td>'+res[i][2]+'</td></tr>'
+                tot+= parseInt(res[i][2]);
+                if ($.inArray(site,st)==-1) {
+                    st.push(site);
+                }
+                if ($.inArray(res[i][1],dm)==-1) {
+                    dm.push(res[i][1]);
+                }
+            }
+            hr = '<p>共有'+tot.format()+'个数据,'+st.length+'个名称,'+dm.length+'域名</p><table class="table table-hover" class="table table-striped" id="list">'+hr+'</table>'
+            $('#mychart').html(hr);
+        }else {
+            var hr = '<tr><th>域名</th><th>入库数量</th><th></tr>'
+            for (var i in res) {
+                hr += '<tr><td>'+res[i][0]+'</td><td>'+res[i][1]+'</td></tr>'
+                tot+= parseInt(res[i][1]);
+                if ($.inArray(res[i][1],dm)==-1) {
+                    dm.push(res[i][1]);
+                }
+            }
+            hr = '<p>共有'+tot.format()+'个数据,'+dm.length+'个域名</p><table class="table table-hover" class="table table-striped" id="list">'+hr+'</table>'
+            $('#mychart').html(hr);
+        }
+    }
+    Number.prototype.format = function() {
+    return this.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").replace(/\../,'');
+    };
+    function chartline(result) {
+        var dt = [['日期',result.cg]];
+            res = result.result;
+            num = result.num;
+            tot = 0;
+        for (var i in res) {
+            dt.push([getLocalTime(res[i][0],num),parseInt(res[i][1])]);
+            tot+=parseInt(res[i][1]);
+        }
+        var data = google.visualization.arrayToDataTable(dt);
+        var options = {
+            title: '入库情况统计表(共'+tot.format()+'个数据)',
+            pointSize: 5,
+            chartArea: {left:100,width:"100%"},
+            lineWidth: 0.5
+        };
+        if (result.op=='all') {
+            $('#mychart').fadeOut();
+            $('#chart').fadeIn();
+            $('#sld').fadeOut();
+            var chart = new google.visualization.LineChart(document.getElementById('chart'));
+            google.visualization.events.addListener(chart, 'select', function(){
+                var sel = chart.getSelection();
+                if(sel.length) {
+                    sel = sel[0].row;
+                    console.log(sel);
+                    query_pie(getLocalTime(res[sel][0],'all'),res[sel][2]);
+                }
+            });
+        }else {
+            $('#mychart').fadeIn();
+            $('#chart').fadeOut();
+            $('#piechart').fadeOut();
+            $('#sld').fadeOut();
+            var chart = new google.visualization.LineChart(document.getElementById('mychart'));
+            google.visualization.events.addListener(chart, 'select', function(){
+                var sel = chart.getSelection();
+                    dm = $('#kw').val();
+                if(sel.length&&dm) {
+                    var dt = $('#dt').val();
+                        dte= $('#dte').val();
+                        sel = sel[0].row;
+                        cg = $('#sel2').val();
+                    if (dt==dte) {
+                        var tm = $('#sel1').val();
+                        tbls(res[sel][0],dm,cg,tm);
+                    }else {
+                        tbls(getLocalTime(res[sel][0],'all'),dm,cg,2);
+                    }
+                }
+            });
+        }
+        chart.draw(data, options);
+        function tbls(dt,dm,cg,tm) {
+	        $.getJSON("/income_tables/?dt="+dt+"&dm="+dm+"&cg="+cg+"&tm="+tm,function (data) {
+	            if(data.result) {
+                    var res = data.result;
+                    if (res.length>0) {
+                        sld_tbl(res);
+                    }else {
+                        $('#chart').html('<p><h1>查找未发现该相关数据！</h1></p>');
+                    }
+                } else {
+                    $('#chart').html('<p><h1>查找有误,请重试！</h1></p>');
+                }
+            });
+        }
+        function sld_tbl(res) {
+            $('#sld').fadeIn();
+            var hr = '<tr><th>域名</th><th>入库数量</th><th></tr>';
+            for (var i in res) {
+                hr+='<tr><td>'+res[i][0]+'</td><td>'+res[i][1]+'</td></tr>'
+            }
+            hr = '<table class="table table-hover" class="table table-striped" id="list">'+hr+'</table>';
+            $('#sld').html(hr);
+        }
+        function query_pie(dt,dm) {
+            var dt = dt.toString();
+            $.getJSON("/income_count?dt="+dt+"&dm="+dm+"&tp=3", function(data){
+            $('#piechart').fadeIn();
+            if(data.result) {
+                var res = data.result;
+                    tbl = data.tables;
+                if (res.length>0&&tbl.length>0) {
+                    draw_pie(res);
+                    sld_tbl(tbl);
+                }else {
+                    $('#piechart').html('<p><h1>查找未发现该相关数据！</h1></p>');
+                }
+            } else {
+                $('#piechart').html('<p><h1>查找有误,请重试！</h1></p>');
+            }
+            });
+        }
+    }
+    function draw_pie(res) {
+        var dt = [['类别','入库量']];
+        for (var i in res) {
+            dt.push([res[i][0],parseInt(res[i][1])])
+        }
+        var data = google.visualization.arrayToDataTable(dt);
+        var options = {
+          title: '域名入库详情统计表',
+          titleTextStyle:{color:'blue'},
+          legend: 'none',
+          pieSliceText: 'label',
+          slices: {  1: {offset: 0.2},
+                     2: {offset: 0.3},
+                     3: {offset: 0.4},
+                  },
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    function getLocalTime(nS,nM) {
+        var now = new Date(parseInt(nS)*1000)
+        if (nM=='all') {
+            return now.getFullYear()+'-'+(parseInt(now.getMonth())+1)+'-'+now.getDate();
+        }else if (nM=='0') {
+            return now;
+        }else if (nM=='1') {
+            return now.getHours();
+        }
+    }
+</script>
+<script type="text/javascript">
+    function nowscrapy() {
+            var dm = $('#kw').val();
+                dt = $('#dt').val();
+                dte = $('#dte').val();
+            if (dm) {
+                $(".you").fadeIn();
+                $(".sel3").fadeOut();
+                if (dte&&dt!=dte) {
+                    $(".mei").fadeOut();
+                }else {
+                    $(".mei").fadeIn();
+                }
+            }else {
+                $(".sel3").fadeIn();
+                $(".weiyi").fadeOut();
+            }
+    }
+    setInterval("nowscrapy()", 500);
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="/static/js/jquery-1.9.1.js"></script>
+<script src="/static/js/jquery-ui.js"></script>
+ <style>
+.ui-autocomplete {
+max-height: 150px;
+overflow-y: auto;
+/* prevent horizontal scrollbar */
+overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+height: 150px;
+}
+</style>
+<script>
+$(function() {
+    var availableTags = {{domain|safe}}
+    $( "#kw" ).autocomplete({
+        source: availableTags
+    });
+});
+</script>
+{% endblock %}
+</head>
+<body>
+{% block navi2 %}
+<div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：
+    <li><a href="/index/">首页</a></li>
+    <span class="divider"> / </span>
+    <li>服务监控</li>
+    <span class="divider">/ </span><li>入库总情况</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<br />
+    <div id="dates" class="input-prepend">
+        <input id="kw" type="text" placeholder="输入域名或不填..." />
+        <span class="add-on">日期</span>
+        <input id="dt" type="text" onfocus="HS_setDate(this)" placeholder="不选...">
+        <span class="add-on you" id="dtes">至</span>
+        <input id="dte" class="you" type="text" onfocus="HS_setDate(this)" placeholder="不选...">
+        <span class="add-on weiyi mei">每</span>
+        <select class="span1 weiyi mei" id="sel1">
+            <option value="1">小时</option>
+            <option value="0">分钟</option>
+        </select>
+        <span class="add-on sel3">展示</span>
+        <select class="span1 sel3" id="sel3">
+            <option value="0">总和</option>
+            <option value="1">每天</option>
+        </select>
+        <span class="add-on tp">类型</span>
+        <select class="span1 tp" name="sitetype" id="sel2">
+            <option value="all">all</option>
+            <option value="bbs">bbs</option>
+            <option value="blog">blog</option>
+            <option value="mblog">mblog</option>
+            <option value="news">news</option>
+        </select>
+        <input type="submit" id="btn" class="btn btn-primary" value="查阅" />
+    </div>
+    <br />
+    <div class="row_fulid" id="tbl">
+        <div id="mychart"></div>
+        <div id="chart"></div>
+        <div id="piechart"></div>
+        <div id="sld"></div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>         

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}task_distribution{% endblock %}</title>
+{% block stylelink %}   
+<style type="text/css">
+#total{width: 95%;float:left;}
+#chart{width: 50%;float: left;height: 500px;}
+#piechart{width: 50%;float: right;height: 500px;}
+#tbl{width: 100%;float: left;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      function drawChart(hd) {      
+        var dt = [['时间点','始末平均时差']];
+        for (var h in hd.result) {         
+	       dt.push([getLocalTime(hd.result[h][0],hd.num),hd.result[h][1]])            
+          }
+        var data = google.visualization.arrayToDataTable(dt);
+        var options = {
+          title: '任务分发(平均时差/时间)统计表',
+          pointSize: 6,
+          chartArea: {left:100,width:"100%"},
+          lineWidth: 0.5
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+        google.visualization.events.addListener(chart, 'select', function(){
+                    var sel = chart.getSelection();
+                    if(sel.length) {
+                        $('#piechart').display = "none";
+                        sel = sel[0].row;
+                        query_pie(hd.result[sel][0])
+                    }
+                });
+        chart.draw(data, options);
+        function query_pie(dt) {
+                $.getJSON("/task_distribution/?dt="+dt+"&"+"num="+hd.num, function(data){
+                    $('#piechart').display = "block";
+                    if(data.result) {
+                        draw_pie(data.result);
+                        tbl_chart(data.chart);
+                    } else {
+                        $('#piechart').html('<p color="red">加载失败,无此数据！</p>');
+                    }
+                });
+            }
+      
+      }
+      function getLocalTime(nS,nM) {
+      if (parseInt(nM)==3600) {
+	          return new Date(parseInt(nS) * 1000 * parseInt(nM)).toLocaleString().replace(/年|月/g, "-").replace(/日|星期.|\d{1,2}分.*/g, "");
+             }else if (parseInt(nM)==86400) {
+	          return new Date(parseInt(nS) * 1000 * parseInt(nM)).toLocaleString().replace(/年|月/g, "-").replace(/日|星期.|\d{1,2}时.*/g, "");
+             }else if (parseInt(nM)==604800) {
+	          return new Date(parseInt(nS) * 1000 * parseInt(nM)).toLocaleString().replace(/年|月/g, "-").replace(/日|\d{1,2}时\d{1,2}分\d{1,2}秒/g, "");
+             }else {
+	          return new Date(parseInt(nS) * 1000 * parseInt(nM)).toLocaleString().replace(/\d{1,2}日.*/g, "");
+             };                                   
+    }
+    function draw_pie(scrapy) {
+        var data = google.visualization.arrayToDataTable([
+          ['类别',            '数量'],
+          ['exception_count',scrapy[0]],
+          ['timeout_count',  scrapy[1]],
+          ['request_count',  scrapy[2]],
+          ['response_count', scrapy[3]],
+          ['status_200_count',scrapy[4]],
+          ['dropped_count',  scrapy[5]],
+          ['duplicated_count',scrapy[6]],
+          ['scraped_count',  scrapy[7]]     
+        ]);
+
+        var options = {
+          title: '任务采集状况统计表',
+          is3D: true,
+          titleTextStyle:{color:'blue'},
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    function tbl_chart(dat) {
+        var sl = '<tr><th>分类1</th><th>分类2</th><th>名称</th><th>域名</th><th>域名名称</th><th>类型</th><th>频道</th><th>配置文件</th>\
+                  <th>日志</th><th>错误</th><th>开始时间</th><th>结束时间</th><th>始末时差</th><th>接收数量</th><th>超时数量</th><th>放弃数量</th>\
+                  <th>请求字节</th><th>请求次数</th><th>响应字节</th><th>响应次数</th><th>状态200</th><th>丢失数量</th><th>重复数量</th>\
+                  <th>采集数量</th><th>优先级数</th><th>标签</th></tr>'
+        for (var i in dat) {
+            var start = new Date(parseInt(dat[i][26])*1000).toLocaleString().replace(/年|月/g, "-").replace(/时|分/g,":").replace(/日|星期.|秒/g, " ");
+                end = new Date(parseInt(dat[i][27])*1000).toLocaleString().replace(/年|月/g, "-").replace(/时|分/g,":").replace(/日|星期.|秒/g, " ");
+                cha = parseInt(dat[i][27]) - parseInt(dat[i][26]);
+            sl+='<tr><td>'+dat[i][2]+'</td><td>'+dat[i][3]+'</td><td>'+dat[i][4]+'</td><td>'+dat[i][5]+'</td><td>'+dat[i][6]+'</td>\
+                 <td>'+dat[i][7]+'</td><td>'+dat[i][8]+'</td><td><a href="'+dat[i][9]+'" target="_blank">查看</a></td>\
+                 <td>'+dat[i][11]+'</td><td>'+dat[i][10]+'</td><td>'+start+'</td><td>'+end+'</td><td>'+cha+'</td><td>'+dat[i][12]+'</td>\
+                 <td>'+dat[i][13]+'</td><td>'+dat[i][14]+'</td><td>'+dat[i][15]+'</td><td>'+dat[i][16]+'</td><td>'+dat[i][17]+'</td>\
+                 <td>'+dat[i][18]+'</td><td>'+dat[i][20]+'</td><td>'+dat[i][21]+'</td><td>'+dat[i][22]+'</td><td>'+dat[i][23]+'</td>\
+                 <td>'+dat[i][24]+'</td><td>'+dat[i][25]+'</td></tr>';
+            }
+	    $('#list').html(sl)
+        }
+    $(function(){
+            $('#btn').click(function(){
+                var val = encodeURIComponent($('#kw').val());
+                    num = encodeURIComponent($('#sel').val());
+                    tp = encodeURIComponent($('#sel1').val());
+                $.getJSON("/task_distribution?val="+val+"&"+"num="+num+"&"+"type="+tp, function(data){
+                    if(data.result) {
+	                                drawChart(data);
+                    }else {
+                            $('#chart').html('<p><h1>查找无数据</h1></p>');
+                          }
+                })
+            });
+        });    
+    </script>
+{% endblock %}
+</head>
+<body>
+{% block navi4 %}
+<div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：
+    <li><a href="/index/">首页</a></li>
+    <span class="divider"> / </span>
+    <li>任务管理</li>
+    <span class="divider">/ </span><li>任务总情况</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+    <div class="input-prepend">
+        <input class="span3" id="kw" type="text" placeholder="等待输入..." />
+        <span class="add-on">按:</span>
+        <select class="span1" name="sitetype" id="sel1">
+            <option value="domain_name">名称</option>
+            <option value="domain">域名</option>
+            <option value="category_name">类型</option>
+        </select>
+        <span class="add-on">选时间:</span>
+        <select class="span2" name="sitetype" id="sel">
+            <option value="3600">每小时分发情况</option>
+            <option value="86400">每天分发情况</option>
+            <option value="604800">每星期分发情况</option>
+            <option value="2592000">每个月分发情况</option>
+        </select>
+        <input type="submit" id="btn" class="btn btn-primary" value="查阅" />
+        <div id="chart"></div>
+        <div id="piechart"></div>
+    </div>
+    <br />
+    <div class="row_fulid" id="tbl">
+        <table class="table table-hover" class="table table-striped" id="list">
+        </table>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+    "site": "天涯论坛-入口URL采集",
+
+    "domains": ["bbs.tianya.cn"],
+
+    "urls": ["http://bbs.tianya.cn"],
+
+    "rules": {
+        "#1": {
+            "xpath": "//div[@id='left']",
+            "regex": "/list-(.+)-1\\.shtml$"
+        },
+        "#2": {
+            "follow": false,
+            "xpath": "//a[.='最新发表']",
+            "regex": "/list.jsp"
+        }
+    },
+
+    "fields": {
+        "id":        {"value":"${URL}", "parse":{"type":"sub", "from":"^.*item=([^&]+)&.*$", "to":"\\g<1>"}},
+        "name":      {"xpath":"//a[@class='a-collection']/@_name"},
+        "lastdate":  {"xpath":"//div[@class='bbs-type'][.//li[@class='curr' and a='最新发表']]/following-sibling::div[@class='mt5']//tbody[last()]/tr[last()]/td/@title", "parse":{"type":"date"}},
+        "currdate":  {"value":"${NOW}", "parse":{"type":"date"}},
+        "postcount": {"xpath":"//div[@class='data-count']/span[1]/text()", "regex":"[0-9]+", "parse":{"type":"int"}},
+        "replcount": {"xpath":"//div[@class='data-count']/span[2]/text()", "regex":"[0-9]+", "parse":{"type":"int"}}
+    },
+
+    "debug": true
+}

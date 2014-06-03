@@ -1,0 +1,46 @@
+{
+    "site": "新浪微博搜索",
+
+    "domains": ["s.weibo.com"],
+
+    "urls": {
+        "base": "http://s.weibo.com/weibo/WORD&xsort=time&scope=ori&timescope=custom:${TODAY}:${TODAY}&Refer=g&page=1",
+        "keywords": {
+            "name": "WORD",
+            "file": "#FILENAME#",
+            "query": false
+        },
+        "pages": {
+            "xpath": "//a[@id='page']",
+            "regex": "page=([0-9]+)",
+            "start": 1,
+            "stop": 5
+        }
+    },
+
+    "loop": "//div[@class='search_feed']//dl[@class='feed_list']",
+
+    "fields": {
+        "url":      {"name":"url",          "xpath":"./dd[@class='content']//a[@class='date']/@href"},
+        "title":    {"name":"title",        "xpath":"./dd[@class='content']/p/em", "parse":{"type":"text"}},
+        "content":  {"name":"content",      "xpath":"./dd[@class='content']/p/em", "parse":{"type":"text"}},
+        "forum":    {"name":"siteName",     "value":"新浪微博"},
+        "author":   {"name":"source",       "xpath":"./dt[@class='face']/a/@title"},
+        "date":     {"name":"ctime",        "xpath":"./dd[@class='content']//a[@class='date']/@title", "parse":{"type":"cst"}, "filter":{"delta":3600}},
+        "updated":  {"name":"gtime",        "value":"${NOW}", "parse":{"type":"cst"}},
+        "clicks":   {"name":"visitCount",   "value":0},
+        "replies":  {"name":"replyCount",   "xpath":"./dd[@class='content']//a[contains(., '评论')]/text()", "parse":[{"type":"sub", "from":"[^0-9]", "to":""}, {"type":"sub", "from":"^$", "to":"0"}, {"type":"int"}]},
+        "category": {"name":"info_flag",    "value":"04"}
+    },
+
+    "proxy": {
+        "file": "http://192.168.3.175/proxy.txt",
+        "rate": 1
+    },
+
+    "settings": {
+        "download_delay": 1,
+        "zmq": "tcp://192.168.3.196:10086",
+        "plugin": "http://192.168.3.175/plugins/weibo_plugin.py"
+    }
+}

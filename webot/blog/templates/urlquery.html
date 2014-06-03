@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title%}URL查询{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%;float: left; text-align: center;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" >
+function getLocalTime(nS) {   
+    return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+    }   
+function result(dt){
+             var urlres;
+             urlres = '<tr><th>键</th><th>值</th></tr>\
+                       <tr><td>链接地址:</td><td><a href="'+dt.url+'" target="_blank">'+dt.url+'</a></td></tr>\
+                       <tr><td>冗余次数:</td><td>'+dt.count+'</td></tr>\
+                       <tr><td>发布时间:</td><td>'+getLocalTime(dt.time)+'</td></tr>\
+                       <tr><td>采集时间:</td><td>'+getLocalTime(dt.created)+'</td></tr>\
+                       <tr><td>更新时间:</td><td>'+getLocalTime(dt.updated)+'</td></tr>'
+             document.getElementById("mytable").innerHTML=urlres;
+             $('#mytable').fadeIn();
+                   }
+$(function(){
+            $('#btn').click(function(){
+            $('#mytable').fadeOut();
+                var urlf = encodeURIComponent($('#kw').val());
+                    udb = encodeURIComponent($('#sel').val());
+                $.getJSON("/urlquery?config="+urlf+"&"+"udb="+udb, function(data){
+                    if(data.result) {
+	                                result(data.result); 
+                    }else {
+                            $('#mytable').html('<p><h1>查找“'+urlf+'”<br />无数据</h1></p>');
+                            $('#mytable').fadeIn();
+                          }
+                })
+            });
+        });
+</script>
+{% endblock %}
+</head>
+<body>
+{% block navi1 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/">首页</a></li><span class="divider"> / </span>
+<li>数据检索</li>
+<span class="divider">/ </span><li>URL查询</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<h3>URL查询</h3><br />
+<div class="input-append">
+<input class="span6" id="kw" type="text" placeholder="输入url..." name='urlq' />
+<span class="add-on">选择库:</span>
+<select class="span2" name="sitetype" id="sel">
+   <option value="0">秘书</option>
+   <option value="1">挖掘</option>
+   <option value="2">属地</option>
+   <option value="3">境外</option>
+ </select>
+<input type="submit" id="btn" class="btn btn-primary" value="查询" />
+</div>
+<div id="chart">
+<table class="table table-hover" class="table table-striped" id="mytable" style="font-size:1.5em;">
+</table> 
+</div>
+</div>
+{%endblock%}
+</body>
+</html>

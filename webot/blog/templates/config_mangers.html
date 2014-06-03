@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}配置检索{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#search{width: 95%;float: left;}
+#tables{width: 95%;float: left;}
+#btn{margin-bottom: 10px;margin-left: 10px;word-break:break-all}
+#tbl{table-layout:fixed;word-break:break-all width: 10%;} 
+.lil{overflow: hidden;text-overflow:ellipsis;white-space:nowrap;}
+#url{width: 200px;overflow: hidden;white-space: nowrap;word-break:break-all}
+#domain{width: 200px;overflow: hidden;white-space: nowrap;}
+#add{float: left;color: red;margin-left: 10px;margin-top: 10px;}
+#form{float: left;}
+.data{font-size: 1.5em;}
+</style>
+{% endblock %}
+</head>
+<body>
+    {% block navi1 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/">首页</a></li><span class="divider"> / </span>
+<li>数据检索</li>
+<span class="divider">/ </span><li>配置</li>
+{% endblock %}
+{% block body %}
+<div id='search'>
+<br />
+<form method="post" id="form"  class="input-prepend">
+<input class="span4" type="text" placeholder="configure" name="conf_content">
+<span class="add-on weiyi mei">按：</span>
+        <select class="span1 weiyi mei" id="sel1" name="conf_option">
+            <option value="conf_site">名称</option>
+            <option value="conf_domain">域名</option>
+            <option value="conf_url">网址</option>
+            <option value="conf_link">配置文件</option>
+            <option value="ERROR">错误配置</option>
+        </select>
+<input id="btn" class="btn btn-primary" type="submit" value="筛选">
+</form>
+<p id="add">共有 <b class="data"> {{cou}} </b> 配置文件,筛选到 <b class="data"> {{co}} </b>配置文件</p>
+</div>
+<div id="tables" class="row_fulid">
+<table class="table table-striped" id="btn">
+<tr><th>名称</th><th id="domain">域名</th><th id="url">网址</th><th>配置文件</th></tr>
+{% for con in msg %}
+    <tr class="{{con.conf_site|lower}}"><td>{{con.conf_site}}</td><td>{{con.conf_domain}}</td><td id="tbl" title="{{con.conf_url}}">{{con.conf_url|truncatewords:"1"}}</td>
+    <td><a href="http://192.168.94.{{ip}}{{con.conf_link|cut:'/home/config'}}" target="_blank">{{con.conf_link}}</a></td></tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}
+</body>
+</html>

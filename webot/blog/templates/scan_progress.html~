@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}扫描进度{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%; float: left; text-align: center;font-size: 1.5em;}
+#tail{width: 95%; float: left; text-align: left;}
+#machart{width: 100%;height: 700px; float: left; text-align: center;font-size: 1.5em;}
+
+</style>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart); 
+      var dt = [['日期','Status=0','Status=1','Status=2'],
+                ['{{scd.0.0}}',{{scd.0.1}},{{scd.0.2}},{{scd.0.3}}],
+                ['{{scd.1.0}}',{{scd.1.1}},{{scd.1.2}},{{scd.1.3}}],
+                ['{{scd.2.0}}',{{scd.2.1}},{{scd.2.2}},{{scd.2.3}}],
+                ['{{scd.3.0}}',{{scd.3.1}},{{scd.3.2}},{{scd.3.3}}],
+                ['{{scd.4.0}}',{{scd.4.1}},{{scd.4.2}},{{scd.4.3}}],              
+                ['{{scd.5.0}}',{{scd.5.1}},{{scd.5.2}},{{scd.5.3}}],
+                ['{{scd.6.0}}',{{scd.6.1}},{{scd.6.2}},{{scd.6.3}}]               
+               ]
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(dt);
+
+        var options = {
+          title: '扫描进度百分比',
+          vAxis: {title: '日期',  titleTextStyle: {color: 'red'}, titleTextStyle: {color: 'blue'}}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('machart'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+</head>
+<body>
+{% block navi3 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>扫描统计</li>
+<span class="divider">/ </span><li>扫描进度</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<div id="tail">
+<br />
+当前进度详情：
+<table class="table table-striped">
+<tr><th>日期</th><th>状态0/个</th><th>状态1/个</th><th>状态2/个</th></tr>
+{% for s in sd %}
+<tr><td>{{s.scan_date}}</td><td>{{s.scan_status_0}}</td>
+<td>{{s.scan_status_1}}</td><td>{{s.scan_status_2}}</td></tr>
+{% endfor %}
+</table>
+</div>
+<div id="machart"></div>
+<div id="piechart"></div>
+
+</div>
+
+{% endblock %}
+</body>
+</html>

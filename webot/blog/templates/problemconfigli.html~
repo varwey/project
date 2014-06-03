@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}问题配置（李浩）{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 820px;float: right;;}
+#tables{width: 820px;float: right;}
+</style>
+        <script type="text/javascript" >
+            $(function(){
+                $("tr:even:has(td)").css("background-color","lightblue");
+                $("td:last-child").css("text-align", "left");
+            });
+        </script>
+
+        <style>
+            th {
+                color: black;;
+                background-color: #f3dfdf;
+            }
+            td {
+                text-align: center;
+                vertical-align: middle;
+            }
+            .bad {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+
+{% endblock %}
+</head>
+<body>
+{% block location %}
+<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>数据检索</li>
+<span class="divider">/ </span><li>问题配置（李浩）</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<div id="heading" style="text-align:center;">
+<h3>1小时内采集丢失率</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>丢失率</th><th>完成原因</th><th>查看日志</th><th>配置文件</th>
+</tr>
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/543ae1360ede11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/yzdsb2_news.conf>http://192.168.3.175/news/big_world_news/yzdsb2_news.conf</a></td>
+
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/e38c1d0a0ede11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/cl_voc_news.conf>http://192.168.3.175/news/big_world_news/cl_voc_news.conf</a></td>
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/1bb4a7a40edc11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fmm_hb130_bbs.conf>http://192.168.3.175/bbs/88bbs/fmm_hb130_bbs.conf</a></td>
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.166:6800/logs/example/example/77f74ba80ee011e38e8c00e04c3fed49.log>192.168.3.166</a></td><td><a href=http://192.168.3.175/bbs/tieba/安徽-14.conf>http://192.168.3.175/bbs/tieba/安徽-14.conf</a></td>
+
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.166:6800/logs/example/example/e2f297a00ee011e38e8c00e04c3fed49.log>192.168.3.166</a></td><td><a href=http://192.168.3.175/bbs/tieba/安徽-17.conf>http://192.168.3.175/bbs/tieba/安徽-17.conf</a></td>
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.172:6800/logs/example/example/aefb48ba0ee111e3b57a00e04c357e65.log>192.168.3.172</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-26.conf>http://192.168.3.175/bbs/tieba/河南-26.conf</a></td>
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.188:6800/logs/example/example/c8c8bcb20ed911e3ab3194de80698662.log>192.168.3.188</a></td><td><a href=http://192.168.3.175/lihao/www.hebnews.cn/lh_hebnews_news_search.conf>http://192.168.3.175/lihao/www.hebnews.cn/lh_hebnews_news_search.conf</a></td>
+
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.80:6800/logs/example/example/0866145e0ee011e391b400e04c2092f6.log>192.168.3.80</a></td><td><a href=http://192.168.3.175/21sites/www.chinanews.com/lh_chinanews_bbs.conf>http://192.168.3.175/21sites/www.chinanews.com/lh_chinanews_bbs.conf</a></td>
+<tr><td>1</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.80:6800/logs/example/example/baeb7efc0ee011e391b400e04c2092f6.log>192.168.3.80</a></td><td><a href=http://192.168.3.175/21sites/www.chinanews.com/lh_chinanews_demo1_news.conf>http://192.168.3.175/21sites/www.chinanews.com/lh_chinanews_demo1_news.conf</a></td>
+<tr><td>176</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/1b15bf940edd11e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/sun0769_news.conf>http://192.168.3.175/news/other_news/sun0769_news.conf</a></td>
+
+<tr><td>18</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/048453ea0ee111e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/cl_cnr_news.conf>http://192.168.3.175/news/other_news/cl_cnr_news.conf</a></td>
+<tr><td>20</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.80:6800/logs/example/example/3cf299f20edd11e391b400e04c2092f6.log>192.168.3.80</a></td><td><a href=http://192.168.3.175/lihao/www.scol.cn/lh_scol_bbs.conf>http://192.168.3.175/lihao/www.scol.cn/lh_scol_bbs.conf</a></td>
+<tr><td>241</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/7d8941e60edd11e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/fdw_wenzhou_bbs.conf>http://192.168.3.175/bbs/other_bbs/fdw_wenzhou_bbs.conf</a></td>
+
+<tr><td>3</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/cd0397260ee211e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/hebei_news.conf>http://192.168.3.175/news/big_world_news/hebei_news.conf</a></td>
+<tr><td>3</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/4953f25c0edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_163news_news.conf>http://192.168.3.175/news/other_news/fdw_163news_news.conf</a></td>
+<tr><td>334</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/e8bfd1be0ed811e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.xinhuanet.com/lh_xinhuanet_bbs.conf>http://192.168.3.175/21sites/www.xinhuanet.com/lh_xinhuanet_bbs.conf</a></td>
+
+<tr><td>4</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/e34f17200ede11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/cl_tom2_news.conf>http://192.168.3.175/news/big_world_news/cl_tom2_news.conf</a></td>
+<tr><td>6</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/c734cb180edc11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-07.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-07.conf</a></td>
+<tr><td>68</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/53158fa80edf11e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_jschina_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_jschina_bbs.conf</a></td>
+
+<tr><td>9</td><td>1</td><td>90.00%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/caf9cfaa0edc11e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/zpbbs_bbs.conf>http://192.168.3.175/bbs/other_bbs/zpbbs_bbs.conf</a></td>
+<tr><td>110</td><td>19</td><td>85.27%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/15f0e7960ee211e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-00.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-00.conf</a></td>
+<tr><td>13</td><td>4</td><td>76.47%</td><td>finished</td><td><a href=http://192.168.3.187:6800/logs/example/example/f5f03dba0edd11e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/div/www.sina.com.cn/fmm_sina_news_0.conf>http://192.168.3.143/div/www.sina.com.cn/fmm_sina_news_0.conf</a></td>
+
+<tr><td>12</td><td>4</td><td>75.00%</td><td>finished</td><td><a href=http://192.168.3.99:6800/logs/example/example/737a1e8a0edf11e38bd600e04c1ff64c.log>192.168.3.99</a></td><td><a href=http://192.168.3.175/880sites/fdw_zaobao_news.conf>http://192.168.3.175/880sites/fdw_zaobao_news.conf</a></td>
+<tr><td>10</td><td>4</td><td>71.43%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/384ef61c0edc11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-03.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-03.conf</a></td>
+<tr><td>15</td><td>6</td><td>71.43%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/bb926aa20ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-06.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-06.conf</a></td>
+
+<tr><td>2</td><td>1</td><td>66.67%</td><td>finished</td><td><a href=http://192.168.3.164:6800/logs/example/example/df7910320edf11e3bdad00e04c20ba4e.log>192.168.3.164</a></td><td><a href=http://192.168.3.175/bbs/tieba/内蒙古-15.conf>http://192.168.3.175/bbs/tieba/内蒙古-15.conf</a></td>
+<tr><td>2</td><td>1</td><td>66.67%</td><td>finished</td><td><a href=http://192.168.3.166:6800/logs/example/example/22dff1be0edc11e38e8c00e04c3fed49.log>192.168.3.166</a></td><td><a href=http://192.168.3.175/bbs/tieba/安徽-13.conf>http://192.168.3.175/bbs/tieba/安徽-13.conf</a></td>
+<tr><td>80</td><td>46</td><td>63.49%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/fdd5ff0e0edf11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-00.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-00.conf</a></td>
+
+<tr><td>38</td><td>23</td><td>62.30%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/0e83d1120edd11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-09.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-09.conf</a></td>
+<tr><td>30</td><td>20</td><td>60.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/21873d8c0ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-01.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-01.conf</a></td>
+<tr><td>9</td><td>6</td><td>60.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/4560e83e0ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-02.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-02.conf</a></td>
+
+<tr><td>131</td><td>90</td><td>59.28%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/85a6900e0ece11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_anhuinews_news.conf>http://192.168.3.175/news/other_news/fdw_anhuinews_news.conf</a></td>
+<tr><td>11</td><td>8</td><td>57.89%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/df6154480ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-07.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-07.conf</a></td>
+<tr><td>10</td><td>8</td><td>55.56%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/03346a900edf11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-08.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-08.conf</a></td>
+
+<tr><td>5</td><td>4</td><td>55.56%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/94edb2380ee011e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/news/jingwai/cl_dwnews_news.conf>http://192.168.3.175/news/jingwai/cl_dwnews_news.conf</a></td>
+<tr><td>19</td><td>16</td><td>54.29%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/01afc3a80ee011e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/lh_e_qqnews_news.conf>http://192.168.3.175/news/big_world_news/lh_e_qqnews_news.conf</a></td>
+<tr><td>10</td><td>9</td><td>52.63%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/49619f740edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_365jia_news.conf>http://192.168.3.175/news/other_news/fdw_365jia_news.conf</a></td>
+
+<tr><td>1</td><td>1</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.164:6800/logs/example/example/1fc095840edb11e3bdad00e04c20ba4e.log>192.168.3.164</a></td><td><a href=http://192.168.3.175/bbs/tieba/内蒙古-11.conf>http://192.168.3.175/bbs/tieba/内蒙古-11.conf</a></td>
+<tr><td>1</td><td>1</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/66e496da0edc11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-28.conf>http://192.168.3.175/bbs/tieba/test/河北-28.conf</a></td>
+<tr><td>1</td><td>1</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/133b49c40edd11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-80.conf>http://192.168.3.175/bbs/tieba/test/河北-80.conf</a></td>
+
+<tr><td>1</td><td>1</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/b51089b40ee011e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-26.conf>http://192.168.3.175/bbs/tieba/test/河北-26.conf</a></td>
+<tr><td>1</td><td>1</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/bac4056c0edf11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-41.conf>http://192.168.3.175/bbs/tieba/test/河北-41.conf</a></td>
+<tr><td>1</td><td>1</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.80:6800/logs/example/example/245907520edb11e391b400e04c2092f6.log>192.168.3.80</a></td><td><a href=http://192.168.3.175/lihao/www.ybbbs.com/lh_ybbbs_bbs.conf>http://192.168.3.175/lihao/www.ybbbs.com/lh_ybbbs_bbs.conf</a></td>
+
+<tr><td>14</td><td>14</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/8ac007f80eda11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-06.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-06.conf</a></td>
+<tr><td>6</td><td>6</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/032714bc0edf11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-08.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-08.conf</a></td>
+<tr><td>81</td><td>86</td><td>48.50%</td><td>finished</td><td><a href=http://192.168.3.187:6800/logs/example/example/2ad692de0edb11e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/blog/qqsearch_blog_fmm.conf>http://192.168.3.143/zhuanjia_configs/blog/qqsearch_blog_fmm.conf</a></td>
+
+<tr><td>14</td><td>15</td><td>48.28%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/8ce1eb220ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-04.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-04.conf</a></td>
+<tr><td>26</td><td>29</td><td>47.27%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/506aa19a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-03.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-03.conf</a></td>
+<tr><td>48</td><td>55</td><td>46.60%</td><td>finished</td><td><a href=http://192.168.3.188:6800/logs/example/example/2a923c540ee211e3ab3194de80698662.log>192.168.3.188</a></td><td><a href=http://192.168.3.175/lihao/www.huanbohainews.com.cn/lh_huanbohainews_news.conf>http://192.168.3.175/lihao/www.huanbohainews.com.cn/lh_huanbohainews_news.conf</a></td>
+
+<tr><td>9</td><td>11</td><td>45.00%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/d03780180d6311e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf</a></td>
+<tr><td>3</td><td>4</td><td>42.86%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/48fb67d60edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_sohuauto_news.conf>http://192.168.3.175/news/other_news/fdw_sohuauto_news.conf</a></td>
+<tr><td>32</td><td>43</td><td>42.67%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/3f3f16640ee111e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-09.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-09.conf</a></td>
+
+<tr><td>28</td><td>39</td><td>41.79%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/08cbef1a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-01.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-01.conf</a></td>
+<tr><td>17</td><td>24</td><td>41.46%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/ffea50640ee011e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_zssns_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_zssns_bbs.conf</a></td>
+<tr><td>7</td><td>10</td><td>41.18%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/2ca3cd9a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-02.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-02.conf</a></td>
+
+<tr><td>7</td><td>10</td><td>41.18%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/5ba71c200edc11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-04.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-04.conf</a></td>
+<tr><td>27</td><td>39</td><td>40.91%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/b09409100ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-05.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-05.conf</a></td>
+<tr><td>2</td><td>3</td><td>40.00%</td><td>finished</td><td><a href=http://192.168.3.164:6800/logs/example/example/03895da60ee011e3bdad00e04c20ba4e.log>192.168.3.164</a></td><td><a href=http://192.168.3.175/bbs/tieba/内蒙古-16.conf>http://192.168.3.175/bbs/tieba/内蒙古-16.conf</a></td>
+
+<tr><td>19</td><td>31</td><td>38.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/4f03a80a0edf11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/hexun_news.conf>http://192.168.3.175/news/big_world_news/hexun_news.conf</a></td>
+<tr><td>3</td><td>5</td><td>37.50%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/bdf0e7320edf11e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_people_rednet_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_people_rednet_bbs.conf</a></td>
+<tr><td>3</td><td>5</td><td>37.50%</td><td>finished</td><td><a href=http://192.168.3.171:6800/logs/example/example/c5bdfdfc0ede11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-20.conf>http://192.168.3.175/bbs/tieba/河南-20.conf</a></td>
+
+<tr><td>10</td><td>17</td><td>37.04%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/1d2bebea0ee311e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/hinews_news.conf>http://192.168.3.175/news/other_news/hinews_news.conf</a></td>
+<tr><td>44</td><td>75</td><td>36.97%</td><td>finished</td><td><a href=http://192.168.3.156:6800/logs/example/example/e8bd02300ede11e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/cl_yahoo_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/cl_yahoo_bbs.conf</a></td>
+<tr><td>34</td><td>62</td><td>35.42%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/b0a9a6300ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-05.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-05.conf</a></td>
+
+<tr><td>1</td><td>2</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/783ec7d20ede11e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/5d0_bbs.conf>http://192.168.3.175/bbs/other_bbs/5d0_bbs.conf</a></td>
+<tr><td>1</td><td>2</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.168:6800/logs/example/example/b73a22a40edb11e3b76c00e04c3f3ecb.log>192.168.3.168</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-26.conf>http://192.168.3.175/bbs/tieba/山东-26.conf</a></td>
+<tr><td>1</td><td>2</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/b08177440ee211e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-13.conf>http://192.168.3.175/bbs/tieba/test/河北-13.conf</a></td>
+
+<tr><td>1</td><td>2</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/6ce82c280ee011e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-21.conf>http://192.168.3.175/bbs/tieba/test/河北-21.conf</a></td>
+<tr><td>1</td><td>2</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/d0d764d80edb11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-42.conf>http://192.168.3.175/bbs/tieba/test/河北-42.conf</a></td>
+<tr><td>1</td><td>2</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/e930469c0edd11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-73.conf>http://192.168.3.175/bbs/tieba/test/河北-73.conf</a></td>
+
+
+</table>
+
+</div>
+<div id="heading" style="text-align:center;">
+<h3>24小时内丢失率</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>丢失率</th><th>完成原因</th><th>查看日志</th><th>配置文件</th>
+</tr>
+<tr><td>1</td><td>2</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.99:6800/logs/example/example/0ddcaac60ede11e38bd600e04c1ff64c.log>192.168.3.99</a></td><td><a href=http://192.168.3.175/880sites/cl_yuananren_bbs.conf>http://192.168.3.175/880sites/cl_yuananren_bbs.conf</a></td>
+<tr><td>13</td><td>26</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/f81177640edb11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fmm_gdzijin_bbs.conf>http://192.168.3.175/bbs/88bbs/fmm_gdzijin_bbs.conf</a></td>
+<tr><td>60</td><td>129</td><td>31.75%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/49b750540edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_sohunews_news.conf>http://192.168.3.175/news/other_news/fdw_sohunews_news.conf</a></td>
+
+<tr><td>130</td><td>312</td><td>29.41%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/b01df2500ee211e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.qq.com/lw_qq_diqu_bbs.conf>http://192.168.3.175/21sites/www.qq.com/lw_qq_diqu_bbs.conf</a></td>
+<tr><td>4</td><td>10</td><td>28.57%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/633e622c0edc11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fmm_jjxw_bbs.conf>http://192.168.3.175/bbs/88bbs/fmm_jjxw_bbs.conf</a></td>
+<tr><td>27</td><td>71</td><td>27.55%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/960b1da00edf11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/ifeng_news.conf>http://192.168.3.175/news/big_world_news/ifeng_news.conf</a></td>
+
+<tr><td>1</td><td>3</td><td>25.00%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/66e9c4e80ee111e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/fdw_dongfeng_bbs.conf>http://192.168.3.175/bbs/other_bbs/fdw_dongfeng_bbs.conf</a></td>
+<tr><td>1</td><td>3</td><td>25.00%</td><td>finished</td><td><a href=http://192.168.3.166:6800/logs/example/example/8e566bbc0edc11e38e8c00e04c3fed49.log>192.168.3.166</a></td><td><a href=http://192.168.3.175/bbs/tieba/安徽-16.conf>http://192.168.3.175/bbs/tieba/安徽-16.conf</a></td>
+<tr><td>1</td><td>3</td><td>25.00%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/df8949060ee011e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-64.conf>http://192.168.3.175/bbs/tieba/test/河北-64.conf</a></td>
+
+<tr><td>1</td><td>3</td><td>25.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/5fe268080edc11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-76.conf>http://192.168.3.175/bbs/tieba/test/河北-76.conf</a></td>
+<tr><td>1</td><td>3</td><td>25.00%</td><td>finished</td><td><a href=http://192.168.3.80:6800/logs/example/example/efce33240edd11e391b400e04c2092f6.log>192.168.3.80</a></td><td><a href=http://192.168.3.175/lihao/www.newssc.org/lh_newssc_bbs.conf>http://192.168.3.175/lihao/www.newssc.org/lh_newssc_bbs.conf</a></td>
+<tr><td>2</td><td>6</td><td>25.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/83e9a5720edc11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-14.conf>http://192.168.3.175/bbs/tieba/test/河北-14.conf</a></td>
+
+<tr><td>1861</td><td>5828</td><td>24.20%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/28e2bb240ec711e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf</a></td>
+<tr><td>2</td><td>7</td><td>22.22%</td><td>finished</td><td><a href=http://192.168.3.156:6800/logs/example/example/1f8ddf7a0ee211e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lw_ngzb_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lw_ngzb_bbs.conf</a></td>
+<tr><td>2</td><td>7</td><td>22.22%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/1348d0d00edd11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-10.conf>http://192.168.3.175/bbs/tieba/test/河北-10.conf</a></td>
+
+<tr><td>2</td><td>7</td><td>22.22%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/492a3eac0ee011e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-58.conf>http://192.168.3.175/bbs/tieba/test/河北-58.conf</a></td>
+<tr><td>4</td><td>14</td><td>22.22%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/018e2ca20edb11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-20.conf>http://192.168.3.175/bbs/tieba/test/河北-20.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/2a3a23fa0eda11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/安徽-29.conf>http://192.168.3.175/bbs/tieba/安徽-29.conf</a></td>
+
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.168:6800/logs/example/example/1739f27c0ede11e3b76c00e04c3f3ecb.log>192.168.3.168</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-28.conf>http://192.168.3.175/bbs/tieba/山东-28.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.168:6800/logs/example/example/9b435d0e0ee011e3b76c00e04c3f3ecb.log>192.168.3.168</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-16.conf>http://192.168.3.175/bbs/tieba/山东-16.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.168:6800/logs/example/example/db5223120edb11e3b76c00e04c3f3ecb.log>192.168.3.168</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-27.conf>http://192.168.3.175/bbs/tieba/山东-27.conf</a></td>
+
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/f23504440edd11e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/cl_wuhunews_news.conf>http://192.168.3.175/news/other_news/cl_wuhunews_news.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/3dce332c0edd11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-24.conf>http://192.168.3.175/bbs/tieba/test/河北-24.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/6e5a3b360ee111e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-36.conf>http://192.168.3.175/bbs/tieba/test/河北-36.conf</a></td>
+
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/7a376a340edf11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-11.conf>http://192.168.3.175/bbs/tieba/test/河北-11.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/c701c6260ede11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-25.conf>http://192.168.3.175/bbs/tieba/test/河北-25.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/e51098260edf11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-30.conf>http://192.168.3.175/bbs/tieba/test/河北-30.conf</a></td>
+
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/01beeb580ee011e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-05.conf>http://192.168.3.175/bbs/tieba/test/河北-05.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/0d17864c0ede11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-27.conf>http://192.168.3.175/bbs/tieba/test/河北-27.conf</a></td>
+<tr><td>1</td><td>4</td><td>20.00%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/de5611280edf11e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-65.conf>http://192.168.3.175/bbs/tieba/test/河北-65.conf</a></td>
+
+</table>
+
+</div>
+<div id="heading" style="text-align:center;">
+<h3>1小时内丢失数</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>丢失率</th><th>完成原因</th><th>查看日志</th><th>配置文件路径</th>
+</tr>
+<tr><td>1861</td><td>5828</td><td>24.20%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/28e2bb240ec711e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf</a></td>
+
+<tr><td>334</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/e8bfd1be0ed811e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.xinhuanet.com/lh_xinhuanet_bbs.conf>http://192.168.3.175/21sites/www.xinhuanet.com/lh_xinhuanet_bbs.conf</a></td>
+<tr><td>241</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/7d8941e60edd11e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/fdw_wenzhou_bbs.conf>http://192.168.3.175/bbs/other_bbs/fdw_wenzhou_bbs.conf</a></td>
+<tr><td>176</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/1b15bf940edd11e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/sun0769_news.conf>http://192.168.3.175/news/other_news/sun0769_news.conf</a></td>
+
+<tr><td>131</td><td>90</td><td>59.28%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/85a6900e0ece11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_anhuinews_news.conf>http://192.168.3.175/news/other_news/fdw_anhuinews_news.conf</a></td>
+<tr><td>130</td><td>312</td><td>29.41%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/b01df2500ee211e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.qq.com/lw_qq_diqu_bbs.conf>http://192.168.3.175/21sites/www.qq.com/lw_qq_diqu_bbs.conf</a></td>
+<tr><td>110</td><td>19</td><td>85.27%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/15f0e7960ee211e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-00.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-00.conf</a></td>
+
+<tr><td>81</td><td>86</td><td>48.50%</td><td>finished</td><td><a href=http://192.168.3.187:6800/logs/example/example/2ad692de0edb11e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/blog/qqsearch_blog_fmm.conf>http://192.168.3.143/zhuanjia_configs/blog/qqsearch_blog_fmm.conf</a></td>
+<tr><td>80</td><td>46</td><td>63.49%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/fdd5ff0e0edf11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-00.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-00.conf</a></td>
+<tr><td>68</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/53158fa80edf11e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_jschina_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_jschina_bbs.conf</a></td>
+
+<tr><td>60</td><td>129</td><td>31.75%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/49b750540edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_sohunews_news.conf>http://192.168.3.175/news/other_news/fdw_sohunews_news.conf</a></td>
+<tr><td>52</td><td>5152</td><td>1.00%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/4e26a0400eda11e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.qq.com/lw_qq_all_news.conf>http://192.168.3.175/21sites/www.qq.com/lw_qq_all_news.conf</a></td>
+<tr><td>48</td><td>55</td><td>46.60%</td><td>finished</td><td><a href=http://192.168.3.188:6800/logs/example/example/2a923c540ee211e3ab3194de80698662.log>192.168.3.188</a></td><td><a href=http://192.168.3.175/lihao/www.huanbohainews.com.cn/lh_huanbohainews_news.conf>http://192.168.3.175/lihao/www.huanbohainews.com.cn/lh_huanbohainews_news.conf</a></td>
+
+<tr><td>44</td><td>75</td><td>36.97%</td><td>finished</td><td><a href=http://192.168.3.156:6800/logs/example/example/e8bd02300ede11e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/cl_yahoo_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/cl_yahoo_bbs.conf</a></td>
+<tr><td>38</td><td>23</td><td>62.30%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/0e83d1120edd11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-09.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-09.conf</a></td>
+<tr><td>34</td><td>62</td><td>35.42%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/b0a9a6300ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-05.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-05.conf</a></td>
+
+<tr><td>32</td><td>43</td><td>42.67%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/3f3f16640ee111e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-09.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-09.conf</a></td>
+<tr><td>30</td><td>20</td><td>60.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/21873d8c0ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-01.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-01.conf</a></td>
+<tr><td>28</td><td>39</td><td>41.79%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/08cbef1a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-01.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-01.conf</a></td>
+
+<tr><td>27</td><td>39</td><td>40.91%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/b09409100ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-05.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-05.conf</a></td>
+<tr><td>27</td><td>71</td><td>27.55%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/960b1da00edf11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/ifeng_news.conf>http://192.168.3.175/news/big_world_news/ifeng_news.conf</a></td>
+<tr><td>26</td><td>29</td><td>47.27%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/506aa19a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-03.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-03.conf</a></td>
+
+<tr><td>26</td><td>827</td><td>3.05%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/f0fff13a0ed611e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/zjj_enorth_bbs.conf>http://192.168.3.175/bbs/88bbs/zjj_enorth_bbs.conf</a></td>
+<tr><td>20</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.80:6800/logs/example/example/3cf299f20edd11e391b400e04c2092f6.log>192.168.3.80</a></td><td><a href=http://192.168.3.175/lihao/www.scol.cn/lh_scol_bbs.conf>http://192.168.3.175/lihao/www.scol.cn/lh_scol_bbs.conf</a></td>
+<tr><td>20</td><td>625</td><td>3.10%</td><td>closespider_timeout</td><td><a href=http://192.168.3.179:6800/logs/example/example/8c4777be0ed511e39fc100e04c43bce0.log>192.168.3.179</a></td><td><a href=http://192.168.3.175/bbs/tieling_pd/baidu_tieba.conf>http://192.168.3.175/bbs/tieling_pd/baidu_tieba.conf</a></td>
+
+<tr><td>19</td><td>16</td><td>54.29%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/01afc3a80ee011e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/lh_e_qqnews_news.conf>http://192.168.3.175/news/big_world_news/lh_e_qqnews_news.conf</a></td>
+<tr><td>19</td><td>31</td><td>38.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/4f03a80a0edf11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/hexun_news.conf>http://192.168.3.175/news/big_world_news/hexun_news.conf</a></td>
+<tr><td>18</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/048453ea0ee111e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/cl_cnr_news.conf>http://192.168.3.175/news/other_news/cl_cnr_news.conf</a></td>
+
+<tr><td>17</td><td>24</td><td>41.46%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/ffea50640ee011e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_zssns_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_zssns_bbs.conf</a></td>
+<tr><td>15</td><td>106</td><td>12.40%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/48d0193c0edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_sohustock_news.conf>http://192.168.3.175/news/other_news/fdw_sohustock_news.conf</a></td>
+<tr><td>15</td><td>6</td><td>71.43%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/bb926aa20ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-06.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-06.conf</a></td>
+
+<tr><td>14</td><td>14</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/8ac007f80eda11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-06.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-06.conf</a></td>
+<tr><td>14</td><td>15</td><td>48.28%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/8ce1eb220ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-04.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-04.conf</a></td>
+<tr><td>13</td><td>26</td><td>33.33%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/f81177640edb11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fmm_gdzijin_bbs.conf>http://192.168.3.175/bbs/88bbs/fmm_gdzijin_bbs.conf</a></td>
+
+<tr><td>13</td><td>285</td><td>4.36%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/7f133f3e0ede11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-01.conf>http://192.168.3.175/bbs/tieba/山东-01.conf</a></td>
+<tr><td>13</td><td>4</td><td>76.47%</td><td>finished</td><td><a href=http://192.168.3.187:6800/logs/example/example/f5f03dba0edd11e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/div/www.sina.com.cn/fmm_sina_news_0.conf>http://192.168.3.143/div/www.sina.com.cn/fmm_sina_news_0.conf</a></td>
+<tr><td>13</td><td>95</td><td>12.04%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/48ddf8900edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_163money_news.conf>http://192.168.3.175/news/other_news/fdw_163money_news.conf</a></td>
+
+<tr><td>12</td><td>130</td><td>8.45%</td><td>finished</td><td><a href=http://192.168.3.170:6800/logs/example/example/7a51ec8a0ed811e393f900e04c43feae.log>192.168.3.170</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-05.conf>http://192.168.3.175/bbs/tieba/河南-05.conf</a></td>
+<tr><td>12</td><td>138</td><td>8.00%</td><td>finished</td><td><a href=http://192.168.3.99:6800/logs/example/example/def8389a0edf11e38bd600e04c1ff64c.log>192.168.3.99</a></td><td><a href=http://192.168.3.175/880sites/lw_chengdu_news.conf>http://192.168.3.175/880sites/lw_chengdu_news.conf</a></td>
+<tr><td>12</td><td>175</td><td>6.42%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/8a57ee280edc11e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/bbs/tieba/安徽-01.conf>http://192.168.3.175/bbs/tieba/安徽-01.conf</a></td>
+
+<tr><td>12</td><td>4</td><td>75.00%</td><td>finished</td><td><a href=http://192.168.3.99:6800/logs/example/example/737a1e8a0edf11e38bd600e04c1ff64c.log>192.168.3.99</a></td><td><a href=http://192.168.3.175/880sites/fdw_zaobao_news.conf>http://192.168.3.175/880sites/fdw_zaobao_news.conf</a></td>
+<tr><td>12</td><td>63</td><td>16.00%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/8ac027f40ee111e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/fdw_dzwww_bbs.conf>http://192.168.3.175/bbs/other_bbs/fdw_dzwww_bbs.conf</a></td>
+<tr><td>11</td><td>251</td><td>4.20%</td><td>closespider_timeout</td><td><a href=http://192.168.3.187:6800/logs/example/example/2af08e000edb11e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/blog/sinasearch_blog_fmm.conf>http://192.168.3.143/zhuanjia_configs/blog/sinasearch_blog_fmm.conf</a></td>
+
+<tr><td>11</td><td>81</td><td>11.96%</td><td>finished</td><td><a href=http://192.168.3.190:6800/logs/example/example/1d5219d20d7611e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_liaoba_bbs.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_liaoba_bbs.conf</a></td>
+<tr><td>11</td><td>8</td><td>57.89%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/df6154480ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-07.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-07.conf</a></td>
+<tr><td>10</td><td>135</td><td>6.90%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/493683d40edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_hexun_news.conf>http://192.168.3.175/news/other_news/fdw_hexun_news.conf</a></td>
+
+<tr><td>10</td><td>143</td><td>6.54%</td><td>finished</td><td><a href=http://192.168.3.171:6800/logs/example/example/4d956c9c0eda11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-04.conf>http://192.168.3.175/search/xici_search/xici_search-04.conf</a></td>
+<tr><td>10</td><td>17</td><td>37.04%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/1d2bebea0ee311e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/hinews_news.conf>http://192.168.3.175/news/other_news/hinews_news.conf</a></td>
+<tr><td>10</td><td>196</td><td>4.85%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/a2e220240ede11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-02.conf>http://192.168.3.175/bbs/tieba/山东-02.conf</a></td>
+
+<tr><td>10</td><td>4</td><td>71.43%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/384ef61c0edc11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-03.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-03.conf</a></td>
+<tr><td>10</td><td>8</td><td>55.56%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/03346a900edf11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-08.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-08.conf</a></td>
+<tr><td>10</td><td>9</td><td>52.63%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/49619f740edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_365jia_news.conf>http://192.168.3.175/news/other_news/fdw_365jia_news.conf</a></td>
+
+<tr><td>9</td><td>11</td><td>45.00%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/d03780180d6311e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf</a></td>
+<tr><td>9</td><td>122</td><td>6.87%</td><td>finished</td><td><a href=http://192.168.3.171:6800/logs/example/example/e9b2f9740ede11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-06.conf>http://192.168.3.175/bbs/tieba/河南-06.conf</a></td>
+<tr><td>9</td><td>143</td><td>5.92%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/321a095a0edf11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-06.conf>http://192.168.3.175/bbs/tieba/山东-06.conf</a></td>
+
+<tr><td>9</td><td>1</td><td>90.00%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/caf9cfaa0edc11e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/zpbbs_bbs.conf>http://192.168.3.175/bbs/other_bbs/zpbbs_bbs.conf</a></td>
+<tr><td>9</td><td>202</td><td>4.27%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/c62c8fb00ede11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-03.conf>http://192.168.3.175/bbs/tieba/山东-03.conf</a></td>
+<tr><td>9</td><td>6</td><td>60.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/4560e83e0ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-02.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-02.conf</a></td>
+
+<tr><td>8</td><td>116</td><td>6.45%</td><td>finished</td><td><a href=http://192.168.3.164:6800/logs/example/example/eaf9cb6a0edd11e3bdad00e04c20ba4e.log>192.168.3.164</a></td><td><a href=http://192.168.3.175/bbs/tieba/内蒙古-01.conf>http://192.168.3.175/bbs/tieba/内蒙古-01.conf</a></td>
+<tr><td>8</td><td>117</td><td>6.40%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/a0e5b2a00ed811e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-04.conf>http://192.168.3.175/bbs/tieba/山东-04.conf</a></td>
+<tr><td>8</td><td>42</td><td>16.00%</td><td>finished</td><td><a href=http://192.168.3.156:6800/logs/example/example/9b82c6480edf11e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/fdw_hexun_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/fdw_hexun_bbs.conf</a></td>
+
+<tr><td>8</td><td>4399</td><td>0.18%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/6924b32c0edb11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fmm_cnwest_bbs.conf>http://192.168.3.175/bbs/88bbs/fmm_cnwest_bbs.conf</a></td>
+<tr><td>8</td><td>56</td><td>12.50%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/af7ef3a40ee111e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-37.conf>http://192.168.3.175/bbs/tieba/test/河北-37.conf</a></td>
+<tr><td>7</td><td>10</td><td>41.18%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/2ca3cd9a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-02.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-02.conf</a></td>
+
+<tr><td>7</td><td>10</td><td>41.18%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/5ba71c200edc11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-04.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-04.conf</a></td>
+<tr><td>7</td><td>108</td><td>6.09%</td><td>finished</td><td><a href=http://192.168.3.170:6800/logs/example/example/7c08d0060ede11e393f900e04c43feae.log>192.168.3.170</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-03.conf>http://192.168.3.175/bbs/tieba/河南-03.conf</a></td>
+<tr><td>7</td><td>126</td><td>5.26%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/24d704a40edb11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-07.conf>http://192.168.3.175/bbs/tieba/山东-07.conf</a></td>
+
+<tr><td>7</td><td>148</td><td>4.52%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/0dcf1e460edf11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-05.conf>http://192.168.3.175/bbs/tieba/山东-05.conf</a></td>
+<tr><td>7</td><td>1495</td><td>0.47%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/eeff825c0ed011e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fdw_gxsky_bbs.conf>http://192.168.3.175/bbs/88bbs/fdw_gxsky_bbs.conf</a></td>
+<tr><td>7</td><td>60</td><td>10.45%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/9553b4d40ee011e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_xuancheng_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_xuancheng_bbs.conf</a></td>
+
+<tr><td>7</td><td>715</td><td>0.97%</td><td>finished</td><td><a href=http://192.168.3.156:6800/logs/example/example/a58db1a00ed711e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/tar_lingshui_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/tar_lingshui_bbs.conf</a></td>
+<tr><td>6</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/c734cb180edc11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-07.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-07.conf</a></td>
+<tr><td>6</td><td>117</td><td>4.88%</td><td>finished</td><td><a href=http://192.168.3.171:6800/logs/example/example/713852d60eda11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-05.conf>http://192.168.3.175/search/xici_search/xici_search-05.conf</a></td>
+
+<tr><td>6</td><td>153</td><td>3.77%</td><td>finished</td><td><a href=http://192.168.3.170:6800/logs/example/example/345e03660ede11e393f900e04c43feae.log>192.168.3.170</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-01.conf>http://192.168.3.175/bbs/tieba/河南-01.conf</a></td>
+<tr><td>6</td><td>176</td><td>3.30%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/4c6cbdd00ed411e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_bbs.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_bbs.conf</a></td>
+<tr><td>6</td><td>6</td><td>50.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/032714bc0edf11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-08.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-08.conf</a></td>
+
+<tr><td>6</td><td>78</td><td>7.14%</td><td>finished</td><td><a href=http://192.168.3.170:6800/logs/example/example/9fe184aa0ede11e393f900e04c43feae.log>192.168.3.170</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-04.conf>http://192.168.3.175/bbs/tieba/河南-04.conf</a></td>
+<tr><td>5</td><td>37</td><td>11.90%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/fbf0021a0edb11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-54.conf>http://192.168.3.175/bbs/tieba/test/河北-54.conf</a></td>
+<tr><td>5</td><td>4</td><td>55.56%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/94edb2380ee011e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/news/jingwai/cl_dwnews_news.conf>http://192.168.3.175/news/jingwai/cl_dwnews_news.conf</a></td>
+
+<tr><td>5</td><td>48</td><td>9.43%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/6d4da71a0ee011e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/sina_news.conf>http://192.168.3.175/news/big_world_news/sina_news.conf</a></td>
+<tr><td>5</td><td>83</td><td>5.68%</td><td>finished</td><td><a href=http://192.168.3.164:6800/logs/example/example/018cca340eda11e3bdad00e04c20ba4e.log>192.168.3.164</a></td><td><a href=http://192.168.3.175/bbs/tieba/内蒙古-03.conf>http://192.168.3.175/bbs/tieba/内蒙古-03.conf</a></td>
+<tr><td>4</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/e34f17200ede11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/cl_tom2_news.conf>http://192.168.3.175/news/big_world_news/cl_tom2_news.conf</a></td>
+
+<tr><td>4</td><td>100</td><td>3.85%</td><td>finished</td><td><a href=http://192.168.3.170:6800/logs/example/example/70cdf93a0ee011e393f900e04c43feae.log>192.168.3.170</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-02.conf>http://192.168.3.175/bbs/tieba/河南-02.conf</a></td>
+<tr><td>4</td><td>10</td><td>28.57%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/633e622c0edc11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fmm_jjxw_bbs.conf>http://192.168.3.175/bbs/88bbs/fmm_jjxw_bbs.conf</a></td>
+<tr><td>4</td><td>105</td><td>3.67%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/c64b0bfc0ede11e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/bbs/tieba/安徽-02.conf>http://192.168.3.175/bbs/tieba/安徽-02.conf</a></td>
+
+<tr><td>4</td><td>14</td><td>22.22%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/018e2ca20edb11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-20.conf>http://192.168.3.175/bbs/tieba/test/河北-20.conf</a></td>
+<tr><td>4</td><td>151</td><td>2.58%</td><td>finished</td><td><a href=http://192.168.3.160:6800/logs/example/example/9fdf10c60ede11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fmm_xwh_bbs.conf>http://192.168.3.175/bbs/88bbs/fmm_xwh_bbs.conf</a></td>
+<tr><td>4</td><td>1554</td><td>0.26%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/b242d7d40d6211e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf>http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf</a></td>
+
+<tr><td>4</td><td>167</td><td>2.34%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/4928a48a0edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_nen_news.conf>http://192.168.3.175/news/other_news/fdw_nen_news.conf</a></td>
+<tr><td>4</td><td>20</td><td>16.67%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/961be0860edf11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/lh_gbcri_news.conf>http://192.168.3.175/news/big_world_news/lh_gbcri_news.conf</a></td>
+<tr><td>4</td><td>43</td><td>8.51%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/6ca6ea560edb11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-66.conf>http://192.168.3.175/bbs/tieba/test/河北-66.conf</a></td>
+
+<tr><td>4</td><td>53</td><td>7.02%</td><td>finished</td><td><a href=http://192.168.3.171:6800/logs/example/example/f4e0be640edc11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/bbs/tieba/河南-07.conf>http://192.168.3.175/bbs/tieba/河南-07.conf</a></td>
+<tr><td>4</td><td>59</td><td>6.35%</td><td>finished</td><td><a href=http://192.168.3.167:6800/logs/example/example/60f28cfe0edd11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/bbs/tieba/山东-08.conf>http://192.168.3.175/bbs/tieba/山东-08.conf</a></td>
+<tr><td>4</td><td>67</td><td>5.63%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/f1c2d4be0edd11e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/cl_sxdaily_news2.conf>http://192.168.3.175/news/other_news/cl_sxdaily_news2.conf</a></td>
+
+<tr><td>3</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/cd0397260ee211e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/hebei_news.conf>http://192.168.3.175/news/big_world_news/hebei_news.conf</a></td>
+<tr><td>3</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/4953f25c0edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_163news_news.conf>http://192.168.3.175/news/other_news/fdw_163news_news.conf</a></td>
+<tr><td>3</td><td>129</td><td>2.27%</td><td>finished</td><td><a href=http://192.168.3.171:6800/logs/example/example/c5aeb8880ede11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-06.conf>http://192.168.3.175/search/xici_search/xici_search-06.conf</a></td>
+
+<tr><td>3</td><td>154</td><td>1.91%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/414c02100edb11e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/qingdaonews_bbs.conf>http://192.168.3.175/bbs/other_bbs/qingdaonews_bbs.conf</a></td>
+<tr><td>3</td><td>24</td><td>11.11%</td><td>finished</td><td><a href=http://192.168.3.193:6800/logs/example/example/140253600ede11e3bb9e94de806a2c2f.log>192.168.3.193</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-53.conf>http://192.168.3.175/bbs/tieba/test/河北-53.conf</a></td>
+<tr><td>3</td><td>26</td><td>10.34%</td><td>finished</td><td><a href=http://192.168.3.194:6800/logs/example/example/61dd8cfe0ee211e39a9e94de8069adb0.log>192.168.3.194</a></td><td><a href=http://192.168.3.175/bbs/tieba/test/河北-61.conf>http://192.168.3.175/bbs/tieba/test/河北-61.conf</a></td>
+
+</table>
+
+</div>
+<div id="heading" style="text-align:center;">
+<h3>24小时内丢失数</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>丢失率</th><th>完成原因</th><th>查看日志</th><th>配置文件路径</th>
+</tr>
+<tr><td>1861</td><td>5828</td><td>24.20%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/28e2bb240ec711e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf</a></td>
+
+<tr><td>334</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/e8bfd1be0ed811e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.xinhuanet.com/lh_xinhuanet_bbs.conf>http://192.168.3.175/21sites/www.xinhuanet.com/lh_xinhuanet_bbs.conf</a></td>
+<tr><td>241</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.157:6800/logs/example/example/7d8941e60edd11e3991300e04c20f2ab.log>192.168.3.157</a></td><td><a href=http://192.168.3.175/bbs/other_bbs/fdw_wenzhou_bbs.conf>http://192.168.3.175/bbs/other_bbs/fdw_wenzhou_bbs.conf</a></td>
+<tr><td>176</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.169:6800/logs/example/example/1b15bf940edd11e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/sun0769_news.conf>http://192.168.3.175/news/other_news/sun0769_news.conf</a></td>
+
+<tr><td>131</td><td>90</td><td>59.28%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/85a6900e0ece11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_anhuinews_news.conf>http://192.168.3.175/news/other_news/fdw_anhuinews_news.conf</a></td>
+<tr><td>130</td><td>312</td><td>29.41%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/b01df2500ee211e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.qq.com/lw_qq_diqu_bbs.conf>http://192.168.3.175/21sites/www.qq.com/lw_qq_diqu_bbs.conf</a></td>
+<tr><td>110</td><td>19</td><td>85.27%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/15f0e7960ee211e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-00.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-00.conf</a></td>
+
+<tr><td>81</td><td>86</td><td>48.50%</td><td>finished</td><td><a href=http://192.168.3.187:6800/logs/example/example/2ad692de0edb11e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/blog/qqsearch_blog_fmm.conf>http://192.168.3.143/zhuanjia_configs/blog/qqsearch_blog_fmm.conf</a></td>
+<tr><td>80</td><td>46</td><td>63.49%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/fdd5ff0e0edf11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-00.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-00.conf</a></td>
+<tr><td>68</td><td>0</td><td>100.00%</td><td>finished</td><td><a href=http://192.168.3.159:6800/logs/example/example/53158fa80edf11e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_jschina_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_jschina_bbs.conf</a></td>
+
+<tr><td>60</td><td>129</td><td>31.75%</td><td>finished</td><td><a href=http://192.168.3.161:6800/logs/example/example/49b750540edf11e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/fdw_sohunews_news.conf>http://192.168.3.175/news/other_news/fdw_sohunews_news.conf</a></td>
+<tr><td>52</td><td>5152</td><td>1.00%</td><td>finished</td><td><a href=http://192.168.3.165:6800/logs/example/example/4e26a0400eda11e3bb4c00e04c20c078.log>192.168.3.165</a></td><td><a href=http://192.168.3.175/21sites/www.qq.com/lw_qq_all_news.conf>http://192.168.3.175/21sites/www.qq.com/lw_qq_all_news.conf</a></td>
+<tr><td>48</td><td>55</td><td>46.60%</td><td>finished</td><td><a href=http://192.168.3.188:6800/logs/example/example/2a923c540ee211e3ab3194de80698662.log>192.168.3.188</a></td><td><a href=http://192.168.3.175/lihao/www.huanbohainews.com.cn/lh_huanbohainews_news.conf>http://192.168.3.175/lihao/www.huanbohainews.com.cn/lh_huanbohainews_news.conf</a></td>
+
+<tr><td>44</td><td>75</td><td>36.97%</td><td>finished</td><td><a href=http://192.168.3.156:6800/logs/example/example/e8bd02300ede11e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/cl_yahoo_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/cl_yahoo_bbs.conf</a></td>
+<tr><td>38</td><td>23</td><td>62.30%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/0e83d1120edd11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-09.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-09.conf</a></td>
+<tr><td>34</td><td>62</td><td>35.42%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/b0a9a6300ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-05.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-05.conf</a></td>
+
+<tr><td>32</td><td>43</td><td>42.67%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/3f3f16640ee111e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-09.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-09.conf</a></td>
+<tr><td>30</td><td>20</td><td>60.00%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/21873d8c0ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_1-01.conf>http://192.168.3.175/search/tieba_search/tieba_search_1-01.conf</a></td>
+<tr><td>28</td><td>39</td><td>41.79%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/08cbef1a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-01.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-01.conf</a></td>
+
+<tr><td>27</td><td>39</td><td>40.91%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/b09409100ee011e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-05.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-05.conf</a></td>
+<tr><td>27</td><td>71</td><td>27.55%</td><td>finished</td><td><a href=http://192.168.3.154:6800/logs/example/example/960b1da00edf11e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/ifeng_news.conf>http://192.168.3.175/news/big_world_news/ifeng_news.conf</a></td>
+<tr><td>26</td><td>29</td><td>47.27%</td><td>finished</td><td><a href=http://192.168.3.174:6800/logs/example/example/506aa19a0ede11e3826000e04c3fee1a.log>192.168.3.174</a></td><td><a href=http://192.168.3.175/search/tieba_search/tieba_search_0-03.conf>http://192.168.3.175/search/tieba_search/tieba_search_0-03.conf</a></td>
+</table>
+
+</div>
+<div id="heading" style="text-align:center;">
+<h3>1小时内采集无数据</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>完成原因</th><th>查看日志</th><th>配置文件路径</th>
+</tr>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.154:6800/logs/example/example/02b5747e0e9411e3a06800e04c20bc25.log>192.168.3.154</a></td><td><a href=http://192.168.3.175/news/big_world_news/huanqiu_news.conf>http://192.168.3.175/news/big_world_news/huanqiu_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.159:6800/logs/example/example/178853780e0611e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/cl_sdinfo_bbs.conf>http://192.168.3.175/bbs/88bbs/cl_sdinfo_bbs.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.161:6800/logs/example/example/039d2eae0d9011e3a34100e04c20ba5f.log>192.168.3.161</a></td><td><a href=http://192.168.3.175/news/other_news/lh_qhnews_news.conf>http://192.168.3.175/news/other_news/lh_qhnews_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.169:6800/logs/example/example/09f57eaa0da411e38b5c00e04c43bd07.log>192.168.3.169</a></td><td><a href=http://192.168.3.175/news/other_news/lh_gansudaily_news.conf>http://192.168.3.175/news/other_news/lh_gansudaily_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.188:6800/logs/example/example/0167e3d60e5811e3ab3194de80698662.log>192.168.3.188</a></td><td><a href=http://192.168.3.175/lihao/www.hbjjrb.com/lh_hbjjrb_news.conf>http://192.168.3.175/lihao/www.hbjjrb.com/lh_hbjjrb_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/0b606f7e0d1411e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/29733a100d3b11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/2abf0b280d4111e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf>http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/312654bc0d2d11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/3206d3ca0cce11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/3a0b56ee0cc011e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/492f60840d4211e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/4ebee1fc0d5411e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/567114d20d4611e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/574e50cc0ce711e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/5f9ad8da0cd911e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/774f7cdc0cee11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/7b650b7c0d5f11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/8b82779a0d4311e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/92fb89020d3511e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/93d33dac0cd611e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/9ba2e5ea0cc811e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/b41823a00cdd11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/b7f6f4f80d4e11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/eca649ae0d4b11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/f450f1800d3d11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/f606b6fe0cde11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/fd6a27860cd011e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf>http://192.168.3.175/21sites/www.china.com.cn/lh_china_cn_news.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/008b95be0eb411e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/009b54720eb411e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00a91d280eb411e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00b522c40d9e11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00b72ea40eb411e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a4.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a4.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00c539260e2911e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00c8499e0d9e11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00d51d100eb411e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00e425ba0d9e11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/00f441ac0d9e11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/01020fb20d9e11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/01b8a7a60e5511e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/01d568b40e5511e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/02d4ef3c0df611e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/02e8379a0df611e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/044b9bf60ead11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0497d4ec0d9711e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/04a86cda0d9711e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/04b72cfc0d9711e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/055250220ed911e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/055fd22e0ed911e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/05baeda20e4e11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/05dd6d140e4e11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/05eb6a4a0e4e11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/05f939c20e4e11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/060787160e4e11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/072c25ac0def11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/073b69540def11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/07ff36d60d9011e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/081ec0320d9011e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/08757b180ea611e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/08849ef40ea611e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/095bad300dbc11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/097d0bb60e4711e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/098ad8900e4711e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/09d048760e4711e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0ad5edf20de811e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0af96c500de811e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0bf08b5e0e9f11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0bfffb840e9f11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0c69e6dc0d8911e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0c8631ca0d8911e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0d3d8aba0db511e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a4.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a4.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0d607d780e4011e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0d704d520e4011e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0eaf9ad80de111e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0ee0d2a20e6c11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0eeecbe00de111e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0efeab780de111e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0efedeaa0e6c11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+
+</table>
+
+</div>
+<div id="heading" style="text-align:center;">
+<h3>48小时内采集无数据</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>完成原因</th><th>查看日志</th><th>配置文件路径</th>
+</tr>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0f0e61a40e6c11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0fe7f8e60d8211e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/0ff582e00d8211e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/104f394a0e9811e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/10f9ae7a0e3911e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/11090b2c0e3911e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/12b7f44c0dda11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/12c5d3820dda11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/12fd6e140dda11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/13b168120e9111e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/13befbee0e9111e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/13cc6b4e0e9111e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/154bc0fa0e3211e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/156afa1a0e3211e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/169494460dd311e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/16b50b360dd311e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/17599df60e8a11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a4.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a4.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/178860be0e8a11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_1.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/1793a0900dff11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a0.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/17cc068e0e8a11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/17d2dc740dff11e3970600e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog_a3.conf</a></td>
+
+<tr><td>0</td><td>0</td><td>finished</td><td><a href=http://192.168.3.143:6800/logs/example/example/1904fb960e2b11e3b48700e04c20bc26.log>192.168.3.143</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf>http://192.168.3.143/zhuanjia_configs/weibo/sina_mblog.conf</a></td>
+
+</table>
+<div id="heading" style="text-align:center;">
+<h3>1小时内超时</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>丢失率</th><th>完成原因</th><th>查看日志</th><th>配置文件路径</th>
+</tr>
+<tr><td>10</td><td>1</td><td>90.91%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/3abf9b7e0cff11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf</a></td>
+<tr><td>379</td><td>124</td><td>75.35%</td><td>closespider_timeout</td><td><a href=http://192.168.3.167:6800/logs/example/example/cfc177500e5e11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/21sites/www.sohu.com/fdw_sohunews_news.conf>http://192.168.3.175/21sites/www.sohu.com/fdw_sohunews_news.conf</a></td>
+<tr><td>969</td><td>1892</td><td>33.87%</td><td>closespider_timeout</td><td><a href=http://192.168.3.162:6800/logs/example/example/a4d7d1280eb911e3900b00e04c20ba61.log>192.168.3.162</a></td><td><a href=http://192.168.3.175/search/other_search/fdw_qqsearch_blog.conf>http://192.168.3.175/search/other_search/fdw_qqsearch_blog.conf</a></td>
+
+<tr><td>2476</td><td>4871</td><td>33.70%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/65c4b6f20eb611e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf</a></td>
+<tr><td>33</td><td>603</td><td>5.19%</td><td>closespider_timeout</td><td><a href=http://192.168.3.179:6800/logs/example/example/33022c280e6011e39fc100e04c43bce0.log>192.168.3.179</a></td><td><a href=http://192.168.3.175/bbs/tieling_pd/baidu_tieba.conf>http://192.168.3.175/bbs/tieling_pd/baidu_tieba.conf</a></td>
+<tr><td>12</td><td>236</td><td>4.84%</td><td>closespider_timeout</td><td><a href=http://192.168.3.187:6800/logs/example/example/15ba32640e4711e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/blog/sinasearch_blog_fmm.conf>http://192.168.3.143/zhuanjia_configs/blog/sinasearch_blog_fmm.conf</a></td>
+
+<tr><td>7</td><td>143</td><td>4.67%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/3f9ad6b60e4b11e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lw_hefei_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lw_hefei_bbs.conf</a></td>
+<tr><td>7</td><td>186</td><td>3.63%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/b8bd50920e4f11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-02.conf>http://192.168.3.175/search/xici_search/xici_search-02.conf</a></td>
+<tr><td>26</td><td>761</td><td>3.30%</td><td>closespider_timeout</td><td><a href=http://192.168.3.160:6800/logs/example/example/8f2b25cc0ece11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/zjj_enorth_bbs.conf>http://192.168.3.175/bbs/88bbs/zjj_enorth_bbs.conf</a></td>
+
+<tr><td>7</td><td>229</td><td>2.97%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/16ee95100e2611e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-04.conf>http://192.168.3.175/search/xici_search/xici_search-04.conf</a></td>
+<tr><td>62</td><td>2788</td><td>2.18%</td><td>closespider_timeout</td><td><a href=http://192.168.3.162:6800/logs/example/example/e7c89fbc0e6e11e3900b00e04c20ba61.log>192.168.3.162</a></td><td><a href=http://192.168.3.175/search/other_search/fdw_sinasearch_blog.conf>http://192.168.3.175/search/other_search/fdw_sinasearch_blog.conf</a></td>
+<tr><td>4</td><td>216</td><td>1.82%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/865fa2fc0e3211e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-03.conf>http://192.168.3.175/search/xici_search/xici_search-03.conf</a></td>
+
+<tr><td>43</td><td>2337</td><td>1.81%</td><td>closespider_timeout</td><td><a href=http://192.168.3.162:6800/logs/example/example/6711d34a0e9e11e3900b00e04c20ba61.log>192.168.3.162</a></td><td><a href=http://192.168.3.175/search/other_search/fdw_163search_blog.conf>http://192.168.3.175/search/other_search/fdw_163search_blog.conf</a></td>
+<tr><td>2</td><td>170</td><td>1.16%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/9cedca3e0e2e11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-05.conf>http://192.168.3.175/search/xici_search/xici_search-05.conf</a></td>
+<tr><td>13</td><td>1289</td><td>1.00%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/a3aa5c300d1f11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf>http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf</a></td>
+
+<tr><td>1</td><td>185</td><td>0.54%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/f27545a40e3811e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lh_e_voc_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lh_e_voc_bbs.conf</a></td>
+<tr><td>8</td><td>1778</td><td>0.45%</td><td>closespider_timeout</td><td><a href=http://192.168.3.159:6800/logs/example/example/4b5136840e2911e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fdw_gxsky_bbs.conf>http://192.168.3.175/bbs/88bbs/fdw_gxsky_bbs.conf</a></td>
+<tr><td>1</td><td>246</td><td>0.40%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/dcd5f1180eb411e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-06.conf>http://192.168.3.175/search/xici_search/xici_search-06.conf</a></td>
+
+<tr><td>1</td><td>532</td><td>0.19%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/c76ba9400d3211e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+</table>
+<div id="heading" style="text-align:center;">
+<h3>24小时内超时</h3>
+<h4>2013-08-26T06:59:01</h4>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped">
+<tr class="success" style="color:black;background-color:#f3dfdf">
+<th>丢失数</th><th>采集数</th><th>丢失率</th><th>完成原因</th><th>查看日志</th><th>配置文件路径</th>
+</tr>
+<tr><td>10</td><td>1</td><td>90.91%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/3abf9b7e0cff11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf>http://192.168.3.175/21sites/www.sina.com.cn/fdw_sina_news.conf</a></td>
+<tr><td>379</td><td>124</td><td>75.35%</td><td>closespider_timeout</td><td><a href=http://192.168.3.167:6800/logs/example/example/cfc177500e5e11e3b16200e04c3fed97.log>192.168.3.167</a></td><td><a href=http://192.168.3.175/21sites/www.sohu.com/fdw_sohunews_news.conf>http://192.168.3.175/21sites/www.sohu.com/fdw_sohunews_news.conf</a></td>
+<tr><td>969</td><td>1892</td><td>33.87%</td><td>closespider_timeout</td><td><a href=http://192.168.3.162:6800/logs/example/example/a4d7d1280eb911e3900b00e04c20ba61.log>192.168.3.162</a></td><td><a href=http://192.168.3.175/search/other_search/fdw_qqsearch_blog.conf>http://192.168.3.175/search/other_search/fdw_qqsearch_blog.conf</a></td>
+
+<tr><td>2476</td><td>4871</td><td>33.70%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/65c4b6f20eb611e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lh_nlrsq_bbs.conf</a></td>
+<tr><td>33</td><td>603</td><td>5.19%</td><td>closespider_timeout</td><td><a href=http://192.168.3.179:6800/logs/example/example/33022c280e6011e39fc100e04c43bce0.log>192.168.3.179</a></td><td><a href=http://192.168.3.175/bbs/tieling_pd/baidu_tieba.conf>http://192.168.3.175/bbs/tieling_pd/baidu_tieba.conf</a></td>
+<tr><td>12</td><td>236</td><td>4.84%</td><td>closespider_timeout</td><td><a href=http://192.168.3.187:6800/logs/example/example/15ba32640e4711e3ae8994de806a247e.log>192.168.3.187</a></td><td><a href=http://192.168.3.143/zhuanjia_configs/blog/sinasearch_blog_fmm.conf>http://192.168.3.143/zhuanjia_configs/blog/sinasearch_blog_fmm.conf</a></td>
+
+<tr><td>7</td><td>143</td><td>4.67%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/3f9ad6b60e4b11e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lw_hefei_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lw_hefei_bbs.conf</a></td>
+<tr><td>7</td><td>186</td><td>3.63%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/b8bd50920e4f11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-02.conf>http://192.168.3.175/search/xici_search/xici_search-02.conf</a></td>
+<tr><td>26</td><td>761</td><td>3.30%</td><td>closespider_timeout</td><td><a href=http://192.168.3.160:6800/logs/example/example/8f2b25cc0ece11e38c8a00e04c20bc29.log>192.168.3.160</a></td><td><a href=http://192.168.3.175/bbs/88bbs/zjj_enorth_bbs.conf>http://192.168.3.175/bbs/88bbs/zjj_enorth_bbs.conf</a></td>
+
+<tr><td>7</td><td>229</td><td>2.97%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/16ee95100e2611e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-04.conf>http://192.168.3.175/search/xici_search/xici_search-04.conf</a></td>
+<tr><td>62</td><td>2788</td><td>2.18%</td><td>closespider_timeout</td><td><a href=http://192.168.3.162:6800/logs/example/example/e7c89fbc0e6e11e3900b00e04c20ba61.log>192.168.3.162</a></td><td><a href=http://192.168.3.175/search/other_search/fdw_sinasearch_blog.conf>http://192.168.3.175/search/other_search/fdw_sinasearch_blog.conf</a></td>
+<tr><td>4</td><td>216</td><td>1.82%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/865fa2fc0e3211e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-03.conf>http://192.168.3.175/search/xici_search/xici_search-03.conf</a></td>
+
+<tr><td>43</td><td>2337</td><td>1.81%</td><td>closespider_timeout</td><td><a href=http://192.168.3.162:6800/logs/example/example/6711d34a0e9e11e3900b00e04c20ba61.log>192.168.3.162</a></td><td><a href=http://192.168.3.175/search/other_search/fdw_163search_blog.conf>http://192.168.3.175/search/other_search/fdw_163search_blog.conf</a></td>
+<tr><td>2</td><td>170</td><td>1.16%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/9cedca3e0e2e11e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-05.conf>http://192.168.3.175/search/xici_search/xici_search-05.conf</a></td>
+<tr><td>13</td><td>1289</td><td>1.00%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/a3aa5c300d1f11e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf>http://192.168.3.175/21sites/www.ifeng.com/cl_ifeng_news.conf</a></td>
+
+<tr><td>1</td><td>185</td><td>0.54%</td><td>closespider_timeout</td><td><a href=http://192.168.3.156:6800/logs/example/example/f27545a40e3811e38f6200e04c20bf82.log>192.168.3.156</a></td><td><a href=http://192.168.3.175/bbs/big_world_bbs/lh_e_voc_bbs.conf>http://192.168.3.175/bbs/big_world_bbs/lh_e_voc_bbs.conf</a></td>
+<tr><td>8</td><td>1778</td><td>0.45%</td><td>closespider_timeout</td><td><a href=http://192.168.3.159:6800/logs/example/example/4b5136840e2911e381ff00e04c2094c8.log>192.168.3.159</a></td><td><a href=http://192.168.3.175/bbs/88bbs/fdw_gxsky_bbs.conf>http://192.168.3.175/bbs/88bbs/fdw_gxsky_bbs.conf</a></td>
+<tr><td>1</td><td>246</td><td>0.40%</td><td>closespider_timeout</td><td><a href=http://192.168.3.171:6800/logs/example/example/dcd5f1180eb411e3933a00e04c3fecd8.log>192.168.3.171</a></td><td><a href=http://192.168.3.175/search/xici_search/xici_search-06.conf>http://192.168.3.175/search/xici_search/xici_search-06.conf</a></td>
+
+<tr><td>1</td><td>532</td><td>0.19%</td><td>closespider_timeout</td><td><a href=http://192.168.3.190:6800/logs/example/example/c76ba9400d3211e3aaa794de80698db1.log>192.168.3.190</a></td><td><a href=http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf>http://192.168.3.175/21sites/www.people.com.cn/lh_people_news.conf</a></td>
+</table>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

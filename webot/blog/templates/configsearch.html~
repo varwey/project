@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}配置检索{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#search{float: left;}
+#tables{float: left;}
+#btn{margin-bottom: 10px;margin-left: 10px;}
+#tbn{table-layout:fixed;word-break:break-all width: 100%;}
+#domain{width: 200px;overflow: hidden;white-space: nowrap;}
+#add{margin-bottom: 10px;float: right;}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                $("tr:even:has(td)").addClass("even");
+                $("tr:has('span')").addClass('bad');
+
+                $("#btn").click(search);
+
+                $("#txt").keypress(function(e) {
+                    if(e.which==13) {
+                        search();
+                    }
+                });
+
+                function search() {
+                    var q = $("#txt").val().trim().toLowerCase();
+                    $("#tbl tr:has(td)").each(function() {
+                        var site = $(this).find('td:nth(1)').text().trim().toLowerCase();
+                        var domain = $(this).find('td:nth(2)').text().trim().toLowerCase();
+                        var config = $(this).find('td:nth(3)').text().trim().toLowerCase();
+                        var writer = $(this).find('td:nth(4)').text().trim().toLowerCase();
+                        var timer = $(this).find('td:nth(5)').text().trim().toLowerCase();
+                        if(site.indexOf(q)!=-1 || domain.indexOf(q)!=-1 || config.indexOf(q)!=-1 || writer.indexOf(q)!=-1 || timer.indexOf(q)!=-1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                    var total = $("tr:visible:has(td)").length;
+                    $("#msg").text("共"+total+"条记录");
+                }
+
+            });
+        </script>
+        <style>
+            th {
+                width: 200px;
+                color: black;
+                background-color: #f3dfdf;
+            }
+
+            td {
+                width: 200px;
+                text-align: left;
+                vertical-align: middle;
+            }
+
+            .even {
+                background-color: lightblue;
+            }
+
+            .bad {
+                background-color: red;
+                color: white;
+                font-weight: bold;
+            }
+
+            #msg {
+                margin-left: 50px;
+                color: red;
+                font-weight: bold;
+            }
+</style>
+{% endblock %}
+</head>
+<body>
+    {% block navi1 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>数据检索</li>
+<span class="divider">/ </span><li>配置检索</li>
+{% endblock %}
+{% block body %}
+<div id='search'>
+<br />
+<input id="txt" type="text" /><input id="btn" type="button" value="筛选" class="btn btn-success" /><span id="msg"></span>
+<a href="/configsearch/configadd/"><button id="add">添加配置文件</button></a>
+</div>
+<div id="tables" class="row_fulid">
+<table class="table table-striped" id="tbl">
+<tr><th></th><th>域名</th><th id="domain">名称</th><th>频道</th><th>配置文件</th><th>创建者</th><th>创建时间</th><th>最后更新时间</th><th>配置管理</th></tr>
+{% for configure in configures %}
+    <tr><td>{{forloop.counter}}</td><td>{{configure.domain}}</td><td>{{configure.domain_name}}</td><td>{{configure.channel}}</td>
+    <td><a href="/configtail/{{configure.id}}/">{{configure.config_path}}</a></td><td>{{configure.user}}</td>
+    <td>{{configure.create_datetime|date:"Y-m-d H:i:s"}}</td><td>{{configure.update_datetime}}</td>
+    <td><a href="/configalter/{{configure.id}}"  target="_blank"><button class="btn btn-success">修改</button></a>
+    <a href="/configdel/{{configure.id}}?name={{configure.config_path}}"><button class="btn btn-danger">删除</button><a></td></tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}
+</body>
+</html>

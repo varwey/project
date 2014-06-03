@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}task_situation{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#search{width: 95%;float: left;}
+#tables{width: 95%;float: left;}
+#domain{width: 200px;overflow: hidden;white-space: nowrap;}
+#add{margin-bottom: 10px; float: right;}
+#export{margin-bottom: 10px; float: right;margin-left: 10px;}
+#msg {
+                margin-left: 50px;
+                color: red;
+                font-weight: bold;
+            }
+#btn{margin-bottom: 10px;margin-left: 10px;}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                $("tr:even:has(td)").addClass("even");
+                $("tr:has('span')").addClass('bad');
+
+                $("#btn").click(search);
+
+                $("#txt").keypress(function(e) {
+                    if(e.which==13) {
+                        search();
+                    }
+                });
+
+                function search() {
+                    var q = $("#txt").val().trim().toLowerCase();
+                    $("#tbl tr:has(td)").each(function() {
+                        var site = $(this).find('td:nth(1)').text().trim().toLowerCase();
+                        var domain = $(this).find('td:nth(2)').text().trim().toLowerCase();
+                        var config = $(this).find('td:nth(3)').text().trim().toLowerCase();
+                        var writer = $(this).find('td:nth(4)').text().trim().toLowerCase();
+                        var timer = $(this).find('td:nth(5)').text().trim().toLowerCase();
+                        if(site.indexOf(q)!=-1 || domain.indexOf(q)!=-1 || config.indexOf(q)!=-1 || writer.indexOf(q)!=-1 || timer.indexOf(q)!=-1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                    var total = $("tr:visible:has(td)").length;
+                    $("#msg").text("共"+total+"条记录");
+                }
+
+            });
+        </script>
+{% endblock %}
+</head>
+<body>
+
+{% block navi4 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>任务管理</li>
+<span class="divider"> / </span><li>task_situation</li>
+{% endblock %}
+{% block body %}
+<div id="search">
+<input id="txt" type="text" /><input id="btn" type="button" value="筛选" class="btn btn-success" /><span id="msg"></span>
+</div>
+<div id="tables" class="row_fulid">
+<table class="table table-hover" class="table table-striped" style="font-size:1.5em;" id="tbl">
+<tr><th>编号</th><th>名称</th><th>域名</th><th>类型</th><th>优先级</th><th>配置文件</th><th>标签</th><th>开始时间</th><th>结束时间</th><th>结束编码</th><th>详情分析</th></tr>
+{% for c in hd %}
+  {% if c.9 == -1 %}
+    <tr class="error"><td style="width:10px;">{{forloop.counter}}</td><td>{{c.3}}</td><td>{{c.2}}</td><td>{{c.1}}</td><td>{{c.5}}</td><td><a href="{{c.4}}" target="_blank">查看</a></td>
+    <td>{{c.7}}</td><td>{{c.6|date:"Y-m-d H:i:s"}}</td><td>{{c.8|date:"Y-m-d H:i:s"}}</td><td style="color:red;">{{c.9}}</td><td><a href="/task_tail/{{c.2}}"><i class="icon-hand-up"></i></a></td></tr>
+  {% else %}
+    <tr><td style="width:10px;">{{forloop.counter}}</td><td>{{c.3}}</td><td>{{c.2}}</td><td>{{c.1}}</td><td>{{c.5}}</td><td><a href="{{c.4}}" target="_blank">查看</a></td>
+    <td>{{c.7}}</td><td>{{c.6|date:"Y-m-d H:i:s"}}</td><td>{{c.8|date:"Y-m-d H:i:s"}}</td><td style="color:green;">{{c.9}}</td><td><a href="/task_tail/{{c.2}}"><i class="icon-hand-up"></i></a></td></tr>
+  {% endif %}
+{% endfor %}
+</table> 
+</div>
+
+{% endblock %}
+</body>
+</html>

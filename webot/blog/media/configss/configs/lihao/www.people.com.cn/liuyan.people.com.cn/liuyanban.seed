@@ -1,0 +1,40 @@
+{
+    "site": "人民网",
+
+    "domains": ["people.com.cn"],
+
+    "urls": ["http://liuyan.people.com.cn/index.php"],
+
+    "rules": {
+        
+        "#1": {
+            "follow": true,
+            "regex" : "city.php",
+            "xpath" : "//div[contains(@class,'sj_list')]"
+        },
+        
+        "#2": {
+            "follow": false,
+            "regex" : "list.php",
+            "xpath" : "//*[contains(@class,'sj_tit')]"
+        }
+
+    },
+
+    "fields": {
+        "url"     : {"name": "url",   	    	"value": "${URL}" },
+        "title"   : {"name": "title", 	    	"xpath": "(//*[@id='d_1']//em[2])[1]|//div[@id='d_1' and contains(.,'没有找到结果')]", "parse": {"type": "text"}}
+    },
+   
+    "proxy": {
+        "file": "http://192.168.3.175/proxy.txt",
+        "rate": 1
+    },
+
+    "settings" : {
+
+        "zmq": "tcp://192.168.3.196:10086",
+        "dedup": "redis://192.168.3.180:6379/0",
+        "download_timeout": 60
+    }
+}

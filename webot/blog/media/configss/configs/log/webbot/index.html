@@ -1,0 +1,160 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>WebBot™监控平台</title>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('a').attr('target', '_blank');
+            stats();
+        });
+
+        function stats() {
+            $.getJSON('http://192.168.3.180:9999/stats?callback=?', function(data){
+                if(data.code===0) {
+                    var time = data.time;
+
+                    var count = data.result.count,
+                            a = count.a,
+                            w = count.w,
+                            d = count.d,
+                            h = count.h,
+                            m = count.m;
+
+                    var interval = data.result.interval,
+                            from = new Date(interval[0]).toLocaleDateString(),
+                              to = new Date(interval[1]).toLocaleDateString();
+
+                    $('#stats').html(from + ' ~ ' + to +'<br />Total:<b>'+a+'</b> (<b>'+w+'</b>/week <b>'+d+'</b>/day <b>'+h+'</b>/hour <b>'+m+'</b>/minute)');
+                }
+            }).always(function(){
+                setTimeout(stats, 60*1000);
+            });
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inconsolata', serif;
+            margin: auto;
+            width: 800px;
+        }
+
+        div.box {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            float: left;
+            margin: 10px;
+            padding: 0;
+            width: 16%;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 50px;
+            text-align: center;
+        }
+
+        h2 {
+            background-color: black;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 0;
+            padding: 5px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 10px;
+        }
+
+        li {
+            font-size: 0.9em;
+            padding: 3px;
+        }
+
+        li>a {
+            color: black;
+            text-decoration: none;
+        }
+
+        li>a:hover {
+            background-color: lightblue;
+        }
+
+        #stats {
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>WebBot™监控平台</h1>
+    </header>
+
+    <div class="box">
+        <h2>数据检索</h2>
+        <ul>
+            <li><a href="config.html">配置检索</a></li>
+            <li><a href="statistic.html">问题配置</a></li>
+            <li><a href="statistic-lihao.html">问题配置(李浩)</a></li>
+            <li><a href="http://192.168.3.180:9999/timeline.html">清单查询</a></li>
+            <li><a href="http://192.168.3.180:9999">URL查询</a></li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>服务监控</h2>
+        <ul>
+            <li><a href="http://192.168.3.175:8080/nagios/">Nagios</a></li>
+            <li><a href="http://192.168.3.184/cacti/">Cacti</a></li>
+            <li><a href="db.html">入库统计</a></li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>在线工具</h2>
+        <ul>
+            <li><a href="/proxy.txt">代理list</a></li>
+            <li><a href='http://jsonlint.com/'>json校验</a></li>
+            <li><a href='http://regexpal.com/'>正则test</a></li>
+            <li><a href='http://dillinger.io/'>MarkDown</a></li>
+            <li><a href='http://jsfiddle.net/'>html测试</a></li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2><img src="http://upload.wikimedia.org/wikipedia/en/e/e3/Firefox-logo.svg" style="width:18px; height:auto;"/>插件</h2>
+        <ul>
+            <li><a href='https://addons.mozilla.org/en-US/firefox/addon/firebug/'>firebug</a></li>
+            <li><a href='https://addons.mozilla.org/en-US/firefox/addon/firepath/'>firepath</a></li>
+            <li><a href='https://addons.mozilla.org/en-US/firefox/addon/firequery/'>firequery</a></li>
+            <li><a href='https://addons.mozilla.org/en-US/firefox/addon/imacros-for-firefox/'>imacros</a></li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>参考文档</h2>
+        <ul>
+            <li><a href="/doc/README.html">WebBot文档</a></li>
+            <li><a href="http://doc.scrapy.org/en/latest/">Scrapy文档</a></li>
+            <li><a href="http://docs.python.org/2/library/index.html">Python文档</a></li>
+            <li><a href="http://docs.mongodb.org/manual/reference/method/">Mongo命令</a></li>
+            <li><a href="http://redis.io/commands">Redis命令</a></li>
+            <li><a href="https://developers.google.com/chart/">gChart文档</a></li>
+            <li><a href="https://help.ubuntu.com/community/AptGet/Howto">安装ubuntu软件</a></li>
+            <li><a href="http://www.pip-installer.org/en/latest/index.html">安装python软件</a></li>
+        </ul>
+    </div>
+
+    <footer>
+        <p id="stats"></p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}采集器状态{% endblock %}</title>
+{% block stylelink %}
+<style>
+div #chart {width: 95%;}
+#total{width: 95%;float: left;}
+</style>
+{% endblock %}
+</head>
+<body>
+{% block navi2 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>服务监控</li>
+<span class="divider">/ </span><li>采集状态</li>
+{% endblock %}
+{%block body%}
+<iframe src="http://192.168.3.180:9999/bar.html" width="95%" height="500"></iframe>
+<!-- <div id="total">
+    <h1>采集器状态</h1>
+    <h3 id="time"></h3>
+    <div id="chart"></div>
+    <div id="down">
+        <h3>异常列表</h3>
+
+        <ul id="list"></ul>
+    </div>
+    <p>说明: 当运行时间超过6小时, 则该任务为僵尸!</p> -->
+</div>
+{%endblock%}
+</body>
+</html>

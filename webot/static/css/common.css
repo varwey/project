@@ -1,0 +1,22 @@
+@charset "utf-8";
+/*
+ * name		common.css
+ * author	raceman
+ * website	www.daqianduan.com
+ * time		2010.05.05
+ * modify	2010.05.11
+ * color	#444  #0064B1  #ff6700
+*/
+h1,h2,h3,h4,h5,h6,ol,ul,li,dl,dt,dd{padding:0;margin:0;}
+li{list-style:none;}
+img{border:none;}
+u{text-decoration:none;}
+em{font-style:normal;}
+a{color:#0064B1;text-decoration:none;outline:none;blr:expression(this.onFocus=this.blur());}
+a:hover{color:#ff6700;text-decoration:underline;}
+body{font-size:12px;color:#444;font-family:Arial,Verdana, Helvetica, sans-serif;word-break:break-all;}
+.clear{height:0;overflow:hidden;clear:both;}
+h1{font:bold 18px microsoft yahei; color:#ff6700;margin-bottom:20px;}
+h2{ position:absolute;top:12px;right:20px;}
+h2 a{ text-indent:-9999px; background:url(http://img.daqianduan.com/ui/logo.png) no-repeat; height:55px;width:130px; display:block;}
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}配置管理{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 75%;float: left;margin-left: 200px;text-align: center;}
+tr{float: left;}
+#alter{float: left;margin-left: 10px;margin-top: 10px;}
+textarea{float: left;}
+#delect{float: left;margin-left: 10px;margin-top: 10px;}
+</style>
+{% endblock %}
+<title>配置详情</title>
+</head>
+<body>
+{% block navi1 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>数据检索</li>
+<span class="divider">/ </span><li><a href="/configsearch/">配置检索</a></li><span class="divider">/ </span><li>配置详情</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<table class="table table-striped" id="tbl">
+<tr><th>键</th><th>值</th></tr>
+<tr><td></td><td style="font-size:1.5em;">{{config_file}}</td></tr>
+</table>
+<a href="/configalter/{{num}}"><button id="alter" class="btn btn-success" value=''>修改配置</button></a>
+<a href="/configdel/{{num}}"><button id="delect" class="btn btn-danger" value='del'>删除配置</button></a>
+</div>
+{% endblock %}
+</body>
+</html>

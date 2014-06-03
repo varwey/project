@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title%}导库监控{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%;float: left;}
+#chart{height: 600px;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    $(function () {
+        $(":checked").click(function () {
+            if ($("input:checked").length>0) {
+                drawChart();
+            } else {
+                $('#chart').html('<p></p>');
+            }
+        });
+    });
+    function getDataSource() {
+        var head = ["时:分"];
+        var index = [];
+        $("input:checked").each(function () {
+                head.push($(this).attr("name"));
+                index.push(parseInt($(this).attr("index")));
+            });
+        var dat = [head];
+            day = $('#sel').val();
+        if (day=='now') {
+            dt = {{dtn|safe}};
+        }else {
+            dt = {{dty|safe}}
+        }
+        for (var i in dt) {
+            var row = [getLocalTime(dt[i][0])];
+            for(var j in index) {
+                row.push(dt[i][index[j]]);
+            }
+            dat.push(row);
+        }
+        return dat;
+    }
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(getDataSource());
+        var options = {
+          title: '导库统计表（最近24小时）',
+          chartArea: {left:80,width:"80%"},
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+        chart.draw(data, options);
+    }
+    function getLocalTime(nS) {
+        var now = new Date(parseInt(nS)*1000)
+        return now.getHours()+':'+now.getMinutes();
+    }
+</script>
+{% endblock %}
+</head>
+<body>
+{% block navi2 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li id="navi" value="1">服务监控</li>
+<span class="divider">/ </span><li>导库监控</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+  <div class="input-prepend">
+      <input type="checkbox" checked="checked" index="1" name="30:news" value="192.168.3.30">
+      <span class="add-on tp">新闻</span>&nbsp;
+      <input type="checkbox" checked="checked" index="2" name="145:bbs" value="192.168.3.145">
+      <span class="add-on tp">论坛</span>&nbsp;
+      <input type="checkbox" checked="checked" index="3" name="212:blog" value="192.168.3.212">
+      <span class="add-on tp">博客</span>&nbsp;
+      <input type="checkbox" checked="checked" index="4" name="202:mblog" value="192.168.3.202">
+      <span class="add-on tp">微博(202)</span>&nbsp;
+      <input type="checkbox" checked="checked" index="5" name="49:mblog" value="192.168.3.49">
+      <span class="add-on tp">微博(49)</span>&nbsp;
+      <select class="span1" id="sel">
+          <option value="now">今天</option>
+          <option value="yes">昨天</option>
+      </select>
+  </div>
+  <div id="chart"></div>
+</div>
+{%endblock%}
+</body>
+</html>

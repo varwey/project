@@ -1,0 +1,51 @@
+{
+	"site" : "http://192.168.3.143/div/tiexue_new",
+	"count" : 19,
+	"rx_count" : 650,
+	"rx_bytes" : 180671,
+	"tx_count" : 509,
+	"tx_bytes" : 11030575,
+	"err_count" : 141,
+	"scraped" : 60,
+	"dropped" : 1,
+	"duplicated" : 3475,
+	"elapsed_min" : 39.602,
+	"elapsed_max" : 198.798,
+	"name" : "铁血网",
+	"date" : "2013-09-03",
+	"elapsed_avg" : 87.15847368421053
+}
+{
+	"site" : "http://192.168.3.143/div/sina_new",
+	"count" : 15,
+	"rx_count" : 1925,
+	"rx_bytes" : 576686,
+	"tx_count" : 1736,
+	"tx_bytes" : 54463016,
+	"err_count" : 189,
+	"scraped" : 340,
+	"dropped" : 1085,
+	"duplicated" : 9848,
+	"elapsed_min" : 51.784,
+	"elapsed_max" : 338.908,
+	"name" : "新浪网",
+	"date" : "2013-09-03",
+	"elapsed_avg" : 154.57319999999999
+}
+{
+	"site" : "http://192.168.3.143/div/sohu_new",
+	"count" : 105,
+	"rx_count" : 12126,
+	"rx_bytes" : 3533758,
+	"tx_count" : 8211,
+	"tx_bytes" : 170238334,
+	"err_count" : 3915,
+	"scraped" : 582,
+	"dropped" : 472,
+	"duplicated" : 6184,
+	"elapsed_min" : 0.48,
+	"elapsed_max" : 659.224,
+	"name" : "搜狐网",
+	"date" : "2013-09-03",
+	"elapsed_avg" : 164.3452761904762
+}

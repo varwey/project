@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}详情分析{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%;float:left; text-align: center;font-size: 1em;}
+#piechart{overflow: hidden;float: right; width: 50%; height: 500px;}
+#chart{overflow: hidden;float: left; width: 50%; height: 500px;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {      
+        var dt = [['时间点','时间差/秒']];
+            h_d= {{h_d|safe}}
+        for (var h in h_d) {         
+	       dt.push([getLocalTime(h_d[h][0]),parseInt(h_d[h][1])])            
+          }
+        var data = google.visualization.arrayToDataTable(dt);
+        var options = {
+          title: '开始时间/开始结束时差统计表',
+          pointSize: 10,
+          chartArea: {left:100,width:"100%"},
+          lineWidth: 2
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+        google.visualization.events.addListener(chart, 'select', function(){
+                    var sel = chart.getSelection();
+                    console.log(sel)
+                    if(sel.length) {
+                        $('#piechart').display = "none";
+                        sel = sel[0].row;
+                        query_pie(h_d[sel][2])
+                    }
+                });
+        chart.draw(data, options);
+        function query_pie(uuid) {
+                $.getJSON('/task_tail/{{domain}}?uuid='+uuid, function(data){
+                    $('#piechart').display = "block";
+                    if(data.result) {
+                        draw_pie(data.result);
+                    } else {
+                        $('#piechart').html('<p color="red">加载失败,无此数据！</p>');
+                    }
+                });
+            }
+      
+      }
+      function getLocalTime(nS) {
+	     return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/时|分/g, ":").replace(/日|星期.|秒/g, "");                                
+      }
+
+      function draw_pie(scrapy) {
+        var data = google.visualization.arrayToDataTable([
+          ['类别',            '数量'],
+          ['exception_count',scrapy[0]],
+          ['timeout_count',  scrapy[1]],
+          ['gava_up_request',scrapy[2]],
+          ['request_count',  scrapy[4]],
+          ['response_count', scrapy[6]],
+          ['status_200_count',scrapy[7]],
+          ['dropped_count',  scrapy[9]],
+          ['duplicated_count',scrapy[10]],
+          ['scraped_count',  scrapy[11]]     
+        ]);
+
+        var options = {
+          title: 'request:'+scrapy[3]+';response:'+scrapy[5],
+          is3D: true,
+          titleTextStyle:{color:'blue'},
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+</head>
+<body>
+{% block navi4 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>任务管理</li><span class="divider"> / </span><li>详情分析</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<div id="chart"></div>
+<div id="piechart"></div>
+<table class="table table-striped">
+<tr>
+    <th>编号</th>
+    <th>名称</th>
+    <th>域名</th><th>类型</th><th>优先级</th><th>配置文件</th><th>标签</th><th>开始时间</th><th>结束时间</th><th>时间差(秒)</th><th>结束编码</th></tr>
+{% for c in hd %}
+    {% if c.9 == -1 %}
+    <tr class="error"><td>{{forloop.counter}}</td><td>{{c.3}}</td><td>{{c.2}}</td><td>{{c.1}}</td><td>{{c.5}}</td><td><a href="{{c.4}}" target="_blank">查看</a></td>
+    <td>{{c.7}}</td><td>{{c.6|date:"Y-m-d H:i:s"}}</td><td>{{c.8|date:"Y-m-d H:i:s"}}</td><td>{{c.10}}</td><td style="color:red">{{c.9}}</td></tr>
+    {% else %}
+    <tr><td>{{forloop.counter}}</td><td>{{c.3}}</td><td>{{c.2}}</td><td>{{c.1}}</td><td>{{c.5}}</td><td><a href="{{c.4}}" target="_blank">查看</a></td>
+    <td>{{c.7}}</td><td>{{c.6|date:"Y-m-d H:i:s"}}</td><td>{{c.8|date:"Y-m-d H:i:s"}}</td><td>{{c.10}}</td><td style="color:green">{{c.9}}</td></tr>
+    {% endif %}
+{% endfor %}
+</table>
+</div>
+{% endblock %}
+</body>
+</html>

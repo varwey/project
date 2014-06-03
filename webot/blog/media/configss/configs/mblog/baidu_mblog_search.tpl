@@ -1,0 +1,44 @@
+{
+    "site": "百度微博搜索",
+
+    "domains": ["www.baidu.com"],
+
+    "urls": {
+        "base": "http://www.baidu.com/s?rn=100&rtt=2&cl=2&tn=baiduwb&wb=4&ie=utf-8&wd=python",
+        "keywords": {
+            "name": "wd",
+            "file": "#FILENAME#",
+            "enc": "utf-8"
+        },
+        "pages": {
+            "xpath": "//p[@id='page']",
+            "regex": "&pn=([0-9]+)",
+            "start": 0,
+            "stop": 300
+        }
+    },
+
+    "loop": "//ol[@id='weibo']//div[@class='weibo_info' and datetime-delta(./div[@class='m'], '+08:00', 1*3600)]",
+
+    "fields": {
+        "url":      {"name":"url",          "xpath":".//a[@name='weibo_ping']/@href", "parse":{"type":"sub", "from":"\\?.*", "to":""}},
+        "title":    {"name":"title",        "xpath":"./preceding-sibling::node()", "parse":{"type":"list"}},
+        "forum":    {"name":"siteName",     "value":"新浪微博"},
+        "author":   {"name":"source",       "xpath":"./preceding-sibling::a[@name='weibo_rootnick']/text()", "regex":"^\\S+"},
+        "date":     {"name":"ctime",        "xpath":".//div[@class='m']/text()", "regex":"^(.+) - ", "parse":{"type":"cst"}, "filter":{"delta":3600}},
+        "updated":  {"name":"gtime",        "value":"${NOW}", "parse":{"type":"cst"}},
+        "content":  {"name":"content",      "xpath":"./preceding-sibling::node()", "parse":{"type":"list"}},
+        "clicks":   {"name":"visitCount",   "value": 0},
+        "replies":  {"name":"replyCount",   "value": 0},
+        "category": {"name":"info_flag",    "value":"04"}
+    },
+
+    "settings": {
+        "zmq": "tcp://192.168.3.196:10086"
+    },
+
+    "notes": {
+        "2013-06-22": "百度微博搜索页面的<div>标签不配对"
+    }
+}
+

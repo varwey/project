@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{% extends "base.html" %}
+<title>{% block title %}问题配置{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#tables{width: 100%;float: left;display: block;}
+#total{width: 95%;float: left;}
+#heading{float: left;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+function loadXMLDoc(vl)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    var configs=xmlhttp.responseText;
+        configs=eval("("+configs+")")
+    
+    datas='<table><tr><th>'+configs.length+'/数量</th><th>丢失数</th><th>采集数</th><th>丢失率/%</th><th>完成原因</th><th>查看日志</th><th>配置文件</th></tr>';    
+	for (var i=0;i<configs.length;i++)
+      {
+      dt=configs[i]
+      datas+='<tr><td>'+(i+1)+'</td><td>'+dt.drop+'</td><td>'+dt.scrap+'</td><td>'+dt.rate.toFixed(2)+'%</td><td>'+dt.reason+'</td><td><a href="//'+dt.bot_ip+':6800/logs/'+dt.spider_name+'/'+dt.bot_name+'/'+dt.job_id+'.log" target="_blank">'+dt.bot_ip+'</a></td><td>'+
+      '<a href="'+dt.config_path+'" target="_blank">'+dt.config_path+'</a></td></tr>';        
+      }
+    datas=datas+'</table>';
+    document.getElementById("mytable").innerHTML=datas;
+        
+    }
+  }
+if (vl == "b1"){
+                xmlhttp.open("GET","../static/time_1.json",true);
+                xmlhttp.send();}
+if (vl == "b2"){
+                xmlhttp.open("GET","../static/time_1out.json",true);
+                xmlhttp.send();}
+if (vl == "b3"){
+                xmlhttp.open("GET","../static/time_1null.json",true);
+                xmlhttp.send();}
+if (vl == "b4"){
+                xmlhttp.open("GET","../static/time_24.json",true);
+                xmlhttp.send();}
+if (vl == "b5"){
+                xmlhttp.open("GET","../static/time_24out.json",true);
+                xmlhttp.send();}
+if (vl == "b6"){
+                xmlhttp.open("GET","../static/time_48.json",true);
+                xmlhttp.send();}
+if (vl == "b7"){
+                xmlhttp.open("GET","../static/time_48null.json",true);
+                xmlhttp.send();}	
+
+}
+</script>
+{% endblock %}
+</head>
+<body>
+{% block navi1 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>数据检索</li>
+<span class="divider">/ </span><li>问题配置</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<div id="heading">
+<button id="b1" name="button" class="btn btn-success" type="button" onclick="loadXMLDoc('b1')">1小时内数据</button>
+<button id="b2" name="button" class="btn btn-success" type="button" onclick="loadXMLDoc('b2')">1小时内超时</button>
+<button id="b3" name="button" class="btn btn-success" type="button" onclick="loadXMLDoc('b3')">1小时无数据</button>
+<button id="b4" name="button" class="btn btn-success" type="button" onclick="loadXMLDoc('b4')">24小时内数据</button>
+<button id="b5" name="button" class="btn btn-success" type="button" onclick="loadXMLDoc('b5')">24小时内超时</button>
+<button id="b6" name="button" class="btn btn-success" type="button" onclick="loadXMLDoc('b6')">48小时内数据</button>
+<button id="b7" name="button" class="btn btn-success" type="button" onclick="loadXMLDoc('b7')">48小时无数据</button>
+</div>
+<div id="tables"  style="margin-top: 20px;">
+<table class="table table-hover" class="table table-striped" id="mytable" style="font-size:1.5em;">
+</table>    
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

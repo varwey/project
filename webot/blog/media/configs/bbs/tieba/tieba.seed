@@ -1,0 +1,41 @@
+{
+    "site": "百度贴吧-seed",
+
+    "domains": ["tieba.baidu.com"],
+
+    "urls": {
+        "base":"http://tieba.baidu.com/f/index/forumpark?cn=%C9%BD%B6%AB&ci=0&pcn=%B5%D8%C7%F8&pci=0&ct=1&rn=20&pn=1",
+        "qstr": {
+            "pcn": {"val":"地区", "enc":"gbk"}
+        },
+        "keywords": {
+            "name": "cn",
+            "list": [
+                "山东", "河北", "河南", "山西", "江苏", "辽宁", "四川", "广东", "黑龙江", "陕西",
+                "安徽", "浙江", "江西", "吉林", "内蒙古", "湖北", "福建", "甘肃", "海外", "湖南",
+                "贵州", "北京", "云南", "广西", "天津", "重庆", "上海", "宁夏", "新疆", "青海",
+                "海南", "港澳台", "西藏", "其他地区及话题"
+            ],
+            "enc": "gbk"
+        },
+
+        "pages": {
+            "xpath": "//div[@class='pagination']/a[.='下一页']",
+            "regex": "&pn=([0-9]+)",
+            "start": 1,
+            "stop": 999
+        }
+    },
+
+    "loop": "//div[@id='ba_list']/div",
+
+    "fields": {
+        "url":      {"xpath":"./a[contains(@class, 'ba_href')]/@href", "parse":{"type":"sub", "from":"^", "to":"http://tieba.baidu.com"}},
+        "name":     {"xpath":".//p[@class='ba_name']/text()"},
+        "members":  {"xpath":".//span[@class='ba_m_num']/text()", "parse":{"type":"int"}},
+        "threads":  {"xpath":".//span[@class='ba_p_num']/text()", "parse":{"type":"int"}},
+        "group":    {"xpath":"//ul/li/a[@class='cur_class']/@title"}
+    },
+
+    "debug": true
+}

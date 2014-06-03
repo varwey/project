@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+{%extends "base.html"%}
+<title>{% block title %}spider_server{% endblock %}</title>
+{% block stylelink %}
+<style type="text/css">
+#total{width: 95%;float:left;text-align: center;font-size: 2em;}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+{% endblock %}
+</head>
+<body>
+{% block navi4 %}
+    <div class="unit current">
+    {% endblock %}
+{% block location %}
+<ul class="breadcrumb">当前位置：<li><a href="/index/">首页</a></li><span class="divider"> / </span>
+<li>任务管理</li><span class="divider"> / </span><li><a href="/task_list/">task_list</a></li>
+<span class="divider"> / </span><li>添加任务</li>
+{% endblock %}
+{% block body %}
+<div id="total">
+<h1 class="form-signin-heading" style="color:green;text-align:center;">task_list添加</h1>
+<form class="form-signin" method="post" enctype="multipart/form-data">
+<table class="table table-striped">
+<tr><th>字段</th><th>添加数据</th><th>提示</th></tr>
+<tr><td>category_name</td><td><input type="text" class="input-block-level" name="category_name"></td><td style="color:red"><i class="icon-asterisk"></i>(char(20))</td></tr>
+<tr><td>domain</td><td><input type="text" class="input-block-level" name="domain"></td><td style="color:red"><i class="icon-asterisk"></i>(char(100))</td></tr>
+<tr><td>domain_name</td><td><input type="text" class="input-block-level" name="domain_name"></td><td style="color:red"><i class="icon-asterisk"></i>(char(50))</td></tr>
+<tr><td>channel</td><td><input type="text" class="input-block-level" name="channel"></td><td style="color:red"><i class="icon-asterisk"></i>(char(50))</td></tr>
+<tr><td>config_url</td><td><input type="text" class="input-block-level" name="config_url"></td><td style="color:red"><i class="icon-asterisk"></i>(char(200))</td></tr>
+<tr><td>project_name</td><td><input type="text" class="input-block-level" name="project_name"></td><td style="color:red"><i class="icon-asterisk"></i>(char(50))</td></tr>
+<tr><td>spider_name</td><td><input type="text" class="input-block-level" name="spider_name"></td><td style="color:red"><i class="icon-asterisk"></i>(char(50))</td></tr>
+<tr><td>spider_params</td><td><input type="text" class="input-block-level" name="spider_params"></td><td style="color:red"><i class="icon-asterisk"></i>(text)</td></tr>
+<tr><td>priority_seconds</td><td><input type="text" class="input-block-level" name="priority_seconds"></td><td style="color:red"><i class="icon-asterisk"></i>bigint(10),DEFAULT '120'</td></tr>
+<tr><td>create_datetime</td><td><input type="text" class="input-block-level" name="create_datetime"></td><td style="color:red"><i class="icon-asterisk"></i>(int(11) unsigned)</td></tr>
+<tr><td>update_datetime</td><td><input type="text" class="input-block-level" name="update_datetime"></td><td style="color:red"><i class="icon-asterisk"></i>(int(11) unsigned)</td></tr>
+<tr><td>tag</td><td><input type="text" class="input-block-level" name="tag"></td><td style="color:red"><i class="icon-asterisk"></i>(char(20))</td></tr>
+<tr><td>status</td><td><input type="text" class="input-block-level" name="status"></td><td style="color:red"><i class="icon-asterisk"></i>(int(11))</td></tr>
+<tr><td>server_id</td><td><input type="text" class="input-block-level" name="server_id"></td><td style="color:red"><i class="icon-asterisk"></i>(int(11))</td></tr>
+<tr><td>thread_id</td><td><input type="text" class="input-block-level" name="thread_id"></td><td style="color:red"><i class="icon-asterisk"></i>(int(11))</td></tr>
+<tr><td>start_datetime</td><td><input type="text" class="input-block-level" name="start_datetime"></td><td style="color:red"><i class="icon-asterisk"></i>(bigint(10))</td></tr>
+<tr><td>end_datetime</td><td><input type="text" class="input-block-level" name="end_datetime"></td><td style="color:red"><i class="icon-asterisk"></i>(bigint(10))</td></tr>
+<tr><td>uuid</td><td><input type="text" class="input-block-level" name="uuid"></td><td style="color:red"><i class="icon-asterisk"></i>(char(36))</td></tr>
+<tr><td>node_id</td><td><input type="text" class="input-block-level" name="node_id"></td><td style="color:red"><i class="icon-asterisk"></i>int(11),DEFAULT '0'</td></tr>
+<tr><td>is_sync</td><td><input type="text" class="input-block-level" name="is_sync"></td><td style="color:red"><i class="icon-asterisk"></i>(int(11))</td></tr>
+</table>
+<p style="float：left;color:red;">{{em}}<br />{{e}}</p><button class="btn btn-large btn-primary" type="submit" style="text-align:center;">立即添加</button>    
+</form>
+</div>
+{% endblock %}
+</body>
+</html>

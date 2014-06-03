@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#webbot用户手册">Webbot用户手册</a><ul>
+<li><a href="#爬虫列表">爬虫列表</a></li>
+<li><a href="#功能列表">功能列表</a></li>
+<li><a href="#scrapy入门">scrapy入门</a></li>
+<li><a href="#在线工具">在线工具</a></li>
+<li><a href="#firefox插件">Firefox插件</a></li>
+</ul></li>
+<li><a href="#配置文件语法">配置文件语法</a><ul>
+<li><a href="#site">site</a></li>
+<li><a href="#domains">domains</a></li>
+<li><a href="#urls">urls</a></li>
+<li><a href="#rules">rules</a></li>
+<li><a href="#loop">loop</a></li>
+<li><a href="#fields">fields</a></li>
+<li><a href="#proxy">proxy</a></li>
+<li><a href="#debug">debug</a></li>
+<li><a href="#settings">settings</a></li>
+</ul></li>
+<li><a href="#配置ubuntu服务器">配置Ubuntu服务器</a><ul>
+<li><a href="#安装系统">安装系统</a></li>
+<li><a href="#系统设置">系统设置</a></li>
+<li><a href="#安装软件">安装软件</a></li>
+<li><a href="#配置软件">配置软件</a></li>
+<li><a href="#目录结构">目录结构</a></li>
+<li><a href="#命名规则">命名规则</a></li>
+<li><a href="#web服务">WEB服务</a></li>
+<li><a href="#计划任务">计划任务</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="webbot用户手册"><a href="#TOC">Webbot用户手册</a></h1>
+<h2 id="爬虫列表"><a href="#TOC">爬虫列表</a></h2>
+<ul>
+<li>example(通用型)</li>
+<li>jsonbot(通用型)</li>
+</ul>
+<blockquote>
+<p>注意: 除此之外的爬虫, 已被废弃(或, 在开发中)!</p>
+</blockquote>
+<h2 id="功能列表"><a href="#TOC">功能列表</a></h2>
+<ul>
+<li>config(json)</li>
+<li>xpath(ver1.0+extensions)</li>
+<li>regex(python flavor)</li>
+<li>macro(year/month/day/hour/minute/second)</li>
+<li>page(start/stop/step)</li>
+<li>parse(int/float/date/utc/text/map)</li>
+<li>plugin(python script)</li>
+<li>filter(detetime-delta/regex/number-range)</li>
+<li>database(mongo[automatically]/mysql[manually])</li>
+<li>proxy(http/https/socks4/socks5)</li>
+<li>HttpMethod(GET/POST)</li>
+<li>HttpHeader(Cookie/Usage-Agent/Referer)</li>
+<li>logging(DEBUG/INFO/WARNING/ERROR)</li>
+<li>settings(<code>download_timeout/download_delay/user_agent</code>)</li>
+<li>MessageQueue(zmq)</li>
+<li>StatsPost</li>
+<li>BatchDeploy</li>
+<li>debug</li>
+</ul>
+<h2 id="scrapy入门"><a href="#TOC">scrapy入门</a></h2>
+<ul>
+<li><p>test:</p>
+<pre><code>$ scrapy crawl &lt;spider&gt;</code></pre></li>
+<li><p>deploy:</p>
+<pre><code>$ scrapy deploy &lt;project&gt;</code></pre></li>
+<li><p>schedule:</p>
+<pre><code>$ curl http://yourdomain:6800/schedule.json -d project=&lt;project&gt; -d spider=&lt;spider&gt; -d config=&lt;/path/to/spider.conf&gt; -d setting=DOWNLOAD_DELAY=1</code></pre></li>
+<li><p>cancel:</p>
+<pre><code>$ curl http://yourdomain:6800/cancel.json   -d project=&lt;project&gt; -d job=xxxxxxxxxxx</code></pre></li>
+<li><p>listjobs:</p>
+<pre><code>$ curl http://yourdomain:6800/listjobs.json -d project=&lt;project&gt;</code></pre></li>
+</ul>
+<h2 id="在线工具"><a href="#TOC">在线工具</a></h2>
+<ul>
+<li>http://yourdomain:6800/</li>
+<li>http://jsonlint.com/</li>
+<li>http://regexpal.com/</li>
+<li>http://dillinger.io/</li>
+</ul>
+<h2 id="firefox插件"><a href="#TOC">Firefox插件</a></h2>
+<ul>
+<li>https://addons.mozilla.org/en-US/firefox/addon/firebug/</li>
+<li>https://addons.mozilla.org/en-US/firefox/addon/firepath/</li>
+<li>https://addons.mozilla.org/en-US/firefox/addon/firequery/</li>
+<li>https://addons.mozilla.org/en-US/firefox/addon/imacros-for-firefox/</li>
+</ul>
+<h1 id="配置文件语法"><a href="#TOC">配置文件语法</a></h1>
+<p>本文描述了webbot配置文件的语法规范. 详情参考<a href="http://192.168.3.175/schema.json">schema.json</a>.</p>
+<h2 id="site"><a href="#TOC">site</a></h2>
+<p><strong>站点名称</strong>, 值类型为<code>字符串</code>, 默认值为<code>&quot;未知站点&quot;</code>. 例如:</p>
+<pre><code>&quot;天涯论坛&quot;</code></pre>
+<p>站点名称, 需要简明扼要, 并且能够精确描述本配置文件的用途.</p>
+<h2 id="domains"><a href="#TOC">domains</a></h2>
+<p><strong>站点域名</strong>, 值类型为<code>数组</code>, 默认值为<code>[]</code>(即, 空数组). 例如:</p>
+<pre><code>[&quot;bj.news.site.com&quot;, &quot;sh.news.site.com&quot;]</code></pre>
+<p>爬虫在提取页面中链接时, 会自动忽略除此之外的域名. 例如, 上述配置会忽略下述链接:</p>
+<pre><code>&quot;http://tj.news.site.com&quot;
+&quot;http://www.ads.com&quot;</code></pre>
+<h2 id="urls"><a href="#TOC">urls</a></h2>
+<p><strong>入口链接</strong>, 值类型为<code>数组</code>或<code>字典</code>, 默认值为<code>[]</code>(即, 空数组). 例如:</p>
+<pre><code>[
+    &quot;http://www.site.com/?rn=10&amp;cate=%B5%D8%C7%F8&amp;city=北京&quot;,
+    &quot;http://www.site.com/?rn=10&amp;cate=%B5%D8%C7%F8&amp;city=上海&quot;,
+    &quot;http://www.site.com/?rn=10&amp;cate=%B5%D8%C7%F8&amp;city=广州&quot;,
+    &quot;http://www.site.com/?rn=10&amp;cate=%B5%D8%C7%F8&amp;city=重庆&quot;,
+    &quot;http://www.site.com/?rn=10&amp;cate=%B5%D8%C7%F8&amp;city=天津&quot;
+]</code></pre>
+<p>当这些链接具有共同特征时, 可以使用规则自动生成. 例如:</p>
+<pre><code>{
+    &quot;base&quot;: &quot;http://www.site.com/?rn=10&quot;,
+    &quot;qstr&quot;: {
+        &quot;type&quot;: 1,
+        &quot;cate&quot;: {&quot;val&quot;:&quot;地区&quot;, &quot;enc&quot;:&quot;gbk&quot;}
+    },
+    &quot;keywords&quot;: {
+        &quot;name&quot;: &quot;city&quot;,
+        &quot;file&quot;: &quot;http://www.mysite.com/cities.txt&quot;,
+        &quot;list&quot;: [&quot;北京&quot;, &quot;上海&quot;],
+        &quot;enc&quot; : &quot;utf-8&quot;
+    },
+    &quot;method&quot;: &quot;GET&quot;
+}</code></pre>
+<ul>
+<li><code>base</code>: 基础链接(可以含有查询字段), 值类型为<code>字符串</code>.</li>
+<li><code>qstr</code>: 链接的查询部分, 值类型为<code>字典</code>. 用来描述固定查询字段.</li>
+<li><p><code>keywords</code>: 关键词, 值类型为<code>字典</code>. 用来描述动态查询字段.</p>
+<ul>
+<li><code>name</code>: 关键词名称, 值类型为<code>字符串</code>, 不能为空.</li>
+<li><p><code>file</code>: 文件名称, 值类型为<code>字符串</code>. 可以使用本地或网络路径, 编码方式必须是<code>UTF-8</code>.</p>
+<pre><code># http://www.mysite.com/cities.txt
+广州
+重庆
+天津</code></pre></li>
+<li><code>list</code>: 关键词列表, 值类型为<code>数组</code>, 默认值为<code>[]</code>.</li>
+<li><code>enc</code>: 编码方式, 值类型为<code>字符串</code>, 默认值为<code>utf-8</code>. 可以对关键词进行编码.</li>
+<li><p><code>query</code>: 是否属于查询字段, 默认值为<code>true</code>. 当其值为<code>false</code>时, 会对基础链接进行替换.</p>
+<pre><code>{
+    &quot;base&quot;: &quot;http://www.site.com/FORUM/index.html&quot;,
+    &quot;keywords&quot;: {
+        &quot;name&quot; : &quot;FORUM&quot;,
+        &quot;list&quot; : [&quot;news&quot;, &quot;blog&quot;, &quot;about&quot;],
+        &quot;query&quot;: false
+    }
+}
+
+上述配置可以生成下述链接
+
+http://www.site.com/news/index.html
+http://www.site.com/blog/index.html
+http://www.site.com/about/index.html</code></pre></li>
+</ul></li>
+<li><p><code>pages</code>: 自动翻页(当且仅当<code>rules</code>为空时, 该配置才有效). 例如:</p>
+<pre><code>{
+    &quot;xpath&quot; : &quot;//div[@id=&#39;page&#39;]&quot;,
+    &quot;regex&quot; : &quot;&amp;(pn)=([0-9]+)&quot;,
+    &quot;start&quot; : 1,
+    &quot;stop&quot;  : 5,
+    &quot;group&quot; : 2
+}</code></pre></li>
+<li><code>method</code>: HTTP请求方法, 值类型为<code>字符串</code>, 默认值为<code>GET</code>. 当其值为<code>POST</code>时, 可以模拟表单提交.</li>
+<li><p><code>headers</code>: HTTP请求头, 值类型为<code>字典</code>, 默认值为<code>{}</code>. 不区分键的大小写. 例如:</p>
+<pre><code>{
+    &quot;User-Agent&quot;: &quot;webbot++(by kev++)&quot;,
+    &quot;Cookie&quot;: &quot;hello=world; foo=bar&quot;
+}</code></pre></li>
+</ul>
+<h2 id="rules"><a href="#TOC">rules</a></h2>
+<p><strong>链接规则集</strong>, 值类型为<code>字典</code>, 默认值为<code>{}</code>(即, 空字典). 用来提取页面中满足条件的链接. 例如:</p>
+<pre><code>{
+    &quot;#1&quot;: {
+        &quot;follow&quot;: true,
+        &quot;regex&quot; : &quot;/f\\?kw=&quot;,
+        &quot;xpath&quot; : &quot;//div[@class=&#39;sub_dir_box&#39;]&quot;
+    },
+    &quot;#2&quot;: {
+        &quot;follow&quot;: true,
+        &quot;regex&quot; : &quot;/f/fdir.*&amp;pn=([0-9]+)&quot;,
+        &quot;xpath&quot; : &quot;//div[@class=&#39;pagination&#39;]/a[last()-1]&quot;,
+        &quot;pages&quot; : {&quot;start&quot;:1, &quot;stop&quot;:5}
+    },
+    &quot;#3&quot;: {
+        &quot;follow&quot;: true,
+        &quot;regex&quot; : &quot;&amp;pn=([0-9]+)&quot;,
+        &quot;xpath&quot; : &quot;//div[@id=&#39;frs_list_pager&#39;]/a[@class=&#39;next&#39;]&quot;,
+        &quot;pages&quot; : {&quot;start&quot;:0, &quot;stop&quot;:250}
+    },
+    &quot;#4&quot;: {
+        &quot;follow&quot;: false,
+        &quot;regex&quot; : &quot;/p/[0-9]+&quot;,
+        &quot;xpath&quot; : &quot;//ul[@id=&#39;thread_list&#39;]//a[@class=&#39;j_th_tit&#39;]&quot;
+    }
+}</code></pre>
+<blockquote>
+<p>注意: 当<code>rules</code>为空时, 会直接下载<code>urls</code>中的所有链接, 也会按<code>keywords.pages</code>中的规则进行翻页, 并且按<code>fields</code>中的规则对页面进行解析.</p>
+</blockquote>
+<p><strong>链接规则集</strong> 是由<strong>链接规则项</strong>构成的. 其中， <code>#1</code>, <code>#2</code> ... <code>#4</code>为<strong>规则项</strong>序号(名称), 需要注意的是:</p>
+<ul>
+<li>规则名称可以是任何不重复的字符串</li>
+<li>这些规则不存在先后次序</li>
+<li>它们会在每个页面中起作用</li>
+<li>一个页面可能会同时匹配多条规则</li>
+</ul>
+<p><strong>规则项</strong>的值类型为<code>字典</code>, 由下列元素组成:</p>
+<ul>
+<li><code>follow</code>, 是否跟踪链接, 值类型为<code>布尔</code>, 默认值为<code>true</code>.
+<ul>
+<li>有且仅有一条规则项不跟踪链接(即, 值设为<code>false</code>), 表示在此链接所指向的页面中, 提取所需字段(参考<strong>fields</strong>)</li>
+</ul></li>
+<li><code>regex</code>, 链接需要匹配的regex, 值类型为<code>字符串</code>, 默认值为<code>null</code>.</li>
+<li><code>xpath</code>, 链接需要匹配的xpath, 值类型为<code>字符串</code>, 默认值为<code>null</code>. 在xpath中可以使用下列扩展函数:
+<ul>
+<li>datetime-delta(dt, tz, delta)</li>
+<li>unixtime-delta(dt, delta)</li>
+</ul></li>
+<li><code>sub</code>, 链接转换, 值类型为<code>字典</code>, 默认值为<code>null</code>. (先于<code>pages</code>执行)
+<ul>
+<li><code>from</code>, 原始地址(转换前), 值类型为<code>字符串</code>, 不能为空.</li>
+<li><code>to</code>, 目标地址(转换后), 值类型为<code>字符串</code>, 不能为空.</li>
+</ul></li>
+<li><code>pages</code>, 提取链接中的页码(数字), 判断是否在范围之内, 值类型为<code>字典</code>, 默认值为<code>null</code>. (需要同时设置上述的<code>regex</code>)
+<ul>
+<li><code>start</code>, 起始页码(包含), 值类型为<code>整数</code>, 默认值为<code>1</code>.</li>
+<li><code>stop</code>, 终止页面(不包含), 值类型为<code>整数</code>, 默认值为<code>5</code>.</li>
+<li><code>group</code>, 需要提取的<code>regex</code>分组编号, 值类型为<code>整数</code>, 默认值为<code>1</code>.</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>注意: <code>regex</code>, <code>xpath</code>, <code>pages</code>都是用来对链接进行过滤的, 需要同时满足.</p>
+</blockquote>
+<h2 id="loop"><a href="#TOC">loop</a></h2>
+<p><strong>循环表达式</strong>, 值类型为<code>字符串</code>, 默认值为<code>(//*)[1]</code>(即, root元素). 用该XPATH表达式来循环提取页面中多条信息. 例如:</p>
+<pre><code>&quot;loop&quot;: &quot;//table/tr&quot;</code></pre>
+<h2 id="fields"><a href="#TOC">fields</a></h2>
+<p><strong>字段定义</strong>, 值类型为<code>字典</code>, 默认值为<code>{}</code>. 例如:</p>
+<pre><code>{                                                                                     
+    &quot;url&quot;     : {&quot;name&quot;: &quot;url&quot;,         &quot;value&quot;: &quot;${URL}&quot;},
+    &quot;title&quot;   : {&quot;name&quot;: &quot;title&quot;,       &quot;xpath&quot;: &quot;//h1[@id=&#39;title&#39;]/text()&quot;, &quot;default&quot;: &quot;未知标题&quot;},
+    &quot;date&quot;    : {&quot;name&quot;: &quot;ctime&quot;,       &quot;xpath&quot;: &quot;//div[contains(@class, &#39;l_post&#39;)][1]/@data-field&quot;, &quot;parse&quot;: [{&quot;type&quot;:&quot;jpath&quot;, &quot;query&quot;:&quot;$.content.date&quot;}, {&quot;type&quot;:&quot;cst&quot;}]},
+    &quot;updated&quot; : {&quot;name&quot;: &quot;gtime&quot;,       &quot;value&quot;: &quot;${NOW}&quot;, &quot;parse&quot;: {&quot;type&quot;: &quot;date&quot;, &quot;tz&quot;: &quot;+08:00&quot;}},
+    &quot;content&quot; : {&quot;name&quot;: &quot;content&quot;,     &quot;xpath&quot;: &quot;//div[@class=&#39;d_post_content&#39;]&quot;, &quot;parse&quot;: {&quot;type&quot;:&quot;text&quot;}},
+    &quot;clicks&quot;  : {&quot;name&quot;: &quot;visitCount&quot;,  &quot;value&quot;: 0},
+    &quot;category&quot;: {&quot;name&quot;: &quot;info_flag&quot;,   &quot;value&quot;: &quot;02&quot;}
+}</code></pre>
+<p>上述对字段的定义, 可以提取网页中的下述信息:</p>
+<pre><code> category : 02
+  updated : 2013-04-23 15:15:09
+      url : http://news.qq.com/a/20130423/000484.htm
+    title : 俄海军重型巡洋舰“瓦良格”号将远航访问亚太
+  content : 中新社莫斯科4月22日电 (记者 贾靖峰)俄罗斯海军太平洋舰...
+     date : 2013-04-23 01:06:00
+   clicks : 0</code></pre>
+<p><strong>字段定义集</strong>, 是由多个 <strong>字段定义项</strong>组成. 每个<strong>字段定义项</strong>由<code>字段名称</code>(值类型为<code>字符串</code>)和<code>字段定义</code>(值类型为<code>字典</code>)组成. 其中, <code>字段定义</code>由下列元素组成:</p>
+<ul>
+<li><code>name</code>, 数据库字段名称
+<ul>
+<li>若无该字段, 则不会写入数据库, 并在<strong>debug</strong>模式下, 会在名称后打印<code>*</code>标识.</li>
+</ul></li>
+<li><code>value</code>, 固定值, 取值范围为:
+<ul>
+<li>整数</li>
+<li>浮点数</li>
+<li>字符串</li>
+</ul></li>
+<li><code>xpath</code>, xpath表达式</li>
+<li><code>default</code>, 默认值, 取值范围于<code>value</code>相同. 若<code>value</code>及<code>xpath</code>提取数据为空, 则使用该默认值.</li>
+<li><code>regex</code>, regex表达式(先于<code>parse</code>执行)</li>
+<li><code>parse</code>, 数据解析, 值类型为<code>字典</code>或<code>数组</code>(由<code>字典</code>组成), 默认值为<code>{}</code>.
+<ul>
+<li>当值类型为<code>字典</code>时:
+<ul>
+<li><code>type</code>, 解析类型, 值类型为<code>字符串</code>, 默认值为<code>str</code>. (取值范围为下述10+种之一):
+<ul>
+<li><code>str</code>, 文本</li>
+<li><code>text</code>, 文本(自动去除tag)</li>
+<li><p><code>unesc</code>, HTML实体转义</p>
+<pre><code># &quot;hello&amp;amp;world&quot; =&gt; &quot;hello&amp;world&quot;
+{&quot;type&quot;:&quot;unesc&quot;}</code></pre></li>
+<li><code>clean</code>, 清理HTML(自动去除style/script/meta/links等)</li>
+<li><code>jpath</code>, jpath表达式</li>
+<li><code>sub</code>, 字符替换
+<ul>
+<li><code>from</code>, 替换前</li>
+<li><p><code>to</code>, 替换后</p>
+<pre><code># &quot;hello - world&quot;  =&gt; &quot;world - hello&quot;
+{&quot;type&quot;:&quot;sub&quot;, &quot;from&quot;:&quot;(.*) - (.*)&quot;, &quot;to&quot;:&quot;\\g&lt;2&gt; - \\g&lt;1&gt;&quot;}</code></pre></li>
+</ul></li>
+<li><code>int</code>, 整数</li>
+<li><code>float</code>, 浮点数</li>
+<li><code>join</code>, 拼接
+<ul>
+<li><code>sep</code>, 分隔符, 值类型为<code>字符串</code>, 默认值为<code>&quot; &quot;</code>(即, 空格).</li>
+</ul></li>
+<li><code>list</code>, 拼接(自动去除tag)
+<ul>
+<li><code>sep</code>, 分隔符, 值类型为<code>字符串</code>, 默认值为<code>&quot; &quot;</code>(即, 空格).</li>
+</ul></li>
+<li><code>date</code>, 日期
+<ul>
+<li><code>fmt</code>, 日期格式, 值类型为<code>字符串</code>, 默认值为<code>auto</code>. 可自动识别下列日期格式:
+<ul>
+<li>刚刚</li>
+<li>几秒前</li>
+<li>8秒前</li>
+<li>8分钟前</li>
+<li>8小时前</li>
+<li>8天前</li>
+<li>今天 12:12</li>
+<li>昨天 12:12</li>
+<li>前天 12:12</li>
+<li>2013年3月5日 18:30</li>
+<li>2013年03月05日 18:30</li>
+<li>2013-03-05 18:30</li>
+<li>2013-3-5 18:30:00</li>
+<li>...</li>
+</ul></li>
+<li><code>tz</code>, 时区, 值类型为<code>字符串</code>, 默认值为<code>+00:00</code>(即, UTC时间). 注意: 当涉及到相对时间计算时, 需要指定<code>tz</code>.</li>
+</ul></li>
+<li><code>cst</code>, CST(China Standard Time)日期 (<code>{&quot;type&quot;:&quot;cst&quot;}</code>等价于<code>{&quot;type:&quot;date&quot;, &quot;tz&quot;:&quot;+08:00&quot;}</code>), 为中国大陆用户量身定做
+<ul>
+<li><code>fmt</code>, 日期格式, 值类型为<code>字符串</code>, 默认值为<code>auto</code>.</li>
+</ul></li>
+<li><p><code>continue</code>, 继续解析. 解析结果必须是个url, 自动下载该url, 并继续解析:</p>
+<pre><code>{
+    &quot;fields&quot;: {
+        &quot;url&quot;: {&quot;name&quot;:&quot;url&quot;,       &quot;value&quot;:&quot;${URL}&quot;},
+        &quot;txt&quot;: {&quot;name&quot;:&quot;content&quot;,   &quot;xpath&quot;:&quot;//iframe[@id=&#39;content&#39;]/@src&quot;, &quot;parse&quot;:{&quot;type&quot;:&quot;continue&quot;}}
+    },
+
+    &quot;continue&quot;: {
+        &quot;fields&quot;: {
+            &quot;txt&quot;: {&quot;name&quot;:&quot;content&quot;,   &quot;xpath&quot;:&quot;//div[@class=&#39;content&#39;]&quot;, &quot;parse&quot;:{&quot;type&quot;:&quot;text&quot;}}
+        }
+    }
+}</code></pre></li>
+</ul></li>
+</ul></li>
+<li><p>当值类型为<code>数组</code>时, 会按先后顺序, 依次进行数据变换. 例如:</p>
+<pre><code># 首先使用`jpath`提取字符串, 并指定它为`cst`时间
+[{&quot;type&quot;:&quot;jpath&quot;, &quot;query&quot;:&quot;$.content.date&quot;}, {&quot;type&quot;:&quot;cst&quot;}]</code></pre></li>
+</ul></li>
+<li><code>filter</code>, filter表达式(后于<code>parse</code>执行), 值类型为<code>字典</code>, 默认值为<code>{}</code>. 其中, 键取值范围如下:
+<ul>
+<li><code>delta</code>, 最大时间差(单位: <code>秒</code>), 只能用于过滤<code>datetime</code>类型的字段(使用UTC时间进行比较)</li>
+<li><code>match</code>, 字符串匹配, 只能用于过滤<code>string</code>类型的字段</li>
+<li><code>min</code>, 最大数值, 只能用于过滤<code>number</code>类型的字段</li>
+<li><code>max</code>, 最小数值, 只能用于过滤<code>number</code>类型的字段</li>
+</ul></li>
+</ul>
+<p>另外, <strong>rules</strong> 以及 <strong>fields</strong> 中的<code>value</code>及<code>xpath</code>中可以嵌入变量(形如, <code>${VARNAME}</code>), 目前支持下列变量:</p>
+<pre><code>&#39;UTCNOW&#39;:   utcnow.strftime(&#39;%Y-%m-%d %H:%M:%S&#39;),
+&#39;NOW&#39;:      now.strftime(&#39;%Y-%m-%d %H:%M:%S&#39;),
+&#39;TODAY&#39;:    now.strftime(&#39;%Y-%m-%d&#39;),
+&#39;ITODAY&#39;:   &#39;%d-%d-%d&#39;.format(now.year, now.month, now.day)
+
+&#39;YEAR&#39;:     now.strftime(&#39;%Y&#39;),
+&#39;MONTH&#39;:    now.strftime(&#39;%m&#39;),
+&#39;DAY&#39;:      now.strftime(&#39;%d&#39;),
+&#39;HOUR&#39;:     now.strftime(&#39;%H&#39;),
+&#39;MINUTE&#39;:   now.strftime(&#39;%M&#39;),
+&#39;SECOND&#39;:   now.strftime(&#39;%S&#39;),
+
+&#39;IMONTH&#39;:   str(now.month),
+&#39;IDAY&#39;:     str(now.day),
+&#39;IHOUR&#39;:    str(now.hour),
+&#39;IMINUTE&#39;:  str(now.minute),
+&#39;ISECOND&#39;:  str(now.second),
+
+&#39;UNOW&#39;:     str(int(time.time())),
+&#39;UTODAY&#39;:   str(int(time.mktime(time.strptime(now.strftime(&#39;%Y-%m-%d&#39;), &#39;%Y-%m-%d&#39;)))),
+&#39;UENDDAY&#39;:  str(int(time.mktime(time.strptime(now.strftime(&#39;%Y-%m-%d 23:59:59&#39;), &#39;%Y-%m-%d %H:%M:%S&#39;))))
+
+&#39;SITE&#39;:     站点名称, 于`site`值一致
+&#39;CONF&#39;:     配置文件内容
+&#39;URL&#39;:      本页面链接(仅用于**fields** 字段定义, 不可在**rules**中使用)</code></pre>
+<h2 id="proxy"><a href="#TOC">proxy</a></h2>
+<p><strong>代理设置</strong>, 值类型为<code>字典</code>. 例如:</p>
+<pre><code>{
+    &quot;enabled&quot; : true,
+    &quot;rate&quot;    : 5,
+    &quot;file&quot;    : &quot;http://192.168.3.155/proxy.txt&quot;,
+    &quot;list&quot;    : [
+                  &quot;http://1.2.3.4:5678&quot;,
+                  &quot;socks5://8.7.6.5:4321&quot;
+                ]
+}</code></pre>
+<p>由下列元素组成:</p>
+<ul>
+<li><code>enabled</code>, 是否生效, 值类型为<code>布尔</code>, 默认值为<code>true</code>.</li>
+<li><code>rate</code>, 代理变化频率, 值类型为<code>整数</code>, 默认值为<code>10</code>(表示: 每10次HTTP请求, 就随机切换代理).</li>
+<li><p><code>file</code>, 代理列表文件, 值类型为<code>字符串</code>, 可以使用本地或网络路径, 编码方式必须是<code>UTF-8</code>.</p>
+<pre><code># 由3个字段组成(prot/host/port), 它们之间用空白符(如, `tab`)分隔
+http    218.29.218.10   6666
+http    122.96.59.103   80
+http    61.136.93.38    8080</code></pre></li>
+<li><code>list</code>, 固定代理列表, 值类型为<code>数组</code>, 默认值为<code>[]</code>, 由形如<code>prot://host:port</code>的代理地址组成:
+<ul>
+<li><code>prot</code>, 协议类型, 如<code>http</code>, <code>https</code>, <code>socks5</code>, <code>socks4</code>等(只支持<code>http</code>)</li>
+<li><code>host</code>, 主机名(或IP地址)</li>
+<li><code>port</code>, 端口号</li>
+</ul></li>
+</ul>
+<h2 id="debug"><a href="#TOC">debug</a></h2>
+<p><strong>调试模式</strong>, 值类型为<code>布尔</code>, 默认值为<code>false</code>. 当值为<code>true</code>时, 程序运行过程中, 会把采集到的item详情输出到屏幕.</p>
+<h2 id="settings"><a href="#TOC">settings</a></h2>
+<p><strong>全局设置</strong>, 值类型为<code>字典</code>, 默认值为<code>{}</code>. 控制爬虫特定行为. 例如:</p>
+<pre><code>{
+    &quot;user_agent&quot;: &quot;Mozilla 5.0 (webbot by Kev++)&quot;,
+    &quot;download_timeout&quot;: 30,
+    &quot;download_delay&quot;: 5,
+    &quot;plugin: &quot;/home/spider/configs/plugins/foobar.py&quot;,
+    &quot;mysql&quot;: &quot;mysql://user:passwd@hostname/db_name.table_name&quot;
+}
+
+- `user_agent`, 浏览器型号
+- `download_timeout`, 下载超时, 默认值为`30`(单位:秒)
+- `download_delay`, 两次下载之间的延时, 默认值为`0`(单位:秒)
+- `plugin`, 自定义插件, 仅支持python脚本(必需定义`parse`函数)
+- `mysql`, MySQL入库设置, 例如: `mysql://user:passwd@hostname:3306/db_name.table_name`
+- `mongo`, MongoDB入库设置, 例如: `mongodb://hostname:27017/db_name.collection_name`
+- `zmq`, ZeroMQ消息队列设置, 例如: `tcp://hostname:10086`</code></pre>
+<p>录入新的mysql库前, 需要根据<strong>fields</strong>, 创建相对应的<code>db_name</code>以及<code>table_name</code>. 参考SQL如下所示(请注意编码方式(<code>CHARSET</code>)):</p>
+<pre class="sourceCode sql"><code class="sourceCode sql">    <span class="co">-- 建库</span>
+    <span class="kw">CREATE</span> <span class="kw">DATABASE</span> <span class="kw">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> db_name <span class="kw">DEFAULT</span> CHARSET=utf8;
+
+    <span class="co">-- 切换</span>
+    <span class="kw">USE</span> db_name
+
+    <span class="co">-- 建表</span>
+    <span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> table_name
+    (
+        <span class="kw">id</span> <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> AUTO_INCREMENT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,
+        url <span class="dt">VARCHAR</span>(<span class="dv">2084</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+        title TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,
+        <span class="kw">source</span> TINYTEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,
+        siteName TINYTEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,
+        ctime DATETIME <span class="kw">NOT</span> <span class="kw">NULL</span>,
+        gtime DATETIME <span class="kw">NOT</span> <span class="kw">NULL</span>,
+        visitCount <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,
+        replyCount <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,
+        content MEDIUMTEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,
+        info_flag <span class="dt">VARCHAR</span>(<span class="dv">10</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>
+    ) ENGINE=InnoDB <span class="kw">DEFAULT</span> CHARSET=utf8;</code></pre>
+<h1 id="配置ubuntu服务器"><a href="#TOC">配置Ubuntu服务器</a></h1>
+<h2 id="安装系统"><a href="#TOC">安装系统</a></h2>
+<ul>
+<li>Ubuntu 12.04.2 LTS</li>
+<li>OpenSSH Server</li>
+<li>Samba File Server</li>
+</ul>
+<h2 id="系统设置"><a href="#TOC">系统设置</a></h2>
+<pre><code># 配置默认编辑器
+$ sudo update-alternatives --config editor
+
+# 配置系统时区
+$ sudo dpkg-reconfigure tzdata
+
+# 改主机名
+$ sudo vi /etc/host{s,name}
+$ sudo hostname ubuntuXXX
+
+# 添加新用户
+$ sudo adduser spider
+
+# 添加用户到组
+$ sudo adduser spider sudo
+
+# 切换用户
+$ sudo su spider
+
+# 改/etc/sudo文件
+$ sudo visudo
+
+    # Allow members of group sudo to execute any command
+    %sudo ALL=(ALL:ALL) NOPASSWD: ALL
+
+# 配置SSH(可选)
+$ ssh-copy-id spider@192.168.3.200
+
+# 下载tmux配置(可选)
+$ wget https://github.com/gotovoid/dot/raw/master/_tmux.conf -O ~/.tmux.conf</code></pre>
+<h2 id="安装软件"><a href="#TOC">安装软件</a></h2>
+<pre><code># 同步文件夹
+sudo chmod a+w /var/cache/apt/archives
+rsync --exclude=&#39;partial/&#39; --include=&#39;*/&#39; --include=&#39;*.deb&#39; --exclude=&#39;*&#39; -avz spider@192.168.3.195:/var/cache/apt/archives /var/cache/apt
+
+# 添加更新源
+if ! grep -q &#39;scrapy&#39; /etc/apt/sources.list
+then
+    echo &#39;deb http://archive.scrapy.org/ubuntu precise main&#39; | sudo tee -a /etc/apt/sources.list
+    curl -s http://archive.scrapy.org/ubuntu/archive.key | sudo apt-key add -
+fi
+
+# 安装软件
+sudo apt-get update
+sudo apt-get install -y scrapy-0.18 scrapyd python-pip python-zmq
+
+# 安装软件包
+PKGS=(pip pymongo pymysql redis jsonpath jinja2)
+sudo pip install --no-index --find-links=http://192.168.3.195/.pip/cache/ --upgrade ${PKGS[@]}</code></pre>
+<h2 id="配置软件"><a href="#TOC">配置软件</a></h2>
+<pre><code># 配置scrapyd
+$ sudo vi /etc/scrapyd/conf.d/000-default
+
+    [scrapyd]
+    http_port  = 6800
+    debug      = off
+    eggs_dir   = /var/lib/scrapyd/eggs
+    dbs_dir    = /var/lib/scrapyd/dbs
+    items_dir  =
+    logs_dir   = /var/log/scrapyd
+    jobs_to_keep = 20000
+    max_proc_per_cpu = 5
+
+$ sudo service scrapyd restart
+
+# 配置mongodb
+$ sudo vi /etc/mongodb.conf
+
+    bind_ip = 0.0.0.0
+
+$ sudo service mongodb restart</code></pre>
+<h2 id="目录结构"><a href="#TOC">目录结构</a></h2>
+<pre><code>$ mkdir -p ~/configs/{log,keywords,bbs,blog,mblog,news}
+$ tree ~/configs
+
+configs/
+├── README.md
+├── log
+│   ├── webbot
+│   │   ├── index.html
+│   │   ├── config.html
+│   │   └── task.html
+│   └── twistd
+│       ├── twistd.log
+│       ├── twistd.log.1
+│       └── twistd.log.2
+├── keywords
+│   ├── b1.dic
+│   ├── b2.dic
+│   └── b3.dic
+├── bbs
+│   ├── abc_bbs.conf
+│   ├── def_bbs.conf
+│   └── ghi_bbs.conf
+├── blog
+│   ├── abc_blog.conf
+│   ├── def_blog.conf
+│   └── ghi_blog.conf
+├── mblog
+│   ├── abc_mblog.conf
+│   ├── def_mblog.conf
+│   └── ghi_mblog.conf
+└── news
+    ├── abc_news.conf
+    ├── def_news.conf
+    └── ghi_news.conf</code></pre>
+<h2 id="命名规则"><a href="#TOC">命名规则</a></h2>
+<pre><code>    域名            配置名
+------------    ------------
+bbs.abc.com     abc_bbc.conf
+blog.def.org    def_blog.conf
+news.ghi.net    ghi_news.conf</code></pre>
+<h2 id="web服务"><a href="#TOC">WEB服务</a></h2>
+<pre><code>$ sudo vi /etc/rc.local
+
+# rc.local
+/usr/bin/twistd web --port=80 --path=/home/spider/configs --mime-type=text/plain --logfile=/home/spider/configs/log/twistd.log
+exit 0</code></pre>
+<h2 id="计划任务"><a href="#TOC">计划任务</a></h2>
+<pre><code>$ crontab -e
+
+# m h  dom mon dow   command
+################################## NEWS ########################################
+15 */1 * * * curl http://192.168.3.154:6800/schedule.json -d project=example -d spider=example -d setting=CLOSESPIDER_TIMEOUT=3600 -d config=http://192.168.3.155/news/abc_news.conf
+################################## BLOG ########################################
+15 */7 * * * curl http://192.168.3.154:6800/schedule.json -d project=example -d spider=example -d setting=CLOSESPIDER_TIMEOUT=3600 -d config=http://192.168.3.155/news/abc_blog.conf
+################################## BBS ########################################
+15 */3 * * * curl http://192.168.3.154:6800/schedule.json -d project=example -d spider=example -d setting=CLOSESPIDER_TIMEOUT=3600 -d config=http://192.168.3.155/news/abc_bbs.conf
+################################## MBLOG ########################################
+15 */2 * * * curl http://192.168.3.154:6800/schedule.json -d project=example -d spider=example -d setting=CLOSESPIDER_TIMEOUT=3600 -d config=http://192.168.3.155/news/abc_mblog.conf</code></pre>
+</body>
+</html>
