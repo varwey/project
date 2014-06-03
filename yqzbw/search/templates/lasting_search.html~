@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<!-- <link rel = "Shortcut Icon" href="/static/img/damotouicon(1).ico"> -->
+<style type="text/css">
+#download{display: none;}
+#head{width: 80%;float: left;text-align: center;}
+#total{width: 80%;float: left;}
+#s_sum{width: 70%;}
+p{font-size: 2em;}
+#kw{height: 25px;}
+#btn{width: 100px;height: 35px;margin-right: 10px;}
+#lc{font-size: 1.5em;width: 15%;float: left;height: 1000px;margin-top: 30px;}
+#lc ul li ul{list-style-type: none;}
+#tal{color: rosybrown;}
+#content{margin-left: 15%;}
+#chart{width: 75%;float: left;}
+#type{font-size: 1em;width: 85%;float: right;}
+.label{font-size: 1.5em;}
+#lil{overflow: hidden;text-overflow:ellipsis;white-space:nowrap;}
+#search{width: 85%;;float: right;}
+#time1 , #time2{height: 15px;font-size: 0.5em;}
+#times{height: 25px;}
+.category ,.page , .type , .only , .time , .export{cursor: pointer;}
+#pagination{float: left;display: none;width: 100%;}
+#mongo{font-size: 1em;}
+#mongo_sum{font-size: 1.5em;color: orangered;}
+#accordion{width: 20%;float: right;}
+#accordion>div>ul{margin-left: -10%;font-size: 0.8em;}
+#book{float: right;margin-right: 10%;height: 20px;}
+.form_datetime{width: 10%;height: 15px;}
+#loading{text-align: center;margin-top: 100px;display: none;}
+#menu{margin-left: 30%;margin-top: -50px;height: 30px;font-size: 0.8em;width: 60%;}
+#small > li >ul{width: 80%}
+.validateTips{font-size: 1em;}
+</style>
+<style type="text/css"> 
+#gation , #gation li ul { 
+list-style-type:none; 
+} 
+#gation{margin-top: -40px;margin-left: 30%;} 
+
+#gation li a:link , #gation li a:visited { 
+display:block; 
+}
+
+#gation li ul {
+float: left; 
+display:none; 
+margin-left: -1%;
+} 
+#gation li ul li ul { 
+display:none;
+float: right;
+} 
+</style> 
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link href="/static/bootstrap-datetimepicker-master/css/datetimepicker.css" rel="stylesheet"></link>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link href="/static/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css" rel="stylesheet"></link>
+<link href="/static/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet"></link>
+<!-- <script src="/static/js/date_time_format.js"></script> -->
+<link href="/static/css/bootstrap.min.css" rel="stylesheet"></link>
+<link href="/static/css/bootstrap.css" rel="stylesheet"></link>
+<link href="/static/css/bootstrap-responsive.css" rel="stylesheet"></link>
+<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet"></link>
+<link href="http://v2.bootcss.com/assets/css/docs.css" rel="stylesheet"></link>
+<link href="//cdnjs.bootcss.com/ajax/libs/prettify/r224/prettify.css" rel="stylesheet"></link>
+<script type="text/javascript">
+$(function () {
+	$('.category,.type,.only,.time').click(function () {
+	  if ($(this).hasClass('disabled')==false&&$(this).hasClass('active')==false&&$(this).hasClass('badge-important')==false) {
+  	  var value=$('#kw').val();
+  	      nu = $(this).attr('id');
+  	      s_time = '';
+  	  if (value) {
+  	    if (nu!='btn'&&nu!='times') {
+    	    if (nu<5) {
+    	      $('.category').removeClass('active');
+    	      $('#'+nu+'').addClass('active');
+          }else if (nu<10) {
+    	      $('.type').removeClass('badge-important').addClass('badge-success');
+    	      $('#'+nu).removeClass('badge-success').addClass('badge-important');
+    	      var nu = nu-5;
+          }else if (nu<24) {
+            $('.only').removeClass('badge-important').addClass('badge-success');
+          	if (nu==21) {
+          	  $('#21').removeClass('badge-success').addClass('badge-important');
+            	value='title:'+value.split(':').slice(-1)[0];
+            }else if (nu==22) {
+              $('#22').removeClass('badge-success').addClass('badge-important');
+              value='content:'+value.split(':').slice(-1)[0];
+            }else if (nu==23) {
+            $('#23').removeClass('badge-success').addClass('badge-important');
+            value='sitename:'+value.split(':').slice(-1)[0];
+            }else {
+            	$('#20').removeClass('badge-success').addClass('badge-important');
+            	value=value.split(':').slice(-1)[0];
+            }
+          }else {
+          	$('.time').removeClass('badge-important').addClass('badge-success');
+          	if (nu==25) {
+          	  $('#25').removeClass('badge-success').addClass('badge-important');
+            	s_time= datetime_format(1);
+            }else if (nu==26) {
+              $('#26').removeClass('badge-success').addClass('badge-important');
+              s_time= datetime_format(24);
+            }else if (nu==27) {
+              $('#27').removeClass('badge-success').addClass('badge-important');
+              s_time= datetime_format(168);
+            }else {
+            	$('#24').removeClass('badge-success').addClass('badge-important');
+            	s_time = '';
+            }
+          }
+        }else if (nu=='times') {
+        	var get_time1 = $('#time1').val();
+        	    get_time2 = $('#time2').val();   
+              s_time = 'ctime:['+get_time1+' TO '+get_time2+']';              	
+        }
+        if (s_time!=''&&value!='') {
+          if (value.indexOf('ctime') >= 0) {
+          	var value = value.replace(/ctime:.*]/,s_time)
+          }else {
+          	var value = value + ' AND ' + s_time;
+          }	        
+        }else if (value=='') {
+        	var value = s_time;
+        }
+        var num = $('.category.active').attr('id');
+            srh = $('.type.badge-important').attr('id');
+            vvv = handle(value,num,srh);
+            val = handles(value,num);
+        $('#chart').fadeOut();
+        $('#loading').fadeIn();
+        $('#pagination').fadeOut();
+        $('#btn').addClass('disabled');
+        
+        console.log((vvv,val.con))
+  	    $.getJSON("/hudie/?value="+vvv+"&sk=0&con="+val.con,function (data) {
+    	    if (data.result.length>0) {
+  	      if (data.count.toString().slice(-1) == '0') {
+  	      	window.cou=parseInt(data.count/10);
+          }else {
+	          window.cou=parseInt(data.count/10)+1;
+          }
+  	      $('#kw').val(value);
+    	    $('#lc').fadeIn();
+          	$('#pagination').fadeIn();
+          	$('#btn').removeClass('disabled');
+      	    console.log(data);
+      	    tables(data,vvv);
+      	    if (cou==1) {
+            	tables(data,vvv);
+            	$('#pagination').fadeOut();
+            }else {
+      	      shuaye1(cou);
+      	      $('#pagination').fadeIn();
+      	    } 
+          }else {
+            $('#loading').hide();
+            $('#chart').fadeIn();
+            $('#pagination').fadeOut();
+            $('#btn').removeClass('disabled');
+          	$('#chart').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;找到约 0 条结果<br />')
+          }  	    
+        });
+      }else if (nu<5) {
+        $('#pagination').fadeOut();
+  	    $('.category').removeClass('active');
+  	    $('#'+nu).addClass('active');
+      }else if (nu<10) {
+      	$('#pagination').fadeOut();
+      	$('.type').removeClass('badge-important').addClass('badge-success');
+    	  $('#'+nu).removeClass('badge-success').addClass('badge-important');
+      }
+    }
+  });
+  $('#page').on('click','.page',function () {
+    if ($(this).hasClass('disabled')==false&&$(this).hasClass('active')==false) {
+  	  var nu = $('.page.active a').text();
+  	  	  nt = $('.page.active').attr('id');
+  	      di = $(this).attr('id');
+  	  if ($(this).next().attr('id')=='down'&&$(this).text()!=1&&$(this).text()!=cou||$(this).prev().attr('id')=='up'&&$(this).text()!=1&&$(this).text()<parseInt(cou)) {
+        num = parseInt($(this).text())+4;
+      	shuaye(num);
+      }else {
+      	fanye(nu,di,nt);
+      }
+    }	  
+  });
+});
+  function fanye(nu,di,nt) {
+	  if (di=='down'&&$('.page.active').hasClass('end')==true&&nu!=cou-1) {
+	    nu = parseInt(nu)+5;
+	    shuaye(nu,15);
+    }else if (di=='up'&&$('.page.active').hasClass('start')==true&&nu!=2) {
+	    var nu = parseInt(nu)+3;
+	    shuaye(nu,15);
+    }else if (di=='down') {
+    	$('.page').removeClass('active');
+    	$('#'+nt).next().addClass('active');
+    	$('#up').removeClass('disabled');
+    	if (nu==cou-1) {
+      	$('#down').addClass('disabled');
+      }
+    }else if (di=='up') {
+    	$('.page').removeClass('active');
+    	$('#'+nt).prev().addClass('active');
+    	$('#down').removeClass('disabled');
+    	if (nu==2) {
+      	$('#up').addClass('disabled');
+      }
+    }else {
+	    $('.page').removeClass('active');
+	    $('#'+di+'').addClass('active');
+	    if ($('.page.active').text()==1) {
+      	$('#up').addClass('disabled');
+      	$('#down').removeClass('disabled');
+      }else if ($('.page.active').text()==cou) {
+        $('#down').addClass('disabled');
+        $('#up').removeClass('disabled');
+      }else {
+      	$('#up').removeClass('disabled');
+      	$('#down').removeClass('disabled');
+      }
+    }
+    var value=$('#kw').val();
+        num = $('.category.active').attr('id');
+        srh = $('.type.badge-important').attr('id');
+        val = handle(value,num,srh);
+        sk  = $('.page.active').text()-1;
+        $('#chart').fadeOut();
+        $('#loading').fadeIn();
+        $('#pagination').fadeOut();
+        $.getJSON("/hudie/?value="+val+"&con="+values.con+"&sk="+sk,function (data) {
+          tables(data,val);        
+        });
+  }
+  function shuaye(nu,nt) {
+    $('.page').removeClass('active');
+    if (nu>cou) {
+    	var bom = parseInt((cou-5)/4)*4+1;
+    	    rmd = parseInt((cou-1)%4+5);
+    	    pa = '<li class="page" id="up"><a><<</a></li>';
+    	for (var i=0;i<rmd;i++) {
+      	pa+= '<li class="page" id="'+(11+i)+'"><a>'+(bom+i)+'</a></li>';
+      }
+      pa+='<li class="page " id="down"><a>>></a></li>';
+      $('#page').html(pa);
+      $('#12').addClass('start');
+      $('#15').addClass('active');
+    }else {
+	    pa = '<li class="page" id="up"><a><<</a></li>\
+            <li class="page" id="11"><a>'+(parseInt(nu)-8)+'</a></li>\
+            <li class="page start" id="12"><a>'+(parseInt(nu)-7)+'</a></li>\
+            <li class="page" id="13"><a>'+(parseInt(nu)-6)+'</a></li>\
+            <li class="page" id="14"><a>'+(parseInt(nu)-5)+'</a></li>\
+            <li class="page" id="15"><a>'+(parseInt(nu)-4)+'</a></li>\
+            <li class="page" id="16"><a>'+(parseInt(nu)-3)+'</a></li>\
+            <li class="page" id="17"><a>'+(parseInt(nu)-2)+'</a></li>\
+            <li class="page end" id="18"><a>'+(parseInt(nu)-1)+'</a></li>\
+            <li class="page" id="19"><a>'+nu+'</a></li>\
+            <li class="page" id="down"><a>>></a></li>';
+      $('#page').html(pa);
+      $('#15').addClass('active');
+     
+    }
+    var value=$('#kw').val();
+        num = $('.category.active').attr('id');
+        srh = $('.type.badge-important').attr('id');
+        vals = handles(value,num);
+        val = handle(value,num,srh);
+        sk  = $('.page.active').text()-1;
+        $('#chart').fadeOut();
+        $('#loading').fadeIn();
+        $('#pagination').fadeOut();
+        $.getJSON("/hudie/?value="+val+"&con="+vals.con+"&sk="+sk,function (data) {
+          tables(data,val);        
+        });
+  }
+  function shuaye1(nu) {
+    if (nu<=9) {
+	    pa = '<li class="page" id="up"><a><<</a></li>';
+  	  for (var i=0;i<nu;i++) {
+    	  pa+='<li class="page" id="'+(11+i)+'"><a>'+(i+1)+'</a></li>';
+      }
+    pa+='<li class="page" id="down"><a>>></a></li>';
+    $('#page').html(pa);
+    $('#11').addClass('active');
+    $('#12').addClass('start');
+    $('#up').addClass('disabled');
+    }else {
+      var nu = 9;
+    	pa = '<li class="page" id="up"><a><<</a></li>\
+            <li class="page" id="11"><a>'+(parseInt(nu)-8)+'</a></li>\
+            <li class="page start" id="12"><a>'+(parseInt(nu)-7)+'</a></li>\
+            <li class="page" id="13"><a>'+(parseInt(nu)-6)+'</a></li>\
+            <li class="page" id="14"><a>'+(parseInt(nu)-5)+'</a></li>\
+            <li class="page" id="15"><a>'+(parseInt(nu)-4)+'</a></li>\
+            <li class="page" id="16"><a>'+(parseInt(nu)-3)+'</a></li>\
+            <li class="page" id="17"><a>'+(parseInt(nu)-2)+'</a></li>\
+            <li class="page end" id="18"><a>'+(parseInt(nu)-1)+'</a></li>\
+            <li class="page" id="19"><a>'+nu+'</a></li>\
+            <li class="page" id="down"><a>>></a></li>';
+      $('#page').html(pa);
+      $('#up').addClass('disabled');
+      $('#11').addClass('active');
+    }
+  }
+  function tables(res,val) {
+	  var sel=res.con; 
+	      window.num=res.count;
+	      time=parseInt(res.usetime)/1000; 
+	      res=res.result;
+	      tb = '<p style="color:#999999;font-size:1em;margin-left:4%;">找到 '+num.format()+' 条结果,用时 '+time+' 秒</p>';
+	  for (var i in res) {
+	    var site=res[i]['siteName'];
+	        tit=res[i]['title'];
+	        url=res[i]['url'];        
+      if (values.val.sitename) {
+        var sit_words = binary_segmentation(values.val.sitename.$regex);
+            high = {};
+        for (var w in sit_words) {
+          high[w+'둘']='<b style="color:red;">'+sit_words[w]+'</b>';
+          rp = new RegExp(sit_words[w],'gi');
+        	site=site.replace(rp,w+'둘');
+        }
+        for (var w in high) {
+          hg = new RegExp(w,'g');
+        	site=site.replace(hg,high[w]);
+        }
+      }
+      if (values.val.title) {
+        var tit_words = binary_segmentation(values.val.title.$regex);
+        light = {};
+        for (var w in tit_words) {
+          light[w+'둘']='<b style="color:red;">'+tit_words[w]+'</b>';
+          rp = new RegExp(tit_words[w],'gi');
+        	tit=tit.replace(rp,w+'둘');
+        }
+        for (var w in light) {
+          lg = new RegExp(w,'g');
+        	tit=tit.replace(lg,light[w]);
+        }
+      }
+      if (values.val.url) {
+      	 url=url.replace(values.val.url.$regex,'<b style="color:red;">'+values.val.url.$regex+'</b>');
+      }
+	    tb+='<br /><ul style="list-style-type:none;">\
+	             <li style="font-size:1.2em;" id="lil">\
+	             <a style="color:#1E0FBE; text-decoration:none;" title="'+res[i]['title']+'" href="'+res[i]['url']+'" target="_blank">'+tit+'</a></li>\
+	             <li id="lil" style="color:#006621;">'+url+'</li>\
+	             <li>来自:'+res[i]['source']+'--'+site+'</li>\
+                     <li>发表时间:'+res[i]['ctime']+'<div style="float:right;">\
+                     入库时间:'+res[i]['gtime']+'--<i class="icon-camera"></i>\
+                     <a href="/tail/'+res[i]['id']+'/?val='+val+'" target="_blank">数据快照</a></div></li></ul>';
+    $('#loading').hide();	  
+	  $('#chart').fadeIn();
+	  $('#pagination').fadeIn(); 
+	  $('#chart').html(tb);
+    }
+  }
+  
+  function handles(dat,num) {
+    var dt = dat.toLocaleLowerCase()
+        c = {};
+        console.log(dt);
+    if (dt.indexOf('sitename:')>=0||dt.indexOf('title:')>=0||dt.indexOf('url:')>=0||dt.indexOf('http:')>=0||dt.indexOf('content:')>=0) {
+  	  var dt = dt.split(' ');
+      for (var i in dt) {
+        var s=dt[i].split(':');
+        if (s[0]=='sitename'){
+          c['sitename']={'$regex':s[1]};
+        }else if (s[0]=='url'||s[0]=='http') {
+          c['url']={'$regex':s[i]};
+          console.log(dt[i]); 
+          console.log(c);          
+        }else {
+          c[s[0]]={'$regex':s[1]}
+        }
+      }
+    }else {
+    	c={'content':{'$regex':dt},'title':{'$regex':dt}};
+    }
+    if (c['siteName']&&c['title']) {
+    	con = 'all';
+    }else if (c['siteName']) {
+    	con = 'siteName';
+    }else if (c['title']) {
+    	con = 'title';
+    }else {
+    	con = 0;
+    }
+    window.values={'val':c,'con':con};
+    console.log(values);
+    return values;
+  }
+  
+  function handle(dat,num,srh) {
+    var sr = {"5":"","6":" sort:ctime=0","7":" sort:ctime=1","8":" sort:gtime=0","9":" sort:gtime=1"};
+    if (dat.indexOf('http:')>=0&&dat.indexOf('url:')==-1) {
+    	var dat = dat.replace(/http:/,'url:http:').replace(/:/g,'\:');
+    }else {
+    	var dat = dat.replace(/:/g,'\:');
+    } 
+  	if (num!=0&&num!=4) {
+      	var dat=dat+' AND info_flag:0'+num;
+      }else if (num==4) {
+      	var dat=dat+' AND info_flag:0401';
+      }
+      
+    dat += sr[srh];
+    window.s_d = dat
+    return dat;
+  }
+  Number.prototype.format = function() {
+  return this.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").replace(/\../,'');
+  };
+  function getLocalTime(nS) {
+        var now = new Date(parseInt(nS))
+            get_data = [parseInt(now.getMonth())+1,parseInt(now.getDate()),parseInt(now.getHours()),parseInt(now.getMinutes()),parseInt(now.getSeconds())]
+        for (var i=0;i<=4;i++) {
+        	if (get_data[i] <10) {
+          	get_data[i] = '0' + get_data[i]
+          }
+        }
+        return now.getFullYear()+''+get_data[0]+''+get_data[1]+''+get_data[2]+''+get_data[3]+''+get_data[4];
+        }
+        
+  function datetime_format(num) {
+  	var timestamp = Date.parse(new Date());
+  	if (num == 1) {
+  	  var agotime = timestamp - 3600*1000;
+    }else if (num == 24) {
+    	var agotime = timestamp - 3600*24*1000;
+    }else {
+    	var agotime = timestamp - 3600*24*7*1000;
+    }
+    return 'ctime:['+getLocalTime(agotime)+' TO '+getLocalTime(timestamp)+']';
+  }
+  
+  function binary_segmentation(word) {
+    var words = [];
+    for (var i=word.length;i>=2;i--) {
+      for (var e=0;e<word.length-i+1;e++) {
+        var wd = word.slice(e,e+i);
+        	  words = words.concat(wd);
+      }	
+    }
+        return words;
+  }
+</script>
+
+<script type="text/javascript">
+  Number.prototype.format = function() {
+  return this.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").replace(/\../,'');
+  };
+
+  function nowscrapy(total) {
+    $.getJSON("/total",function (data) {
+          
+      $('#mongo_sum').text(data.total.format());     
+    });
+  }
+  <!-- setInterval("nowscrapy(total)", 2000); -->
+</script>
+
+<script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  });
+</script>
+
+</head>
+<body>
+<br />
+<div id="head"><!-- <img src="/static/img/title.jpeg"  width="25%;" alt="舆情早报网-图标"> --><h1>搜&nbsp;&nbsp;索</h1></div>
+<br />
+<div id="total"><br />
+  <div>
+    <div id="type">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <ul class="nav">
+            <li id="0" class="category active"><a><strong>全部</strong></a></li>
+            <li id="1" class="category"><a><strong>新闻</strong></a></li>
+            <li id="2" class="category"><a><strong>论坛</strong></a></li>
+            <li id="3" class="category"><a><strong>博客</strong></a></li>
+            <li id="4" class="category"><a><strong>微博</strong></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="input-append" id="search">
+      <input class="span6" id="kw" type="text" placeholder="待输入..." name='urlq' onkeydown="if(event.keyCode==13){btn.click()}" /></input>
+      <button class="btn category" id="btn">
+      <i class="icon-search"></i>搜索</button>
+      <span class="label" id="book">搜索技巧： </span>
+    </div>
+    <div id="accordion">
+        <h4>默认搜索：</h4>
+        <div>
+          <ul>
+            <li>1,输入字符或汉字默认搜索标题或内容</li>
+            <li>2,以http:开头默认搜索url选项</li>
+            <li>3,加双引号默认搜索绝对匹配的值，如：输入"舆情早报网",只有标题或内容含有连续的这几个字才会返回</li>
+          </ul>
+        </div>
+        <h4>指定类型搜索：</h4>
+        <div>
+          <ul>
+            <li>1,标题：“title：XXX”</li>
+            <li>2,内容：“content:XXX”</li>
+            <li>3,站点：“sitename:XXX”</li>
+            <li>4,网址：“url:XXX”</li>
+            <li>5,时间范围：“ctime:[20140101120000 TO 20140102120000]”</li>
+          </ul>
+        </div>
+        <h4>组合搜索：</h4>
+        <div>
+          <ul>
+            <li>注：组合支持“且(AND)”与“或(OR)”的关系（暂不支持站点与网址的组合查找）,如下语法例子</li>
+            <li>1,标题和内容：“title:XXX AND content:XXX”</li>
+            <li>2,标题或时间：“title:XXX OR ctime:[2014010112000 TO 20140102120000]”</li>
+          </ul>
+        </div>
+      </div>
+      <br /><br />
+  </div><br /><br />
+  <div id="lc" class="thumbnails">
+  <ul id="gation"> 
+    <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"> 
+      <a class="label label-info" ><i class="icon-download-alt"></i> 数据导出</a> 
+      <ul>
+        <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"> 
+          <a class="badge badge-success">txt格式</a> 
+          <ul> 
+            <li><a class="export badge badge-important" id="txt=1000">一千条</a></li>
+            <li><a class="export badge badge-important" id="txt=5000">五千条</a></li>
+            <li><a class="export badge badge-important" id="txt=10000">一万条</a></li>
+            <li><a class="export badge badge-important" id="txt=50000">五万条</a></li>
+          </ul>  
+        </li> 
+        <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)">
+          <a class="badge badge-success" >excel格式</a>
+          <ul> 
+            <li><a class="export badge badge-important" id="excel=1000">一千条</a></li>
+            <li><a class="export badge badge-important" id="excel=5000">五千条</a></li>
+            <li><a class="export badge badge-important" id="excel=10000">一万条</a></li>
+            <li><a class="export badge badge-important" id="excel=50000">五万条</a></li>   
+          </ul> 
+        </li> 
+        <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)"> 
+          <a class="badge badge-success">sql格式</a> 
+          <ul> 
+            <li><a class="export badge badge-important" id="sql=1000">一千条</a></li>
+            <li><a class="export badge badge-important" id="sql=5000">五千条</a></li>
+            <li><a class="export badge badge-important" id="sql=10000">一万条</a></li>
+            <li><a class="export badge badge-important" id="sql=50000">五万条</a></li>   
+          </ul> 
+        </li> 
+      </ul> 
+    </li> 
+  </ul>
+  <br />
+    <ul>
+      <li>
+        <ul>
+          <span class="label label-info">搜索排序</span>
+          <li><a><span id="5" class="type badge badge-important" value="d">默认优先级</span></a></li>
+          <li><a><span id="6" class="type badge badge-success">发布时间正序</span></a></li>
+          <li><a><span id="7" class="type badge badge-success">发布时间倒序</span></a></li>
+          <li><a><span id="8" class="type badge badge-success">采集时间正序</span></a></li>
+          <li><a><span id="9" class="type badge badge-success">采集时间倒序</span></a></li>
+        </ul>
+      </li><br /><br />
+      <li>
+        <ul>
+          <span class="label label-info">只查选项</span>
+          <li><a><span id="20" class="only badge badge-important">默认</span></a></li>
+          <li><a><span id="21" class="only badge badge-success">标题</span></a></li>
+          <li><a><span id="22" class="only badge badge-success">内容</span></a></li>
+          <li><a><span id="23" class="only badge badge-success">网站名称</span></a></li>
+        </ul>
+      </li><br /><br />
+      <li>
+        <ul id="option_datetime">
+          <span class="label label-info">时间范围</span>
+          <li><a><span id="24" class="time badge badge-important">系统默认</span></a></li>
+          <li><a><span id="25" class="time badge badge-success">最近一小时</span></a></li>
+          <li><a><span id="26" class="time badge badge-success">24小时内</span></a></li>
+          <li><a><span id="27" class="time badge badge-success">一周内</span></a></li><br />
+          <li><span class="badge badge-success">指定范围</span></li>
+          <li><input readonly class="span1 form_datetime" id="time1" type="text"  placeholder="开始日期..." /></li>
+          <li><input readonly class="span1 form_datetime" id="time2" type="text"  placeholder="结束日期..." /></li>
+          <button class="time btn" id="times"><i class="icon-search"></i></button>
+        </ul>
+      </li><br /><br />
+    </ul>
+  </div>
+  
+  <div id="content">
+    <div id="s_sum">
+      <p id="mongo">持久库总数：<b id="mongo_sum">{{total}}</b> 条</p>
+    </div> 
+    <div id="chart" class="row-fluid thumbnails">
+      {% if tail %}
+        <br />
+        <ul style="list-style-type:none;">
+          <li style="font-size:1.2em;"><a style="color:#1E0FBE; text-decoration:none;" title="{{tail.url}}" href="{{tail.url}}" target="_blank">{{tail.title|safe}}</a></li><br />
+          <li><span class="label label-success">来自:&nbsp;</span>{{tail.source}}--{{tail.siteName|safe}}</li><br />
+          <li><span class="label label-success">发表时间:&nbsp;</span>{{tail.ctime|date:"Y-m-d H:i:s"}}</li><br />
+          <li><span class="label label-success">主要内容:&nbsp;</span>{{tail.content|safe}}</li><br />
+          <li>查看数:&nbsp;<span class="badge">{{tail.visitCount}}</span>&nbsp;&nbsp; 回复数:&nbsp;<span class="badge badge-warning">{{tail.replyCount}}</span></li>
+          <li><span class="label label-success">入库时间:</span>{{tail.gtime|date:"Y-m-d H:i:s"}}</li>
+        </ul>
+      {% endif %}    
+    </div>
+    <div class="pagination" id="pagination">
+      <ul id="page">
+      </ul>
+    </div>
+    <div id="loading">
+      <img src="/static/img/loading.gif" alt="加载中..."><br /><p>加载中,请稍等...</p>
+    </div>
+  </div> 
+<div id="dialog-form" title="输入账户信息进行下载...">
+<p class="validateTips">以下均为必填项！</p>
+<form>
+<fieldset>
+<label for="name">账户名</label>
+<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" value="">
+<label for="password">密码</label>
+<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
+</fieldset>
+</form>
+</div>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header">
+<h3 id="myModalLabel"></h3>
+</div>
+<div class="modal-body">
+<div id="jindutiao" class="progress progress-striped active">
+<div class="bar" style="width: 0%;">0%</div>
+</div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary" id="download">下载数据</button>
+<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">取消操作</button>
+</div>
+</div> 
+</div>
+  
+  <script src="/static/js/bootstrap.min.js"></script>
+
+  <script src="/static/js/bootstrap.js"></script>
+
+  <script src="/static/js/holder.js"></script>
+  <script src="//cdnjs.bootcss.com/ajax/libs/prettify/r224/prettify.js"></script>
+
+  <script src="/static/js/application.js"></script>
+  <script src="/static/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+  <script src="/static/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script> 
+
+  <script type="text/javascript">
+    $(".form_datetime").datetimepicker({format: 'yyyymmddhhii', forceParse: true}); 
+  </script>
+  <script>
+    $(function() {
+      $( "#menu" ).menu();
+    });
+  </script>
+  <script type="text/javascript"> 
+    function displaySubMenu(li) { 
+      var subMenu = li.getElementsByTagName("ul")[0]; 
+      subMenu.style.display = "block"; 
+    } 
+    function hideSubMenu(li) { 
+      var subMenu = li.getElementsByTagName("ul")[0]; 
+      subMenu.style.display = "none"; 
+    } 
+  </script>
+<script>
+  $(function() {
+    window.wait=0;  
+    var name = $( "#name" );
+        password = $( "#password" );
+        allFields = $( [] ).add( name ).add( password );
+        tips = $( ".validateTips" );
+    function updateTips( t ) {
+      tips.text( t ).addClass( "ui-state-highlight" );
+      setTimeout(function() {
+      tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+    function checkLength( o, n, min, max ) {
+      if ( o.val().length > max || o.val().length < min ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n+"长度必须在" +
+        min + "和" + max + "之间" );
+        return false;
+      } else {
+        return true;
+      }
+    }
+    function checkRegexp( o, regexp, n ) {
+      if ( !( regexp.test( o.val() ) ) ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n );
+        return false;
+      } else {
+        return true;
+      }
+    }
+    $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 300,
+      width: 400,
+      modal: true,
+      buttons: {
+        "验证账户": function() {
+          var bValid = true;
+              allFields.removeClass( "ui-state-error" );
+              bValid = bValid && checkLength( name, "username", 3, 16 );
+              bValid = bValid && checkLength( password, "password", 5, 16 );
+              bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "账户名由字母，数字组成，但要以字母开头." );
+              bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "密码只能是数字和字母" );
+          if ( bValid ) {
+            window.username = name.val();
+            var passwd = password.val();
+            $( "#users tbody" ).append( "<tr>" +
+              "<td>" + name.val() + "</td>" +
+              "<td>" + password.val() + "</td>" +
+              "</tr>" ); 
+            $.get('/check?username='+username+'&password='+passwd,function (data) {
+            	if (data==username) {
+                $('#download').hide();
+                $('#dialog-form')
+                .dialog()
+                .dialog( "close" );
+                $('#myModalLabel').text('正在搜集数据,请稍等...');
+                $('#myModal').modal({
+                  keyboard: false
+                });
+                var s_dt = s_d+' export['+username+' '+ex_geshi+']';
+                $.get('http://192.168.110.4:8080/IndexSearch/search?keyword='+s_dt,function (data) {
+                })
+                window.interval = setInterval('jindu(username)', 1000);
+                console.log(s_dt);
+              }else {
+              	$('.validateTips').text('帐号或密码错误，请重新输入...')
+              }
+            })
+            
+          }
+        },
+        取消验证: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        allFields.val( "" ).removeClass( "ui-state-error" );
+      }
+    });
+  });
+  $( ".export" ).click(function() {      
+        if (typeof(num)=='undefined') {
+        	alert('未发现查询结果，无法导出数据!!!');        
+        }else {
+        	$( "#dialog-form" ).dialog( "open" );
+        	window.ex_geshi = $(this).attr('id');
+        	
+        }  
+      });
+  $('#download').click(function () {
+    $('#myModal').modal('hide');
+    window.open('http://192.168.110.4:8080/IndexSearch/datazip/'+username+'.zip','_blank');
+    $('.bar').css({width: '0%'});
+    $('.bar').text('0%');
+  })
+  function save_record(username,option,geshi,sum) {
+  	$.post('/save_record/',{'username':username,'option':option,'geshi':geshi,'sum':sum},function (data) {
+    })
+  }
+  function dabao(username) {
+  	$.get('/jindu?file_name='+username,function (data) {
+  	  console.log(data);
+      if (data=='Success') {
+      	clearInterval(inter);
+      	$('#myModalLabel').text('打包完成，请点击“下载数据”进行下载！');
+    	  $('#download').fadeIn();
+    	  save_record(username,s_d,ex_geshi.split('=')[0],ex_geshi.split('=')[1]);
+      }  	
+  	})
+  }
+  
+  function jindu(username) {
+    $.get('/jindu?file_name='+username,function (data) {
+      console.log(data);
+    	if (isNaN(data)==false) {
+    	  if (data=='') {
+        	var divcss={width: '0%'};
+      	  $('.bar').css(divcss);
+      	  $('.bar').text('0%');
+      	  $('#myModalLabel').text('正在生成文件,请稍等...');
+        }else {
+        	var divcss={width: data+'%'};
+          $('.bar').css(divcss);
+          $('.bar').text(data+'%');
+          $('#myModalLabel').text('正在生成文件,请稍等...');
+      	  if (data=='100') {
+      	    clearInterval(interval);
+      	    $('#myModalLabel').text('正在打包数据中,请稍等...');
+      	    window.inter = setInterval('dabao(username)', 1000);       	
+          }	        
+        }      	
+      }else if (data=='Success') {
+        window.wait += 1;
+        console.log(wait);
+        if (wait==10) {
+          clearInterval(interval);
+          var divcss={width: '100%'};
+        	$('.bar').css(divcss);
+        	$('.bar').text('100%')
+        	$('#myModalLabel').text('打包完成，请点击“下载数据”进行下载！');
+      	  $('#download').fadeIn();
+      	  save_record(username,s_d,ex_geshi.split('=')[0],ex_geshi.split('=')[1]);
+        }
+      }else {
+      	var divcss={width: '0%'};
+      	$('.bar').css(divcss);
+      	$('.bar').text('0%');
+      }
+    })    
+  }
+</script>
+</body>
+</html>
